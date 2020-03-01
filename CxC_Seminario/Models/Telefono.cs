@@ -9,7 +9,7 @@ namespace CxC_Seminario.Models
     {
         public int IdTelefono { get; set; }
 
-        public string IdPersona { get; set; }
+        public string IdPersona { get; set; } //cedula
 
         public long telefono { get; set; }
 
