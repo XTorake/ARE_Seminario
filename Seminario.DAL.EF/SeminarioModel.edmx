@@ -497,7 +497,7 @@
           </Key>
           <Property Name="idCorreo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="correo1" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idPersona" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedula" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Correo_Persona" FromRole="Correo" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Curso">
@@ -704,7 +704,7 @@
               <PropertyRef Name="cedula" />
             </Principal>
             <Dependent Role="Correo">
-              <PropertyRef Name="idPersona" />
+              <PropertyRef Name="cedula" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -974,7 +974,7 @@
               <MappingFragment StoreEntitySet="Correo">
                 <ScalarProperty Name="idCorreo" ColumnName="idCorreo" />
                 <ScalarProperty Name="correo1" ColumnName="correo" />
-                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="cedula" ColumnName="idPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

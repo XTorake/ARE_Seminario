@@ -16,7 +16,7 @@ namespace Seminario.DAL.EF
     {
         public int idCorreo { get; set; }
         public string correo1 { get; set; }
-        public string idPersona { get; set; }
+        public string cedula { get; set; }
     
         public virtual Persona Persona { get; set; }
     }

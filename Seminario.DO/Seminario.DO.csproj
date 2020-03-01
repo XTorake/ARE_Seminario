@@ -42,7 +42,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="Objects\Auditoria.cs" />
+    <Compile Include="Objects\Carrera.cs" />
+    <Compile Include="Objects\CarreraxCurso.cs" />
+    <Compile Include="Objects\CategoriaProducto.cs" />
+    <Compile Include="Objects\Correo.cs" />
+    <Compile Include="Objects\Curso.cs" />
+    <Compile Include="Objects\DistritoEclesiastico.cs" />
+    <Compile Include="Objects\EncabezadoFactura.cs" />
+    <Compile Include="Objects\Iglesia.cs" />
+    <Compile Include="Objects\LineaFactura.cs" />
+    <Compile Include="Objects\MetodoPago.cs" />
     <Compile Include="Objects\Pais.cs" />
+    <Compile Include="Objects\Persona.cs" />
+    <Compile Include="Objects\Producto.cs" />
+    <Compile Include="Objects\Telefono.cs" />
+    <Compile Include="Objects\TipoUsuario.cs" />
+    <Compile Include="Objects\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
