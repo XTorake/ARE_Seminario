@@ -9,7 +9,7 @@ namespace CxC_Seminario.Models
     {
         public string IdPersona { get; set; }
 
-        public string Usuario { get; set; }
+        public string usuario { get; set; }
 
         public string Contrasena { get; set; }
 

@@ -11,7 +11,7 @@ namespace CxC_Seminario.Models
 
         public string IdPersona { get; set; }
 
-        public long Telefono { get; set; }
+        public long telefono { get; set; }
 
         public int IdCodigoPais { get; set; }
 
