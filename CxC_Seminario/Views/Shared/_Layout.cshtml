@@ -81,7 +81,8 @@
                             <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
                                 <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
-                                <li><a title="Dashboard v.3" href="index-2.html"><span class="mini-sub-pro">Dashboard v.3</span></a></li>
+                                @Html.ActionLink("Contact","Contact","Home",null ,new {@class="mini-sub-pro"} )
+                                @*<li><a title="Contact" href=""><span class="mini-sub-pro">Contact</span></a></li>*@
                                 <li><a title="Analytics" href="analytics.html"><span class="mini-sub-pro">Analytics</span></a></li>
                                 <li><a title="Widgets" href="widgets.html"><span class="mini-sub-pro">Widgets</span></a></li>
                             </ul>
@@ -1653,7 +1654,9 @@
             </div>
         </div>*@
     <div class="container body-content">
+
         @RenderBody()
+
     </div>
             <div class="footer-copyright-area">
                 <div class="container-fluid">

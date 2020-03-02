@@ -1,0 +1,52 @@
+﻿@model CxC_Seminario.Models.Producto
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCategoriaProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCategoriaProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        @Html.RadioButton("pepe","2")
+
+    </dl>
+</div>href
+<p>
+    @Html.ActionLink("Home", "About",new {@class="btn btn-success" }) 
+    @Html.ActionLink("Back to List", "Index")
+</p>
