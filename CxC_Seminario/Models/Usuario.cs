@@ -6,8 +6,8 @@ using System.Web;
 namespace CxC_Seminario.Models
 {
     public class Usuario
-    { 
-        public string IdPersona { get; set; }
+    {
+        public string IdPersona { get; set; } //cedula
 
         public string usuario { get; set; }
 
