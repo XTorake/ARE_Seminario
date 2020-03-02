@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +154,7 @@
     <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DO\TipoUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\accordions.css" />
@@ -421,6 +423,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\metisMenu\metisMenu.min.js.map" />
     <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\TipoUsuario\Create.cshtml" />
+    <Content Include="Views\TipoUsuario\Delete.cshtml" />
+    <Content Include="Views\TipoUsuario\Details.cshtml" />
+    <Content Include="Views\TipoUsuario\Edit.cshtml" />
+    <Content Include="Views\TipoUsuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
