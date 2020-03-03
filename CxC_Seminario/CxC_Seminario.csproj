@@ -153,8 +153,24 @@
     <Compile Include="Models\Telefono.cs" />
     <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DO\Auditoria.cs" />
+    <Compile Include="DO\Carrera.cs" />
+    <Compile Include="DO\CarreraxCurso.cs" />
+    <Compile Include="DO\CategoriaProducto.cs" />
+    <Compile Include="DO\Correo.cs" />
+    <Compile Include="DO\Curso.cs" />
+    <Compile Include="DO\DistritoEclesiastico.cs" />
+    <Compile Include="DO\EncabezadoFactura.cs" />
+    <Compile Include="DO\Iglesia.cs" />
+    <Compile Include="DO\LineaFactura.cs" />
+    <Compile Include="DO\MetodoPago.cs" />
+    <Compile Include="DO\Pais.cs" />
+    <Compile Include="DO\Persona.cs" />
+    <Compile Include="DO\Producto.cs" />
+    <Compile Include="DO\Telefono.cs" />
     <Compile Include="DO\TipoUsuario.cs" />
+    <Compile Include="DO\Usuario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\accordions.css" />

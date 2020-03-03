@@ -13,8 +13,8 @@ namespace Seminario.DO.Objects
         public int idDistritoEclesiastico { get; set; }
         public double descuento { get; set; }
 
-        //public virtual DistritoEclesiastico DistritoEclesiastico { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual DistritoEclesiastico DistritoEclesiastico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

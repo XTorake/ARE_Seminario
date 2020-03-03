@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Seminario.DO.Objects
+namespace CxC_Seminario.DO
 {
     public class Correo
     {

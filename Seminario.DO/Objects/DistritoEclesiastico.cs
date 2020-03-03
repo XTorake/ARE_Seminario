@@ -11,7 +11,7 @@ namespace Seminario.DO.Objects
         public int idDistritoEclesiastico { get; set; }
         public string nombre { get; set; }
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<Iglesia> Iglesias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Iglesia> Iglesias { get; set; }
     }
 }

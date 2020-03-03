@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Seminario.DO.Objects
+namespace CxC_Seminario.DO
 {
-    public class Correo
+    public class Telefono
     {
-        public int idCorreo { get; set; }
-        public string correo1 { get; set; }
+        public int idTelefono { get; set; }
         public string cedula { get; set; }
+        public int telefono1 { get; set; }
+        public int idCodigoPais { get; set; }
 
+        public virtual Pais Pais { get; set; }
         public virtual Persona Persona { get; set; }
     }
 }

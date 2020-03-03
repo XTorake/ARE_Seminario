@@ -13,7 +13,7 @@ namespace Seminario.DO.Objects
         public int telefono1 { get; set; }
         public int idCodigoPais { get; set; }
 
-        //public virtual Pai Pai { get; set; }
-        //public virtual Persona Persona { get; set; }
+        public virtual Pais Pais { get; set; }
+        public virtual Persona Persona { get; set; }
     }
 }
