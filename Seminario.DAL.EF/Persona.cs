@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Persona
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
             this.Correos = new HashSet<Correo>();
@@ -28,12 +28,12 @@ namespace Seminario.DAL.EF
         public string apellido2 { get; set; }
         public int idPais { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Correo> Correos { get; set; }
         public virtual Pai Pai { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Telefono> Telefonoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

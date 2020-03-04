@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Pai
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pai()
         {
             this.Personas = new HashSet<Persona>();
@@ -26,9 +26,9 @@ namespace Seminario.DAL.EF
         public int codigoPais { get; set; }
         public double descuento { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Personas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Telefono> Telefonoes { get; set; }
     }
 }

@@ -1,84 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using data = Seminario.DAL.EF;
-using Seminario.DAL.EF;
+﻿using System.Collections.Generic;
+using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
+using data = Seminario.DAL.EF;
 
 namespace Seminario.DAL
 {
-    public class Pais : ICRUD<data.Pai>
+    public class Pais : ICrud<data.Pai>
     {
-        private Repository.Repository<data.Pai> _repository = new Repository.Repository<data.Pai>(new ARE_SeminarioEntities());
+        private Repository<data.Pai> _repository = new Repository<data.Pai>(new data.ARE_SeminarioEntities());
 
         public void Delete(data.Pai t)
         {
-            try
-            {
-                _repository.Delete(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Delete(t);
+            _repository.Commit();
         }
 
         public IEnumerable<data.Pai> GetAll()
         {
-            try
-            {
-                return _repository.GetAll();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetAll();
         }
 
         public data.Pai GetOneById(int id)
         {
-            try
-            {
-                return _repository.GetOneByID(id);
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetOneByID(id);
         }
 
         public void Insert(data.Pai t)
         {
-            try
-            {
-                _repository.Insert(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Insert(t);
+            _repository.Commit();
         }
 
         public void Updated(data.Pai t)
         {
-            try
-            {
-                _repository.Updated(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Updated(t);
+            _repository.Commit();
         }
     }
 }

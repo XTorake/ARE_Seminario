@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class CarreraxCurso : ent.Interfaces.ICRUD<ent.Objects.CarreraxCurso>
+    public class CarreraxCurso : ICrud<DO.Objects.CarreraxCurso>
     {
-        public void Delete(ent.Objects.CarreraxCurso t)
+        public void Delete(DO.Objects.CarreraxCurso t)
         {
-            var _ent = Mapper.Map<ent.Objects.CarreraxCurso, data.CarreraxCurso>(t);
-            new dal.CarreraxCurso().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.CarreraxCurso, data.CarreraxCurso>(t);
+            new dal.CarreraxCurso().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.CarreraxCurso> GetAll()
+        public IEnumerable<DO.Objects.CarreraxCurso> GetAll()
         {
-            var DetailsQuery = new dal.CarreraxCurso().GetAll();
-            var res = Mapper.Map<IEnumerable<data.CarreraxCurso>, IEnumerable<ent.Objects.CarreraxCurso>>(DetailsQuery);
+            var detailsQuery = new dal.CarreraxCurso().GetAll();
+            var res = Mapper.Map<IEnumerable<data.CarreraxCurso>, IEnumerable<DO.Objects.CarreraxCurso>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.CarreraxCurso GetOneById(int id)
+        public DO.Objects.CarreraxCurso GetOneById(int id)
         {
-            var DetailsQuery = new dal.CarreraxCurso().GetOneById(id);
-            var res = Mapper.Map<data.CarreraxCurso, ent.Objects.CarreraxCurso>(DetailsQuery);
+            var detailsQuery = new dal.CarreraxCurso().GetOneById(id);
+            var res = Mapper.Map<data.CarreraxCurso, DO.Objects.CarreraxCurso>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.CarreraxCurso t)
+        public void Insert(DO.Objects.CarreraxCurso t)
         {
-            var _ent = Mapper.Map<ent.Objects.CarreraxCurso, data.CarreraxCurso>(t);
-            new dal.CarreraxCurso().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.CarreraxCurso, data.CarreraxCurso>(t);
+            new dal.CarreraxCurso().Insert(ent);
         }
 
-        public void Updated(ent.Objects.CarreraxCurso t)
+        public void Updated(DO.Objects.CarreraxCurso t)
         {
-            var _ent = Mapper.Map<ent.Objects.CarreraxCurso, data.CarreraxCurso>(t);
-            new dal.CarreraxCurso().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.CarreraxCurso, data.CarreraxCurso>(t);
+            new dal.CarreraxCurso().Updated(ent);
         }
     }
 }

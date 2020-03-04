@@ -1,26 +1,25 @@
-﻿using CxC_Seminario.DO;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using CxC_Seminario.DO;
+using Newtonsoft.Json;
 
 namespace CxC_Seminario.Controllers
 {
     public class PersonaController : Controller
     {
-        string baseurl = "https://localhost:44313/";
+        string _baseurl = "https://localhost:44313/";
         // GET: Persona
         public async Task<ActionResult> Index()
         {
             List<Persona> aux = new List<Persona>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Persona/GetAll");
@@ -39,7 +38,7 @@ namespace CxC_Seminario.Controllers
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/?id= " + id);
@@ -64,10 +63,10 @@ namespace CxC_Seminario.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Persona/Insert", byteContent).Result;
@@ -88,7 +87,7 @@ namespace CxC_Seminario.Controllers
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/?id=" + id);
@@ -108,10 +107,10 @@ namespace CxC_Seminario.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Persona/Updated", byteContent).Result;
@@ -132,7 +131,7 @@ namespace CxC_Seminario.Controllers
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/?id=" + id);
@@ -153,7 +152,7 @@ namespace CxC_Seminario.Controllers
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -167,7 +166,7 @@ namespace CxC_Seminario.Controllers
                 }
 
                 var myContent = JsonConvert.SerializeObject(aux);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Persona/Delete", byteContent).Result;

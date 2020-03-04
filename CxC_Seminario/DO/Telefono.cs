@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CxC_Seminario.DO
+﻿namespace CxC_Seminario.DO
 {
     public class Telefono
     {
-        public int idTelefono { get; set; }
-        public string cedula { get; set; }
-        public int telefono1 { get; set; }
-        public int idCodigoPais { get; set; }
+        public int IdTelefono { get; set; }
+        public string Cedula { get; set; }
+        public int Telefono1 { get; set; }
+        public int IdCodigoPais { get; set; }
 
         public virtual Pais Pais { get; set; }
         public virtual Persona Persona { get; set; }

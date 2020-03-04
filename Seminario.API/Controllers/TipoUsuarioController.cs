@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using Seminario.BS;
 using ent = Seminario.DO.Objects;
 
 namespace Seminario.API.Controllers
@@ -16,35 +13,35 @@ namespace Seminario.API.Controllers
         [HttpGet]
         public IEnumerable<ent.TipoUsuario> GetAll()
         {
-            return new Seminario.BS.TipoUsuario().GetAll();
+            return new TipoUsuario().GetAll();
         }
 
         [Route("api/TipoUsuario/GetOneById/5")]
         [HttpGet]
         public ent.TipoUsuario GetOneById(int id)
         {
-            return new Seminario.BS.TipoUsuario().GetOneById(id);
+            return new TipoUsuario().GetOneById(id);
         }
 
         [Route("api/TipoUsuario/Delete")]
         [HttpPost]
         public void Delete(ent.TipoUsuario t)
         {
-            new Seminario.BS.TipoUsuario().Delete(t);
+            new TipoUsuario().Delete(t);
         }
 
         [Route("api/TipoUsuario/Update")]
         [HttpPost]
         public void Updated(ent.TipoUsuario t)
         {
-            new Seminario.BS.TipoUsuario().Updated(t);
+            new TipoUsuario().Updated(t);
         }
 
         [Route("api/TipoUsuario/Insert")]
         [HttpPost]
         public void Insert(ent.TipoUsuario t)
         {
-            new Seminario.BS.TipoUsuario().Insert(t);
+            new TipoUsuario().Insert(t);
         }
     }
 }

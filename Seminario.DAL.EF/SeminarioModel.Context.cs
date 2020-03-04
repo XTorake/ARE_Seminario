@@ -7,12 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
     public partial class ARE_SeminarioEntities : DbContext
     {
         public ARE_SeminarioEntities()

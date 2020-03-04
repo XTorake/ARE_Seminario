@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CxC_Seminario.Models
 {
@@ -9,7 +6,7 @@ namespace CxC_Seminario.Models
     {
         public string IdEncabezado { get; set; }
 
-        public string idEstudiante { get; set; }
+        public string IdEstudiante { get; set; }
 
         public DateTime FechaPago { get; set; }
 

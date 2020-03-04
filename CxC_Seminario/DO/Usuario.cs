@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CxC_Seminario.DO
 {
     public class Usuario
     {
-        public string cedula { get; set; }
-        public string usuario1 { get; set; }
-        public string contrasena { get; set; }
-        public int idTipoUsuario { get; set; }
-        public Nullable<int> idIglesia { get; set; }
-        public Nullable<int> idMetodoPago { get; set; }
-        public Nullable<int> idCarrera { get; set; }
+        public string Cedula { get; set; }
+        public string Usuario1 { get; set; }
+        public string Contrasena { get; set; }
+        public int IdTipoUsuario { get; set; }
+        public int? IdIglesia { get; set; }
+        public int? IdMetodoPago { get; set; }
+        public int? IdCarrera { get; set; }
 
         public virtual Carrera Carrera { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EncabezadoFactura> EncabezadoFacturas { get; set; }
         public virtual Iglesia Iglesia { get; set; }
         public virtual MetodoPago MetodoPago { get; set; }

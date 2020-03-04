@@ -7,14 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class EncabezadoFactura
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EncabezadoFactura()
         {
             this.LineaFacturas = new HashSet<LineaFactura>();
@@ -22,14 +23,14 @@ namespace Seminario.DAL.EF
     
         public string idEncabezado { get; set; }
         public string idEstudiante { get; set; }
-        public System.DateTime fechaPago { get; set; }
+        public DateTime fechaPago { get; set; }
         public string direccion { get; set; }
         public double descuento { get; set; }
         public double totalPagar { get; set; }
         public double totalCobrar { get; set; }
     
         public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LineaFactura> LineaFacturas { get; set; }
     }
 }

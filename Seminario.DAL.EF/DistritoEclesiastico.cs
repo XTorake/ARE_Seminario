@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class DistritoEclesiastico
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DistritoEclesiastico()
         {
             this.Iglesias = new HashSet<Iglesia>();
@@ -23,7 +23,7 @@ namespace Seminario.DAL.EF
         public int idDistritoEclesiastico { get; set; }
         public string nombre { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Iglesia> Iglesias { get; set; }
     }
 }
