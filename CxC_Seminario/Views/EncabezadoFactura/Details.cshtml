@@ -1,0 +1,66 @@
+﻿@model CxC_Seminario.DO.EncabezadoFactura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EncabezadoFactura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descuento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descuento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPagar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPagar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalCobrar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalCobrar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.cedula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEncabezado }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

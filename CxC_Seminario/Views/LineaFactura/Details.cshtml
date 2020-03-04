@@ -1,0 +1,58 @@
+﻿@model CxC_Seminario.DO.LineaFactura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LineaFactura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EncabezadoFactura.idEstudiante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EncabezadoFactura.idEstudiante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Producto.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idLinea }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

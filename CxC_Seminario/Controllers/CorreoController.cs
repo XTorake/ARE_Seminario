@@ -42,7 +42,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/?id= " + id);
+                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id= " + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -91,7 +91,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -114,7 +114,7 @@ namespace CxC_Seminario.Controllers
                 var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var postTask = client.PostAsync("api/Correo/Updated", byteContent).Result;
+                var postTask = client.PostAsync("api/Correo/Update", byteContent).Result;
 
                 var result = postTask;
                 if (result.IsSuccessStatusCode)
@@ -135,7 +135,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -157,7 +157,7 @@ namespace CxC_Seminario.Controllers
 
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {

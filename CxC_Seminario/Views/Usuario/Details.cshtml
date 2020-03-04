@@ -1,0 +1,74 @@
+﻿@model CxC_Seminario.DO.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.contrasena)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.contrasena)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Carrera.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Carrera.nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Iglesia.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Iglesia.nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MetodoPago.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MetodoPago.nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Persona.nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoUsuario.nombre)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.usuario1 }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
