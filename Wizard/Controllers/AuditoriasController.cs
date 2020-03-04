@@ -8,109 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using Wizard.Models;
 
-namespace Wizard.Controllers
+namespace CxC_Seminario
 {
-    public class TipoUsuariosController : Controller
+    public class AuditoriasController : Controller
     {
         private ARE_SeminarioEntities db = new ARE_SeminarioEntities();
 
-        // GET: TipoUsuarios
+        // GET: Auditorias
         public ActionResult Index()
         {
-            return View(db.TipoUsuarios.ToList());
+            return View(db.Auditorias.ToList());
         }
 
-        // GET: TipoUsuarios/Details/5
+        // GET: Auditorias/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoUsuario tipoUsuario = db.TipoUsuarios.Find(id);
-            if (tipoUsuario == null)
+            Auditoria auditoria = db.Auditorias.Find(id);
+            if (auditoria == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoUsuario);
+            return View(auditoria);
         }
 
-        // GET: TipoUsuarios/Create
+        // GET: Auditorias/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoUsuarios/Create
+        // POST: Auditorias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idTipoUsuario,nombre")] TipoUsuario tipoUsuario)
+        public ActionResult Create([Bind(Include = "idAuditoria,usuario,tablaAfectada,columna,valorViejo,valorNuevo,fecha,accion")] Auditoria auditoria)
         {
             if (ModelState.IsValid)
             {
-                db.TipoUsuarios.Add(tipoUsuario);
+                db.Auditorias.Add(auditoria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tipoUsuario);
+            return View(auditoria);
         }
 
-        // GET: TipoUsuarios/Edit/5
+        // GET: Auditorias/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoUsuario tipoUsuario = db.TipoUsuarios.Find(id);
-            if (tipoUsuario == null)
+            Auditoria auditoria = db.Auditorias.Find(id);
+            if (auditoria == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoUsuario);
+            return View(auditoria);
         }
 
-        // POST: TipoUsuarios/Edit/5
+        // POST: Auditorias/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idTipoUsuario,nombre")] TipoUsuario tipoUsuario)
+        public ActionResult Edit([Bind(Include = "idAuditoria,usuario,tablaAfectada,columna,valorViejo,valorNuevo,fecha,accion")] Auditoria auditoria)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tipoUsuario).State = EntityState.Modified;
+                db.Entry(auditoria).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tipoUsuario);
+            return View(auditoria);
         }
 
-        // GET: TipoUsuarios/Delete/5
+        // GET: Auditorias/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoUsuario tipoUsuario = db.TipoUsuarios.Find(id);
-            if (tipoUsuario == null)
+            Auditoria auditoria = db.Auditorias.Find(id);
+            if (auditoria == null)
             {
                 return HttpNotFound();
             }
-            return View(tipoUsuario);
+            return View(auditoria);
         }
 
-        // POST: TipoUsuarios/Delete/5
+        // POST: Auditorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TipoUsuario tipoUsuario = db.TipoUsuarios.Find(id);
-            db.TipoUsuarios.Remove(tipoUsuario);
+            Auditoria auditoria = db.Auditorias.Find(id);
+            db.Auditorias.Remove(auditoria);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

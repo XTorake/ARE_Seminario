@@ -1,0 +1,74 @@
+﻿@model Wizard.Models.Auditoria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Auditoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tablaAfectada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tablaAfectada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.columna)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.columna)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorViejo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorViejo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorNuevo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorNuevo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAuditoria }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

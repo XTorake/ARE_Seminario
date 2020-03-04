@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Wizard.Models.Auditoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tablaAfectada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.columna)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorViejo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorNuevo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tablaAfectada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.columna)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valorViejo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valorNuevo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idAuditoria }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idAuditoria }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idAuditoria })
+        </td>
+    </tr>
+}
+
+</table>

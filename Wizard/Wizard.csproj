@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4DE9A33B-BC41-44B0-B9F4-46D2DFA271A8}</ProjectGuid>
+    <ProjectGuid>{74B8E916-CFC6-40EC-88C6-5540BBBCFAAA}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -128,8 +128,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuditoriasController.cs" />
+    <Compile Include="Controllers\CarrerasController.cs" />
+    <Compile Include="Controllers\CarreraxCursoesController.cs" />
+    <Compile Include="Controllers\CategoriaProductoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,11 +260,26 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\TipoUsuarios\Create.cshtml" />
-    <Content Include="Views\TipoUsuarios\Delete.cshtml" />
-    <Content Include="Views\TipoUsuarios\Details.cshtml" />
-    <Content Include="Views\TipoUsuarios\Edit.cshtml" />
-    <Content Include="Views\TipoUsuarios\Index.cshtml" />
+    <Content Include="Views\Auditoria\Create.cshtml" />
+    <Content Include="Views\Auditoria\Delete.cshtml" />
+    <Content Include="Views\Auditoria\Details.cshtml" />
+    <Content Include="Views\Auditoria\Edit.cshtml" />
+    <Content Include="Views\Auditoria\Index.cshtml" />
+    <Content Include="Views\Carreras\Create.cshtml" />
+    <Content Include="Views\Carreras\Delete.cshtml" />
+    <Content Include="Views\Carreras\Details.cshtml" />
+    <Content Include="Views\Carreras\Edit.cshtml" />
+    <Content Include="Views\Carreras\Index.cshtml" />
+    <Content Include="Views\CarreraxCursoes\Create.cshtml" />
+    <Content Include="Views\CarreraxCursoes\Delete.cshtml" />
+    <Content Include="Views\CarreraxCursoes\Details.cshtml" />
+    <Content Include="Views\CarreraxCursoes\Edit.cshtml" />
+    <Content Include="Views\CarreraxCursoes\Index.cshtml" />
+    <Content Include="Views\CategoriaProductoes\Create.cshtml" />
+    <Content Include="Views\CategoriaProductoes\Delete.cshtml" />
+    <Content Include="Views\CategoriaProductoes\Details.cshtml" />
+    <Content Include="Views\CategoriaProductoes\Edit.cshtml" />
+    <Content Include="Views\CategoriaProductoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,7 +316,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49727</DevelopmentServerPort>
+          <DevelopmentServerPort>51813</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44309/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

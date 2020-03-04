@@ -133,6 +133,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuditoriaController.cs" />
+    <Compile Include="Controllers\CarreraController.cs" />
+    <Compile Include="Controllers\CarreraxCursoController.cs" />
+    <Compile Include="Controllers\CategoriaProductoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -444,10 +448,29 @@
     <Content Include="Views\TipoUsuario\Details.cshtml" />
     <Content Include="Views\TipoUsuario\Edit.cshtml" />
     <Content Include="Views\TipoUsuario\Index.cshtml" />
+    <Content Include="Views\Auditoria\Create.cshtml" />
+    <Content Include="Views\Auditoria\Delete.cshtml" />
+    <Content Include="Views\Auditoria\Details.cshtml" />
+    <Content Include="Views\Auditoria\Edit.cshtml" />
+    <Content Include="Views\Auditoria\Index.cshtml" />
+    <Content Include="Views\Carrera\Create.cshtml" />
+    <Content Include="Views\Carrera\Delete.cshtml" />
+    <Content Include="Views\Carrera\Details.cshtml" />
+    <Content Include="Views\Carrera\Edit.cshtml" />
+    <Content Include="Views\Carrera\Index.cshtml" />
+    <Content Include="Views\CarreraxCurso\Create.cshtml" />
+    <Content Include="Views\CarreraxCurso\Delete.cshtml" />
+    <Content Include="Views\CarreraxCurso\Details.cshtml" />
+    <Content Include="Views\CarreraxCurso\Edit.cshtml" />
+    <Content Include="Views\CarreraxCurso\Index.cshtml" />
+    <Content Include="Views\CategoriaProducto\Create.cshtml" />
+    <Content Include="Views\CategoriaProducto\Delete.cshtml" />
+    <Content Include="Views\CategoriaProducto\Details.cshtml" />
+    <Content Include="Views\CategoriaProducto\Edit.cshtml" />
+    <Content Include="Views\CategoriaProducto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Persona\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Wizard.Models.TipoUsuario>
+﻿@model IEnumerable<Wizard.Models.Carrera>
 
 @{
     ViewBag.Title = "Index";
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idTipoUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idTipoUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idTipoUsuario })
+            @Html.ActionLink("Edit", "Edit", new { id=item.idCarrera }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idCarrera }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idCarrera })
         </td>
     </tr>
 }
