@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using AutoMapper;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO.Objects;
 
@@ -11,6 +7,7 @@ namespace Seminario.Maps
 {
     public class Maps
     {
+        [Obsolete]
         public static void CreateMaps()
         {
             Mapper.Initialize(cfg =>

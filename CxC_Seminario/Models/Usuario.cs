@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CxC_Seminario.Models
+﻿namespace CxC_Seminario.Models
 {
     public class Usuario
     {
         public string IdPersona { get; set; } //cedula
 
-        public string usuario { get; set; }
+        public string NombreUsuario { get; set; }
 
         public string Contrasena { get; set; }
 

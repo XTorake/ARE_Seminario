@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Pais : ent.Interfaces.ICRUD<ent.Objects.Pais>
+    public class Pais : ICrud<DO.Objects.Pais>
     {
-        public void Delete(ent.Objects.Pais t)
+        public void Delete(DO.Objects.Pais t)
         {
-            var _ent = Mapper.Map<ent.Objects.Pais, data.Pai>(t);
-            new dal.Pais().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Pais, data.Pai>(t);
+            new dal.Pais().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Pais> GetAll()
+        public IEnumerable<DO.Objects.Pais> GetAll()
         {
-            var DetailsQuery = new dal.Pais().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Pai>, IEnumerable<ent.Objects.Pais>>(DetailsQuery);
+            var detailsQuery = new dal.Pais().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Pai>, IEnumerable<DO.Objects.Pais>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Pais GetOneById(int id)
+        public DO.Objects.Pais GetOneById(int id)
         {
-            var DetailsQuery = new dal.Pais().GetOneById(id);
-            var res = Mapper.Map<data.Pai, ent.Objects.Pais>(DetailsQuery);
+            var detailsQuery = new dal.Pais().GetOneById(id);
+            var res = Mapper.Map<data.Pai, DO.Objects.Pais>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Pais t)
+        public void Insert(DO.Objects.Pais t)
         {
-            var _ent = Mapper.Map<ent.Objects.Pais, data.Pai>(t);
-            new dal.Pais().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Pais, data.Pai>(t);
+            new dal.Pais().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Pais t)
+        public void Updated(DO.Objects.Pais t)
         {
-            var _ent = Mapper.Map<ent.Objects.Pais, data.Pai>(t);
-            new dal.Pais().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Pais, data.Pai>(t);
+            new dal.Pais().Updated(ent);
         }
     }
 }

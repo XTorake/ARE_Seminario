@@ -1,84 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using data = Seminario.DAL.EF;
-using Seminario.DAL.EF;
+﻿using System.Collections.Generic;
+using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
+using data = Seminario.DAL.EF;
 
 namespace Seminario.DAL
 {
-    public class Curso : ICRUD<data.Curso>
+    public class Curso : ICrud<data.Curso>
     {
-        private Repository.Repository<data.Curso> _repository = new Repository.Repository<data.Curso>(new ARE_SeminarioEntities());
+        private Repository<data.Curso> _repository = new Repository<data.Curso>(new data.ARE_SeminarioEntities());
 
         public void Delete(data.Curso t)
         {
-            try
-            {
-                _repository.Delete(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Delete(t);
+            _repository.Commit();
         }
 
         public IEnumerable<data.Curso> GetAll()
         {
-            try
-            {
-                return _repository.GetAll();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetAll();
         }
 
         public data.Curso GetOneById(int id)
         {
-            try
-            {
-                return _repository.GetOneByID(id);
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetOneByID(id);
         }
 
         public void Insert(data.Curso t)
         {
-            try
-            {
-                _repository.Insert(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Insert(t);
+            _repository.Commit();
         }
 
         public void Updated(data.Curso t)
         {
-            try
-            {
-                _repository.Updated(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Updated(t);
+            _repository.Commit();
         }
     }
 }

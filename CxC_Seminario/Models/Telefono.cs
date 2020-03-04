@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CxC_Seminario.Models
+﻿namespace CxC_Seminario.Models
 {
     public class Telefono
     {
@@ -11,7 +6,7 @@ namespace CxC_Seminario.Models
 
         public string IdPersona { get; set; } //cedula
 
-        public long telefono { get; set; }
+        public long Numero { get; set; }
 
         public int IdCodigoPais { get; set; }
 

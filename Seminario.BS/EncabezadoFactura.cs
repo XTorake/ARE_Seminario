@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class EncabezadoFactura : ent.Interfaces.ICRUD<ent.Objects.EncabezadoFactura>
+    public class EncabezadoFactura : ICrud<DO.Objects.EncabezadoFactura>
     {
-        public void Delete(ent.Objects.EncabezadoFactura t)
+        public void Delete(DO.Objects.EncabezadoFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
-            new dal.EncabezadoFactura().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
+            new dal.EncabezadoFactura().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.EncabezadoFactura> GetAll()
+        public IEnumerable<DO.Objects.EncabezadoFactura> GetAll()
         {
-            var DetailsQuery = new dal.EncabezadoFactura().GetAll();
-            var res = Mapper.Map<IEnumerable<data.EncabezadoFactura>, IEnumerable<ent.Objects.EncabezadoFactura>>(DetailsQuery);
+            var detailsQuery = new dal.EncabezadoFactura().GetAll();
+            var res = Mapper.Map<IEnumerable<data.EncabezadoFactura>, IEnumerable<DO.Objects.EncabezadoFactura>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.EncabezadoFactura GetOneById(int id)
+        public DO.Objects.EncabezadoFactura GetOneById(int id)
         {
-            var DetailsQuery = new dal.EncabezadoFactura().GetOneById(id);
-            var res = Mapper.Map<data.EncabezadoFactura, ent.Objects.EncabezadoFactura>(DetailsQuery);
+            var detailsQuery = new dal.EncabezadoFactura().GetOneById(id);
+            var res = Mapper.Map<data.EncabezadoFactura, DO.Objects.EncabezadoFactura>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.EncabezadoFactura t)
+        public void Insert(DO.Objects.EncabezadoFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
-            new dal.EncabezadoFactura().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
+            new dal.EncabezadoFactura().Insert(ent);
         }
 
-        public void Updated(ent.Objects.EncabezadoFactura t)
+        public void Updated(DO.Objects.EncabezadoFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
-            new dal.EncabezadoFactura().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);
+            new dal.EncabezadoFactura().Updated(ent);
         }
     }
 }

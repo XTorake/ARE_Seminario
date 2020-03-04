@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Producto : ent.Interfaces.ICRUD<ent.Objects.Producto>
+    public class Producto : ICrud<DO.Objects.Producto>
     {
-        public void Delete(ent.Objects.Producto t)
+        public void Delete(DO.Objects.Producto t)
         {
-            var _ent = Mapper.Map<ent.Objects.Producto, data.Producto>(t);
-            new dal.Producto().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Producto, data.Producto>(t);
+            new dal.Producto().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Producto> GetAll()
+        public IEnumerable<DO.Objects.Producto> GetAll()
         {
-            var DetailsQuery = new dal.Producto().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Producto>, IEnumerable<ent.Objects.Producto>>(DetailsQuery);
+            var detailsQuery = new dal.Producto().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Producto>, IEnumerable<DO.Objects.Producto>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Producto GetOneById(int id)
+        public DO.Objects.Producto GetOneById(int id)
         {
-            var DetailsQuery = new dal.Producto().GetOneById(id);
-            var res = Mapper.Map<data.Producto, ent.Objects.Producto>(DetailsQuery);
+            var detailsQuery = new dal.Producto().GetOneById(id);
+            var res = Mapper.Map<data.Producto, DO.Objects.Producto>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Producto t)
+        public void Insert(DO.Objects.Producto t)
         {
-            var _ent = Mapper.Map<ent.Objects.Producto, data.Producto>(t);
-            new dal.Producto().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Producto, data.Producto>(t);
+            new dal.Producto().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Producto t)
+        public void Updated(DO.Objects.Producto t)
         {
-            var _ent = Mapper.Map<ent.Objects.Producto, data.Producto>(t);
-            new dal.Producto().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Producto, data.Producto>(t);
+            new dal.Producto().Updated(ent);
         }
     }
 }

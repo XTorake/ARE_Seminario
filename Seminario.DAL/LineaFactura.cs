@@ -1,84 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using data = Seminario.DAL.EF;
-using Seminario.DAL.EF;
+﻿using System.Collections.Generic;
+using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
+using data = Seminario.DAL.EF;
 
 namespace Seminario.DAL
 {
-    public class LineaFactura : ICRUD<data.LineaFactura>
+    public class LineaFactura : ICrud<data.LineaFactura>
     {
-        private Repository.Repository<data.LineaFactura> _repository = new Repository.Repository<data.LineaFactura>(new ARE_SeminarioEntities());
+        private Repository<data.LineaFactura> _repository = new Repository<data.LineaFactura>(new data.ARE_SeminarioEntities());
 
         public void Delete(data.LineaFactura t)
         {
-            try
-            {
-                _repository.Delete(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Delete(t);
+            _repository.Commit();
         }
 
         public IEnumerable<data.LineaFactura> GetAll()
         {
-            try
-            {
-                return _repository.GetAll();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetAll();
         }
 
         public data.LineaFactura GetOneById(int id)
         {
-            try
-            {
-                return _repository.GetOneByID(id);
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetOneByID(id);
         }
 
         public void Insert(data.LineaFactura t)
         {
-            try
-            {
-                _repository.Insert(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Insert(t);
+            _repository.Commit();
         }
 
         public void Updated(data.LineaFactura t)
         {
-            try
-            {
-                _repository.Updated(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Updated(t);
+            _repository.Commit();
         }
     }
 }

@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Curso : ent.Interfaces.ICRUD<ent.Objects.Curso>
+    public class Curso : ICrud<DO.Objects.Curso>
     {
-        public void Delete(ent.Objects.Curso t)
+        public void Delete(DO.Objects.Curso t)
         {
-            var _ent = Mapper.Map<ent.Objects.Curso, data.Curso>(t);
-            new dal.Curso().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Curso, data.Curso>(t);
+            new dal.Curso().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Curso> GetAll()
+        public IEnumerable<DO.Objects.Curso> GetAll()
         {
-            var DetailsQuery = new dal.Curso().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Curso>, IEnumerable<ent.Objects.Curso>>(DetailsQuery);
+            var detailsQuery = new dal.Curso().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Curso>, IEnumerable<DO.Objects.Curso>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Curso GetOneById(int id)
+        public DO.Objects.Curso GetOneById(int id)
         {
-            var DetailsQuery = new dal.Curso().GetOneById(id);
-            var res = Mapper.Map<data.Curso, ent.Objects.Curso>(DetailsQuery);
+            var detailsQuery = new dal.Curso().GetOneById(id);
+            var res = Mapper.Map<data.Curso, DO.Objects.Curso>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Curso t)
+        public void Insert(DO.Objects.Curso t)
         {
-            var _ent = Mapper.Map<ent.Objects.Curso, data.Curso>(t);
-            new dal.Curso().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Curso, data.Curso>(t);
+            new dal.Curso().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Curso t)
+        public void Updated(DO.Objects.Curso t)
         {
-            var _ent = Mapper.Map<ent.Objects.Curso, data.Curso>(t);
-            new dal.Curso().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Curso, data.Curso>(t);
+            new dal.Curso().Updated(ent);
         }
     }
 }

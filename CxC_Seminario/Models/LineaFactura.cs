@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CxC_Seminario.Models
+﻿namespace CxC_Seminario.Models
 {
     public class Lineafactura
     {
-        public int idLinea { get; set; }
+        public int IdLinea { get; set; }
 
-        public int idProducto { get; set; }
+        public int IdProducto { get; set; }
 
         public double Monto { get; set; }
 
@@ -17,7 +12,7 @@ namespace CxC_Seminario.Models
 
         public string Descripcion { get; set; }
 
-        public string idEncabezado { get; set; }
+        public string IdEncabezado { get; set; }
 
     }
 }

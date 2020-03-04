@@ -1,84 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using data = Seminario.DAL.EF;
-using Seminario.DAL.EF;
+﻿using System.Collections.Generic;
+using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
+using data = Seminario.DAL.EF;
 
 namespace Seminario.DAL
 {
-    public class MetodoPago : ICRUD<data.MetodoPago>
+    public class MetodoPago : ICrud<data.MetodoPago>
     {
-        private Repository.Repository<data.MetodoPago> _repository = new Repository.Repository<data.MetodoPago>(new ARE_SeminarioEntities());
+        private Repository<data.MetodoPago> _repository = new Repository<data.MetodoPago>(new data.ARE_SeminarioEntities());
 
         public void Delete(data.MetodoPago t)
         {
-            try
-            {
-                _repository.Delete(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Delete(t);
+            _repository.Commit();
         }
 
         public IEnumerable<data.MetodoPago> GetAll()
         {
-            try
-            {
-                return _repository.GetAll();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetAll();
         }
 
         public data.MetodoPago GetOneById(int id)
         {
-            try
-            {
-                return _repository.GetOneByID(id);
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetOneByID(id);
         }
 
         public void Insert(data.MetodoPago t)
         {
-            try
-            {
-                _repository.Insert(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Insert(t);
+            _repository.Commit();
         }
 
         public void Updated(data.MetodoPago t)
         {
-            try
-            {
-                _repository.Updated(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Updated(t);
+            _repository.Commit();
         }
     }
 }

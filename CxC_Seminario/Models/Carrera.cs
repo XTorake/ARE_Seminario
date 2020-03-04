@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CxC_Seminario.Models
+﻿namespace CxC_Seminario.Models
 {
     public class Carrera
     {

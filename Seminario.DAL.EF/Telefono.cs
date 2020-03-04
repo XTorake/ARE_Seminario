@@ -9,9 +9,6 @@
 
 namespace Seminario.DAL.EF
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Telefono
     {
         public int idTelefono { get; set; }

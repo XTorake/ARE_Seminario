@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class LineaFactura : ent.Interfaces.ICRUD<ent.Objects.LineaFactura>
+    public class LineaFactura : ICrud<DO.Objects.LineaFactura>
     {
-        public void Delete(ent.Objects.LineaFactura t)
+        public void Delete(DO.Objects.LineaFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.LineaFactura, data.LineaFactura>(t);
-            new dal.LineaFactura().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.LineaFactura, data.LineaFactura>(t);
+            new dal.LineaFactura().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.LineaFactura> GetAll()
+        public IEnumerable<DO.Objects.LineaFactura> GetAll()
         {
-            var DetailsQuery = new dal.LineaFactura().GetAll();
-            var res = Mapper.Map<IEnumerable<data.LineaFactura>, IEnumerable<ent.Objects.LineaFactura>>(DetailsQuery);
+            var detailsQuery = new dal.LineaFactura().GetAll();
+            var res = Mapper.Map<IEnumerable<data.LineaFactura>, IEnumerable<DO.Objects.LineaFactura>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.LineaFactura GetOneById(int id)
+        public DO.Objects.LineaFactura GetOneById(int id)
         {
-            var DetailsQuery = new dal.LineaFactura().GetOneById(id);
-            var res = Mapper.Map<data.LineaFactura, ent.Objects.LineaFactura>(DetailsQuery);
+            var detailsQuery = new dal.LineaFactura().GetOneById(id);
+            var res = Mapper.Map<data.LineaFactura, DO.Objects.LineaFactura>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.LineaFactura t)
+        public void Insert(DO.Objects.LineaFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.LineaFactura, data.LineaFactura>(t);
-            new dal.LineaFactura().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.LineaFactura, data.LineaFactura>(t);
+            new dal.LineaFactura().Insert(ent);
         }
 
-        public void Updated(ent.Objects.LineaFactura t)
+        public void Updated(DO.Objects.LineaFactura t)
         {
-            var _ent = Mapper.Map<ent.Objects.LineaFactura, data.LineaFactura>(t);
-            new dal.LineaFactura().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.LineaFactura, data.LineaFactura>(t);
+            new dal.LineaFactura().Updated(ent);
         }
     }
 }

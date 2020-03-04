@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Persona : ent.Interfaces.ICRUD<ent.Objects.Persona>
+    public class Persona : ICrud<DO.Objects.Persona>
     {
-        public void Delete(ent.Objects.Persona t)
+        public void Delete(DO.Objects.Persona t)
         {
-            var _ent = Mapper.Map<ent.Objects.Persona, data.Persona>(t);
-            new dal.Persona().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Persona, data.Persona>(t);
+            new dal.Persona().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Persona> GetAll()
+        public IEnumerable<DO.Objects.Persona> GetAll()
         {
-            var DetailsQuery = new dal.Persona().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Persona>, IEnumerable<ent.Objects.Persona>>(DetailsQuery);
+            var detailsQuery = new dal.Persona().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Persona>, IEnumerable<DO.Objects.Persona>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Persona GetOneById(int id)
+        public DO.Objects.Persona GetOneById(int id)
         {
-            var DetailsQuery = new dal.Persona().GetOneById(id);
-            var res = Mapper.Map<data.Persona, ent.Objects.Persona>(DetailsQuery);
+            var detailsQuery = new dal.Persona().GetOneById(id);
+            var res = Mapper.Map<data.Persona, DO.Objects.Persona>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Persona t)
+        public void Insert(DO.Objects.Persona t)
         {
-            var _ent = Mapper.Map<ent.Objects.Persona, data.Persona>(t);
-            new dal.Persona().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Persona, data.Persona>(t);
+            new dal.Persona().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Persona t)
+        public void Updated(DO.Objects.Persona t)
         {
-            var _ent = Mapper.Map<ent.Objects.Persona, data.Persona>(t);
-            new dal.Persona().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Persona, data.Persona>(t);
+            new dal.Persona().Updated(ent);
         }
     }
 }

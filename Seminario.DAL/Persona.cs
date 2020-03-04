@@ -1,84 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using data = Seminario.DAL.EF;
-using Seminario.DAL.EF;
+﻿using System.Collections.Generic;
+using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
+using data = Seminario.DAL.EF;
 
 namespace Seminario.DAL
 {
-    public class Persona : ICRUD<data.Persona>
+    public class Persona : ICrud<data.Persona>
     {
-        private Repository.Repository<data.Persona> _repository = new Repository.Repository<data.Persona>(new ARE_SeminarioEntities());
+        private Repository<data.Persona> _repository = new Repository<data.Persona>(new data.ARE_SeminarioEntities());
 
         public void Delete(data.Persona t)
         {
-            try
-            {
-                _repository.Delete(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Delete(t);
+            _repository.Commit();
         }
 
         public IEnumerable<data.Persona> GetAll()
         {
-            try
-            {
-                return _repository.GetAll();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetAll();
         }
 
         public data.Persona GetOneById(int id)
         {
-            try
-            {
-                return _repository.GetOneByID(id);
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            return _repository.GetOneByID(id);
         }
 
         public void Insert(data.Persona t)
         {
-            try
-            {
-                _repository.Insert(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Insert(t);
+            _repository.Commit();
         }
 
         public void Updated(data.Persona t)
         {
-            try
-            {
-                _repository.Updated(t);
-                _repository.Commit();
-            }
-            catch (Exception ee)
-            {
-
-                throw;
-            }
+            _repository.Updated(t);
+            _repository.Commit();
         }
     }
 }

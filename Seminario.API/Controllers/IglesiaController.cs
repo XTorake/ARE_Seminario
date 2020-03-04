@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using Seminario.BS;
 using ent = Seminario.DO.Objects;
 
 namespace Seminario.API.Controllers
@@ -16,35 +13,35 @@ namespace Seminario.API.Controllers
         [HttpGet]
         public IEnumerable<ent.Iglesia> GetAll()
         {
-            return new Seminario.BS.Iglesia().GetAll();
+            return new Iglesia().GetAll();
         }
 
         [Route("api/Iglesia/GetOneById/5")]
         [HttpGet]
         public ent.Iglesia GetOneById(int id)
         {
-            return new Seminario.BS.Iglesia().GetOneById(id);
+            return new Iglesia().GetOneById(id);
         }
 
         [Route("api/Iglesia/Delete")]
         [HttpPost]
         public void Delete(ent.Iglesia t)
         {
-            new Seminario.BS.Iglesia().Delete(t);
+            new Iglesia().Delete(t);
         }
 
         [Route("api/Iglesia/Update")]
         [HttpPost]
         public void Updated(ent.Iglesia t)
         {
-            new Seminario.BS.Iglesia().Updated(t);
+            new Iglesia().Updated(t);
         }
 
         [Route("api/Iglesia/Insert")]
         [HttpPost]
         public void Insert(ent.Iglesia t)
         {
-            new Seminario.BS.Iglesia().Insert(t);
+            new Iglesia().Insert(t);
         }
     }
 }

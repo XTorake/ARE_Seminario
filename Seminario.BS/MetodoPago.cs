@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class MetodoPago : ent.Interfaces.ICRUD<ent.Objects.MetodoPago>
+    public class MetodoPago : ICrud<DO.Objects.MetodoPago>
     {
-        public void Delete(ent.Objects.MetodoPago t)
+        public void Delete(DO.Objects.MetodoPago t)
         {
-            var _ent = Mapper.Map<ent.Objects.MetodoPago, data.MetodoPago>(t);
-            new dal.MetodoPago().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.MetodoPago, data.MetodoPago>(t);
+            new dal.MetodoPago().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.MetodoPago> GetAll()
+        public IEnumerable<DO.Objects.MetodoPago> GetAll()
         {
-            var DetailsQuery = new dal.MetodoPago().GetAll();
-            var res = Mapper.Map<IEnumerable<data.MetodoPago>, IEnumerable<ent.Objects.MetodoPago>>(DetailsQuery);
+            var detailsQuery = new dal.MetodoPago().GetAll();
+            var res = Mapper.Map<IEnumerable<data.MetodoPago>, IEnumerable<DO.Objects.MetodoPago>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.MetodoPago GetOneById(int id)
+        public DO.Objects.MetodoPago GetOneById(int id)
         {
-            var DetailsQuery = new dal.MetodoPago().GetOneById(id);
-            var res = Mapper.Map<data.MetodoPago, ent.Objects.MetodoPago>(DetailsQuery);
+            var detailsQuery = new dal.MetodoPago().GetOneById(id);
+            var res = Mapper.Map<data.MetodoPago, DO.Objects.MetodoPago>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.MetodoPago t)
+        public void Insert(DO.Objects.MetodoPago t)
         {
-            var _ent = Mapper.Map<ent.Objects.MetodoPago, data.MetodoPago>(t);
-            new dal.MetodoPago().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.MetodoPago, data.MetodoPago>(t);
+            new dal.MetodoPago().Insert(ent);
         }
 
-        public void Updated(ent.Objects.MetodoPago t)
+        public void Updated(DO.Objects.MetodoPago t)
         {
-            var _ent = Mapper.Map<ent.Objects.MetodoPago, data.MetodoPago>(t);
-            new dal.MetodoPago().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.MetodoPago, data.MetodoPago>(t);
+            new dal.MetodoPago().Updated(ent);
         }
     }
 }

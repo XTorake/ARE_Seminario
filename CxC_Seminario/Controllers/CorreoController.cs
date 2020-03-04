@@ -1,26 +1,25 @@
-﻿using CxC_Seminario.DO;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using CxC_Seminario.DO;
+using Newtonsoft.Json;
 
 namespace CxC_Seminario.Controllers
 {
     public class CorreoController : Controller
     {
-        string baseurl = "https://localhost:44313/";
+        string _baseurl = "https://localhost:44313/";
         // GET: Correo
         public async Task<ActionResult> Index()
         {
             List<Correo> aux = new List<Correo>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Correo/GetAll");
@@ -39,7 +38,7 @@ namespace CxC_Seminario.Controllers
             Correo aux = new Correo();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id= " + id);
@@ -64,10 +63,10 @@ namespace CxC_Seminario.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Correo/Insert", byteContent).Result;
@@ -88,7 +87,7 @@ namespace CxC_Seminario.Controllers
             Correo aux = new Correo();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id=" + id);
@@ -108,10 +107,10 @@ namespace CxC_Seminario.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Correo/Update", byteContent).Result;
@@ -132,7 +131,7 @@ namespace CxC_Seminario.Controllers
             Correo aux = new Correo();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Correo/GetOneById/5?id=" + id);
@@ -153,7 +152,7 @@ namespace CxC_Seminario.Controllers
             Correo aux = new Correo();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseurl);
+                client.BaseAddress = new Uri(_baseurl);
 
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -167,7 +166,7 @@ namespace CxC_Seminario.Controllers
                 }
 
                 var myContent = JsonConvert.SerializeObject(aux);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/Correo/Delete", byteContent).Result;

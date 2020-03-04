@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Telefono : ent.Interfaces.ICRUD<ent.Objects.Telefono>
+    public class Telefono : ICrud<DO.Objects.Telefono>
     {
-        public void Delete(ent.Objects.Telefono t)
+        public void Delete(DO.Objects.Telefono t)
         {
-            var _ent = Mapper.Map<ent.Objects.Telefono, data.Telefono>(t);
-            new dal.Telefono().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Telefono, data.Telefono>(t);
+            new dal.Telefono().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Telefono> GetAll()
+        public IEnumerable<DO.Objects.Telefono> GetAll()
         {
-            var DetailsQuery = new dal.Telefono().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Telefono>, IEnumerable<ent.Objects.Telefono>>(DetailsQuery);
+            var detailsQuery = new dal.Telefono().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Telefono>, IEnumerable<DO.Objects.Telefono>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Telefono GetOneById(int id)
+        public DO.Objects.Telefono GetOneById(int id)
         {
-            var DetailsQuery = new dal.Telefono().GetOneById(id);
-            var res = Mapper.Map<data.Telefono, ent.Objects.Telefono>(DetailsQuery);
+            var detailsQuery = new dal.Telefono().GetOneById(id);
+            var res = Mapper.Map<data.Telefono, DO.Objects.Telefono>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Telefono t)
+        public void Insert(DO.Objects.Telefono t)
         {
-            var _ent = Mapper.Map<ent.Objects.Telefono, data.Telefono>(t);
-            new dal.Telefono().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Telefono, data.Telefono>(t);
+            new dal.Telefono().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Telefono t)
+        public void Updated(DO.Objects.Telefono t)
         {
-            var _ent = Mapper.Map<ent.Objects.Telefono, data.Telefono>(t);
-            new dal.Telefono().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Telefono, data.Telefono>(t);
+            new dal.Telefono().Updated(ent);
         }
     }
 }

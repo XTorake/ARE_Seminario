@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class TipoUsuario : ent.Interfaces.ICRUD<ent.Objects.TipoUsuario>
+    public class TipoUsuario : ICrud<DO.Objects.TipoUsuario>
     {
-        public void Delete(ent.Objects.TipoUsuario t)
+        public void Delete(DO.Objects.TipoUsuario t)
         {
-            var _ent = Mapper.Map<ent.Objects.TipoUsuario, data.TipoUsuario>(t);
-            new dal.TipoUsuario().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.TipoUsuario, data.TipoUsuario>(t);
+            new dal.TipoUsuario().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.TipoUsuario> GetAll()
+        public IEnumerable<DO.Objects.TipoUsuario> GetAll()
         {
-            var DetailsQuery = new dal.TipoUsuario().GetAll();
-            var res = Mapper.Map<IEnumerable<data.TipoUsuario>, IEnumerable<ent.Objects.TipoUsuario>>(DetailsQuery);
+            var detailsQuery = new dal.TipoUsuario().GetAll();
+            var res = Mapper.Map<IEnumerable<data.TipoUsuario>, IEnumerable<DO.Objects.TipoUsuario>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.TipoUsuario GetOneById(int id)
+        public DO.Objects.TipoUsuario GetOneById(int id)
         {
-            var DetailsQuery = new dal.TipoUsuario().GetOneById(id);
-            var res = Mapper.Map<data.TipoUsuario, ent.Objects.TipoUsuario>(DetailsQuery);
+            var detailsQuery = new dal.TipoUsuario().GetOneById(id);
+            var res = Mapper.Map<data.TipoUsuario, DO.Objects.TipoUsuario>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.TipoUsuario t)
+        public void Insert(DO.Objects.TipoUsuario t)
         {
-            var _ent = Mapper.Map<ent.Objects.TipoUsuario, data.TipoUsuario>(t);
-            new dal.TipoUsuario().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.TipoUsuario, data.TipoUsuario>(t);
+            new dal.TipoUsuario().Insert(ent);
         }
 
-        public void Updated(ent.Objects.TipoUsuario t)
+        public void Updated(DO.Objects.TipoUsuario t)
         {
-            var _ent = Mapper.Map<ent.Objects.TipoUsuario, data.TipoUsuario>(t);
-            new dal.TipoUsuario().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.TipoUsuario, data.TipoUsuario>(t);
+            new dal.TipoUsuario().Updated(ent);
         }
     }
 }

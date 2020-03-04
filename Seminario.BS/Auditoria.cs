@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
+using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
-using Seminario.DO.Objects;
 
 namespace Seminario.BS
 {
-    public class Auditoria : ent.Interfaces.ICRUD<ent.Objects.Auditoria>
+    public class Auditoria : ICrud<DO.Objects.Auditoria>
     {
-        public void Delete(ent.Objects.Auditoria t)
+        public void Delete(DO.Objects.Auditoria t)
         {
-            var _ent = Mapper.Map<ent.Objects.Auditoria, data.Auditoria>(t);
-            new dal.Auditoria().Delete(_ent);
+            var ent = Mapper.Map<DO.Objects.Auditoria, data.Auditoria>(t);
+            new dal.Auditoria().Delete(ent);
         }
 
-        public IEnumerable<ent.Objects.Auditoria> GetAll()
+        public IEnumerable<DO.Objects.Auditoria> GetAll()
         {
-            var DetailsQuery = new dal.Auditoria().GetAll();
-            var res = Mapper.Map<IEnumerable<data.Auditoria>, IEnumerable<ent.Objects.Auditoria>>(DetailsQuery);
+            var detailsQuery = new dal.Auditoria().GetAll();
+            var res = Mapper.Map<IEnumerable<data.Auditoria>, IEnumerable<DO.Objects.Auditoria>>(detailsQuery);
             return res;
         }
 
-        public ent.Objects.Auditoria GetOneById(int id)
+        public DO.Objects.Auditoria GetOneById(int id)
         {
-            var DetailsQuery = new dal.Auditoria().GetOneById(id);
-            var res = Mapper.Map<data.Auditoria, ent.Objects.Auditoria>(DetailsQuery);
+            var detailsQuery = new dal.Auditoria().GetOneById(id);
+            var res = Mapper.Map<data.Auditoria, DO.Objects.Auditoria>(detailsQuery);
             return res;
         }
 
-        public void Insert(ent.Objects.Auditoria t)
+        public void Insert(DO.Objects.Auditoria t)
         {
-            var _ent = Mapper.Map<ent.Objects.Auditoria, data.Auditoria>(t);
-            new dal.Auditoria().Insert(_ent);
+            var ent = Mapper.Map<DO.Objects.Auditoria, data.Auditoria>(t);
+            new dal.Auditoria().Insert(ent);
         }
 
-        public void Updated(ent.Objects.Auditoria t)
+        public void Updated(DO.Objects.Auditoria t)
         {
-            var _ent = Mapper.Map<ent.Objects.Auditoria, data.Auditoria>(t);
-            new dal.Auditoria().Updated(_ent);
+            var ent = Mapper.Map<DO.Objects.Auditoria, data.Auditoria>(t);
+            new dal.Auditoria().Updated(ent);
         }
     }
 }

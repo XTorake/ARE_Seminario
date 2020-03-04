@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Seminario.API.Areas.HelpPage.ModelDescriptions
