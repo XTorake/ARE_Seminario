@@ -1,6 +1,8 @@
 ﻿@model CxC_Seminario.DO.Carrera
 
-@{
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     ViewBag.Title = "Create";
 }
 
@@ -34,7 +36,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

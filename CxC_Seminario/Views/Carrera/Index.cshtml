@@ -1,33 +1,48 @@
 ﻿@model IEnumerable<CxC_Seminario.DO.Carrera>
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <div class="container-fluid">
+        <a href="@Url.Action("Create", "Carrera")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdCarrera }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdCarrera }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdCarrera })
-        </td>
-    </tr>
-}
+    <div class="courses-area">
+        <div class="container-fluid">
+            <div class="row">
+            @foreach (var item in Model)
+            {
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
+                        <div class="courses-inner res-mg-b-30">
+                            <div class="courses-title">
+                                <a href="@Url.Action("Details", "Carrera", new {id = item.IdCarrera })"><img src="img/courses/1.jpg" alt=""></a>
+                                <h3>@Html.DisplayFor(modelItem =>item.Nombre)</h3>
+                            </div>
+                            <div class="courses-alaltic">
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
+                               <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
+                            </div>
+                            <div class="course-des">
+                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
+                            </div>
+                            <div class="product-buttons">
+                                
+                               
+                                @Html.ActionLink("Detalles", "Details", new { id = item.IdCarrera }, new { @class = "btn btn-primary btn-sm" }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCarrera }, new { @class = "btn btn-danger btn-sm" })
+                            </div>
+                        </div>
+                    </div>
 
-</table>
+            }
+                </div>
+           
+        </div>
+    </div>
+
+

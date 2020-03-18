@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CxC_Seminario.DO
@@ -6,11 +7,20 @@ namespace CxC_Seminario.DO
     public class Usuario
     {
         public string Cedula { get; set; }
+        [Required]
+        [StringLength(30)]
         public string Usuario1 { get; set; }
+        [Required]
+        [StringLength(20)]
         public string Contrasena { get; set; }
+        [Required]
+        [RegularExpression("([0-9]+)")]
         public int IdTipoUsuario { get; set; }
+        [RegularExpression("([0-9]+)")]
         public int? IdIglesia { get; set; }
+        [RegularExpression("([0-9]+)")]
         public int? IdMetodoPago { get; set; }
+        [RegularExpression("([0-9]+)")]
         public int? IdCarrera { get; set; }
 
         public virtual Carrera Carrera { get; set; }

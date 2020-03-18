@@ -61,24 +61,35 @@ namespace CxC_Seminario.Controllers
         [HttpPost]
         public ActionResult Create(Carrera entidad)
         {
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri(_baseurl);
-
-                var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = Encoding.UTF8.GetBytes(myContent);
-                var byteContent = new ByteArrayContent(buffer);
-                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var postTask = client.PostAsync("api/Carrera/Insert", byteContent).Result;
-
-                var result = postTask;
-                if (result.IsSuccessStatusCode)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(_baseurl);
+
+                        var myContent = JsonConvert.SerializeObject(entidad);
+                        var buffer = Encoding.UTF8.GetBytes(myContent);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var postTask = client.PostAsync("api/Carrera/Insert", byteContent).Result;
+
+                        var result = postTask;
+                        if (result.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
+                  
                 }
+                return View(entidad);
             }
-            ModelState.AddModelError(string.Empty, "Server Error, Please contact administrator");
-            return View(entidad);
+            catch
+            {
+                return View(entidad);
+            }
+          
         }
         #endregion
         #region Edit
