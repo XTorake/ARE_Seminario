@@ -154,21 +154,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Curso.cs" />
-    <Compile Include="Models\Carrera.cs" />
-    <Compile Include="Models\CategoriaProducto.cs" />
-    <Compile Include="Models\Correo.cs" />
-    <Compile Include="Models\DistritoEclesiastico.cs" />
-    <Compile Include="Models\EncabezadoFactura.cs" />
-    <Compile Include="Models\Iglesia.cs" />
-    <Compile Include="Models\LineaFactura.cs" />
-    <Compile Include="Models\MetodoPago.cs" />
-    <Compile Include="Models\Pais.cs" />
-    <Compile Include="Models\Persona.cs" />
-    <Compile Include="Models\Producto.cs" />
-    <Compile Include="Models\Telefono.cs" />
-    <Compile Include="Models\TipoUsuario.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="DO\Auditoria.cs" />
     <Compile Include="DO\Carrera.cs" />
     <Compile Include="DO\CarreraxCurso.cs" />

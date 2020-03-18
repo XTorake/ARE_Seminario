@@ -10,8 +10,5 @@ namespace Seminario.DO.Objects
         public string IdProfesor { get; set; }
         public double Precio { get; set; }
         public int Creditos { get; set; }
-
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarreraxCurso> CarreraxCursoes { get; set; }
     }
 }

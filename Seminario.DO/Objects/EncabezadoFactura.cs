@@ -13,9 +13,5 @@ namespace Seminario.DO.Objects
         public double Descuento { get; set; }
         public double TotalPagar { get; set; }
         public double TotalCobrar { get; set; }
-
-        public virtual Usuario Usuario { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LineaFactura> LineaFacturas { get; set; }
     }
 }

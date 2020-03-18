@@ -18,22 +18,22 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.contrasena)
+                @Html.DisplayNameFor(model => model.Contrasena)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Carrera.nombre)
+                @Html.DisplayNameFor(model => model.Carrera.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Iglesia.nombre)
+                @Html.DisplayNameFor(model => model.Iglesia.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetodoPago.nombre)
+                @Html.DisplayNameFor(model => model.MetodoPago.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona.nombre)
+                @Html.DisplayNameFor(model => model.Persona.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
+                @Html.DisplayNameFor(model => model.TipoUsuario.Nombre)
             </th>
             <th></th>
         </tr>
@@ -41,27 +41,27 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.contrasena)
+                @Html.DisplayFor(modelItem => item.Contrasena)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Carrera.nombre)
+                @Html.DisplayFor(modelItem => item.Carrera.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Iglesia.nombre)
+                @Html.DisplayFor(modelItem => item.Iglesia.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MetodoPago.nombre)
+                @Html.DisplayFor(modelItem => item.MetodoPago.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Persona.nombre)
+                @Html.DisplayFor(modelItem => item.Persona.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
+                @Html.DisplayFor(modelItem => item.TipoUsuario.Nombre)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.usuario1 }) |
-                @Html.ActionLink("Details", "Details", new { id=item.usuario1 }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.usuario1 })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Usuario1 }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Usuario1 }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Usuario1 })
             </td>
         </tr>
     }

@@ -5,7 +5,5 @@
         public int IdCorreo { get; set; }
         public string Correo1 { get; set; }
         public string Cedula { get; set; }
-
-        public virtual Persona Persona { get; set; }
     }
 }

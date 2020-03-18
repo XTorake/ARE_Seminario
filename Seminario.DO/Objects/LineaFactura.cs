@@ -8,8 +8,5 @@
         public double Pago { get; set; }
         public string Descripcion { get; set; }
         public string IdEncabezado { get; set; }
-
-        public virtual EncabezadoFactura EncabezadoFactura { get; set; }
-        public virtual Producto Producto { get; set; }
     }
 }

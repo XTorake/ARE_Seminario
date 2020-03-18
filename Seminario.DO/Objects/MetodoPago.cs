@@ -7,8 +7,5 @@ namespace Seminario.DO.Objects
     {
         public int IdMetodoPago { get; set; }
         public string Nombre { get; set; }
-
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }
