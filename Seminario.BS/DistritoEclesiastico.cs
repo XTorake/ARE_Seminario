@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.DistritoEclesiastico, DO.Objects.DistritoEclesiastico>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.DistritoEclesiastico GetOneById(string id)
+        {
+            var detailsQuery = new dal.DistritoEclesiastico().GetOneById(id);
+            var res = Mapper.Map<data.DistritoEclesiastico, DO.Objects.DistritoEclesiastico>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.DistritoEclesiastico t)
         {
             var ent = Mapper.Map<DO.Objects.DistritoEclesiastico, data.DistritoEclesiastico>(t);

@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.CategoriaProducto, DO.Objects.CategoriaProducto>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.CategoriaProducto GetOneById(string id)
+        {
+            var detailsQuery = new dal.CategoriaProducto().GetOneById(id);
+            var res = Mapper.Map<data.CategoriaProducto, DO.Objects.CategoriaProducto>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.CategoriaProducto t)
         {
             var ent = Mapper.Map<DO.Objects.CategoriaProducto, data.CategoriaProducto>(t);

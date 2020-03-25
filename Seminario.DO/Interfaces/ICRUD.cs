@@ -9,5 +9,7 @@ namespace Seminario.DO.Interfaces
         void Delete(T t);
         IEnumerable<T> GetAll();
         T GetOneById(int id);
+        T GetOneById(string id);
+
     }
 }

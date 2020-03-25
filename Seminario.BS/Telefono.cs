@@ -28,6 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.Telefono, DO.Objects.Telefono>(detailsQuery);
             return res;
         }
+        public DO.Objects.Telefono GetOneById(string id)
+        {
+            var detailsQuery = new dal.Telefono().GetOneById(id);
+            var res = Mapper.Map<data.Telefono, DO.Objects.Telefono>(detailsQuery);
+            return res;
+        }
 
         public void Insert(DO.Objects.Telefono t)
         {

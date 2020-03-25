@@ -28,6 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.CarreraxCurso, DO.Objects.CarreraxCurso>(detailsQuery);
             return res;
         }
+        public DO.Objects.CarreraxCurso GetOneById(string id)
+        {
+            var detailsQuery = new dal.CarreraxCurso().GetOneById(id);
+            var res = Mapper.Map<data.CarreraxCurso, DO.Objects.CarreraxCurso>(detailsQuery);
+            return res;
+        }
 
         public void Insert(DO.Objects.CarreraxCurso t)
         {

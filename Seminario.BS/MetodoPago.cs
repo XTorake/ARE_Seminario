@@ -28,6 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.MetodoPago, DO.Objects.MetodoPago>(detailsQuery);
             return res;
         }
+        public DO.Objects.MetodoPago GetOneById(string id)
+        {
+            var detailsQuery = new dal.MetodoPago().GetOneById(id);
+            var res = Mapper.Map<data.MetodoPago, DO.Objects.MetodoPago>(detailsQuery);
+            return res;
+        }
 
         public void Insert(DO.Objects.MetodoPago t)
         {

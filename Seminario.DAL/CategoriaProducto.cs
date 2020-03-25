@@ -24,7 +24,10 @@ namespace Seminario.DAL
         {
             return _repository.GetOneByID(id);
         }
-
+        public data.CategoriaProducto GetOneById(string id)
+        {
+            return _repository.GetOneByID(id);
+        }
         public void Insert(data.CategoriaProducto t)
         {
             _repository.Insert(t);

@@ -20,6 +20,10 @@ namespace Seminario.DAL
             return _repository.GetAll();
         }
 
+        public data.Pai GetOneById(string id)
+        {
+            return _repository.GetOneByID(id);
+        }
         public data.Pai GetOneById(int id)
         {
             return _repository.GetOneByID(id);

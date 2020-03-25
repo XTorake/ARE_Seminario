@@ -33,7 +33,7 @@ namespace CxC_Seminario.Controllers
             }
             return View(aux);
         }
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(string id)
         {
             Usuario aux = new Usuario();
             using (var client = new HttpClient())
@@ -41,7 +41,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneById/5?id= " + id);
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/id= " + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -49,7 +49,41 @@ namespace CxC_Seminario.Controllers
 
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                 }
+
+                HttpResponseMessage restipoUsuarios = await client.GetAsync("api/TipoUsuario/GetOneById/5?id=" + aux.IdTipoUsuario);
+                if (restipoUsuarios.IsSuccessStatusCode)
+                {
+
+                }
+
+                if (aux.IdIglesia != null)
+                {
+                    HttpResponseMessage resIglesias = await client.GetAsync("api/Iglesia/GetOneById/5?id=" + aux.IdIglesia);
+                    if (resIglesias.IsSuccessStatusCode)
+                    {
+
+                    }
+                }
+
+                if (aux.IdMetodoPago != null)
+                {
+                    HttpResponseMessage resMetodoPagos = await client.GetAsync("api/MetodoPago/GetOneById/5?id=" + aux.IdMetodoPago);
+                    if (resMetodoPagos.IsSuccessStatusCode)
+                    {
+
+                    }
+                }
+
+                if (aux.IdCarrera != null)
+                {
+                    HttpResponseMessage resCarreras = await client.GetAsync("api/Carrera/GetOneById/5?id=" + aux.IdCarrera);
+                    if (resCarreras.IsSuccessStatusCode)
+                    {
+
+                    }
+                }
             }
+
             return View(aux);
         }
         #region Create
@@ -85,19 +119,26 @@ namespace CxC_Seminario.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             Usuario aux = new Usuario();
+            List<TipoUsuario> tipoUsuarios = new List<TipoUsuario>();
+            List<Iglesia> iglesias = new List<Iglesia>();
+            List<MetodoPago> metodoPagos = new List<MetodoPago>();
+            List<Carrera> carreras = new List<Carrera>();
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
 
-                if (res.IsSuccessStatusCode)
+                HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
+
+            if (resUsuario.IsSuccessStatusCode)
                 {
-                    var auxRes = res.Content.ReadAsStringAsync().Result;
-
+                    var auxRes = resUsuario.Content.ReadAsStringAsync().Result;
+                
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                 }
+            
             }
             return View(aux);
         }
@@ -179,6 +220,35 @@ namespace CxC_Seminario.Controllers
             }
             ModelState.AddModelError(string.Empty, "Server Error, Please contact administrator");
             return View(aux);
+        }
+        #endregion
+        #region Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(Usuario entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                //string nomb = ModelState["Nombre"].Value.AttemptedValue;
+                client.BaseAddress = new Uri(_baseurl);
+
+                var myContent = JsonConvert.SerializeObject(entidad);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var postTask = client.PostAsync("api/Usuario/Insert", byteContent).Result;
+
+                var result = postTask;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            ModelState.AddModelError(string.Empty, "Server Error, Please contact administrator");
+            return View(entidad);
         }
         #endregion
     }

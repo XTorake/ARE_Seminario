@@ -28,6 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.TipoUsuario, DO.Objects.TipoUsuario>(detailsQuery);
             return res;
         }
+        public DO.Objects.TipoUsuario GetOneById(string id)
+        {
+            var detailsQuery = new dal.TipoUsuario().GetOneById(id);
+            var res = Mapper.Map<data.TipoUsuario, DO.Objects.TipoUsuario>(detailsQuery);
+            return res;
+        }
 
         public void Insert(DO.Objects.TipoUsuario t)
         {

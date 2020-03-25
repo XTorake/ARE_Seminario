@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.Correo, DO.Objects.Correo>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.Correo GetOneById(string id)
+        {
+            var detailsQuery = new dal.Correo().GetOneById(id);
+            var res = Mapper.Map<data.Correo, DO.Objects.Correo>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.Correo t)
         {
             var ent = Mapper.Map<DO.Objects.Correo, data.Correo>(t);

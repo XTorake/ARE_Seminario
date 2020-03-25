@@ -12,6 +12,7 @@ namespace Seminario.DAL.Repository
         IEnumerable<T> Search(Expression<Func<T, bool>> predicado);
         T GetOne(Expression<Func<T, bool>> predicado);
         T GetOneByID(int id);
+        T GetOneByID(string id);
         void Insert(T entity);
         void Updated(T entity);
         void Delete(T entity);

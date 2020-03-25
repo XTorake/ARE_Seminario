@@ -4,6 +4,8 @@ using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
 using ent = Seminario.DO;
 using dal = Seminario.DAL;
+using System.Linq.Expressions;
+using System;
 
 namespace Seminario.BS
 {
@@ -22,7 +24,21 @@ namespace Seminario.BS
             return res;
         }
 
+        //public ent.Objects.Usuario GetOne(Expression<Func<ent.Objects.Usuario, bool>> predicado)
+        //{
+        //    Expression<Func<Seminario.DAL.EF.Usuario>,bool > s=predicado;
+        //    var detailsQuery = new dal.Usuario().GetOne(predicado);
+        //    var res = Mapper.Map<data.Usuario, DO.Objects.Usuario>(detailsQuery);
+        //    return res;
+        //}
+
         public DO.Objects.Usuario GetOneById(int id)
+        {
+            var detailsQuery = new dal.Usuario().GetOneById(id);
+            var res = Mapper.Map<data.Usuario, DO.Objects.Usuario>(detailsQuery);
+            return res;
+        }
+        public DO.Objects.Usuario GetOneById(string id)
         {
             var detailsQuery = new dal.Usuario().GetOneById(id);
             var res = Mapper.Map<data.Usuario, DO.Objects.Usuario>(detailsQuery);

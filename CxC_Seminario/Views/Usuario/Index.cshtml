@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CxC_Seminario.DO.Usuario>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -21,19 +21,19 @@
                 @Html.DisplayNameFor(model => model.Contrasena)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Carrera.Nombre)
+                @Html.DisplayNameFor(model => model.Carrera)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Iglesia.Nombre)
+                @Html.DisplayNameFor(model => model.Iglesia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetodoPago.Nombre)
+                @Html.DisplayNameFor(model => model.MetodoPago)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Persona.Nombre)
+                @Html.DisplayNameFor(model => model.Persona)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoUsuario.Nombre)
+                @Html.DisplayNameFor(model => model.TipoUsuario)
             </th>
             <th></th>
         </tr>
@@ -44,19 +44,19 @@
                 @Html.DisplayFor(modelItem => item.Contrasena)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Carrera.Nombre)
+                @Html.DisplayFor(modelItem => item.Usuario1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Iglesia.Nombre)
+                @Html.DisplayFor(modelItem => item.Iglesia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MetodoPago.Nombre)
+                @Html.DisplayFor(modelItem => item.MetodoPago)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Persona.Nombre)
+                @Html.DisplayFor(modelItem => item.Persona)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoUsuario.Nombre)
+                @Html.DisplayFor(modelItem => item.TipoUsuario)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Usuario1 }) |

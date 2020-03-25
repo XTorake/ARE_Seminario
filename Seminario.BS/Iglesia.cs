@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.Iglesia, DO.Objects.Iglesia>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.Iglesia GetOneById(string id)
+        {
+            var detailsQuery = new dal.Iglesia().GetOneById(id);
+            var res = Mapper.Map<data.Iglesia, DO.Objects.Iglesia>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.Iglesia t)
         {
             var ent = Mapper.Map<DO.Objects.Iglesia, data.Iglesia>(t);

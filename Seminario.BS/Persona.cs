@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.Persona, DO.Objects.Persona>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.Persona GetOneById(string id)
+        {
+            var detailsQuery = new dal.Persona().GetOneById(id);
+            var res = Mapper.Map<data.Persona, DO.Objects.Persona>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.Persona t)
         {
             var ent = Mapper.Map<DO.Objects.Persona, data.Persona>(t);

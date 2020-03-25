@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.EncabezadoFactura, DO.Objects.EncabezadoFactura>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.EncabezadoFactura GetOneById(string id)
+        {
+            var detailsQuery = new dal.EncabezadoFactura().GetOneById(id);
+            var res = Mapper.Map<data.EncabezadoFactura, DO.Objects.EncabezadoFactura>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.EncabezadoFactura t)
         {
             var ent = Mapper.Map<DO.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);

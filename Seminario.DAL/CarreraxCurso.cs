@@ -24,6 +24,10 @@ namespace Seminario.DAL
         {
             return _repository.GetOneByID(id);
         }
+        public data.CarreraxCurso GetOneById(string id)
+        {
+            return _repository.GetOneByID(id);
+        }
 
         public void Insert(data.CarreraxCurso t)
         {

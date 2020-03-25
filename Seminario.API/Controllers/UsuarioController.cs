@@ -22,6 +22,12 @@ namespace Seminario.API.Controllers
         {
             return new Usuario().GetOneById(id);
         }
+        [Route("api/Usuario/GetOneByString/")]
+        [HttpGet]
+        public ent.Usuario GetOneById(string id)
+        {
+            return new Usuario().GetOneById(id);
+        }
 
         [Route("api/Usuario/Delete")]
         [HttpPost]

@@ -24,7 +24,10 @@ namespace Seminario.DAL
         {
             return _repository.GetOneByID(id);
         }
-
+        public data.EncabezadoFactura GetOneById(string id)
+        {
+            return _repository.GetOneByID(id);
+        }
         public void Insert(data.EncabezadoFactura t)
         {
             _repository.Insert(t);

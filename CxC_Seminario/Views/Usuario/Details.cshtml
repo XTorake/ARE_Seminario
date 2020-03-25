@@ -1,7 +1,7 @@
 ﻿@model CxC_Seminario.DO.Usuario
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -25,43 +25,43 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Carrera.Nombre)
+                @Html.DisplayNameFor(model => model.Carrera)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Carrera.Nombre)
+                @Html.DisplayFor(model => model.Carrera)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Iglesia.Nombre)
+                @Html.DisplayNameFor(model => model.Iglesia)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Iglesia.Nombre)
+                @Html.DisplayFor(model => model.Iglesia)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.MetodoPago.Nombre)
+                @Html.DisplayNameFor(model => model.MetodoPago)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.MetodoPago.Nombre)
+                @Html.DisplayFor(model => model.MetodoPago)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Persona.Nombre)
+                @Html.DisplayNameFor(model => model.Persona)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Persona.Nombre)
+                @Html.DisplayFor(model => model.Persona)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.TipoUsuario.Nombre)
+                @Html.DisplayNameFor(model => model.TipoUsuario)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.TipoUsuario.Nombre)
+                @Html.DisplayFor(model => model.TipoUsuario)
             </dd>
     
         </dl>

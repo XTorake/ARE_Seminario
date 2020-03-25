@@ -28,7 +28,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.Auditoria, DO.Objects.Auditoria>(detailsQuery);
             return res;
         }
-
+        public DO.Objects.Auditoria GetOneById(string id)
+        {
+            var detailsQuery = new dal.Auditoria().GetOneById(id);
+            var res = Mapper.Map<data.Auditoria, DO.Objects.Auditoria>(detailsQuery);
+            return res;
+        }
         public void Insert(DO.Objects.Auditoria t)
         {
             var ent = Mapper.Map<DO.Objects.Auditoria, data.Auditoria>(t);

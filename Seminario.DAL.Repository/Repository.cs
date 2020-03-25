@@ -46,6 +46,10 @@ namespace Seminario.DAL.Repository
         {
             return _dbContext.Set<T>().Find(id);
         }
+        public T GetOneByID(string id)
+        {
+            return _dbContext.Set<T>().Find(id);
+        }
 
         public void Insert(T entity)
         {

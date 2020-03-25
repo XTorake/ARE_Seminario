@@ -24,7 +24,10 @@ namespace Seminario.DAL
         {
             return _repository.GetOneByID(id);
         }
-
+        public data.Correo GetOneById(string id)
+        {
+            return _repository.GetOneByID(id);
+        }
         public void Insert(data.Correo t)
         {
             _repository.Insert(t);
