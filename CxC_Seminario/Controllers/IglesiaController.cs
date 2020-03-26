@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -84,22 +85,31 @@ namespace CxC_Seminario.Controllers
         #region Edit
         public async Task<ActionResult> Edit(int? id)
         {
-            Iglesia aux = new Iglesia();
+   
+            Iglesia iglesia= new Iglesia();
+            List<DistritoEclesiastico> distritos = new List<DistritoEclesiastico>();
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Iglesia/GetOneById/5?id=" + id);
+                HttpResponseMessage resIglesia = await client.GetAsync("api/Iglesia/GetOneById/5?id=" + id);
+                HttpResponseMessage resDistrito = await client.GetAsync("api/DistritoEclesiastico/GetAll");
 
-                if (res.IsSuccessStatusCode)
+                if (resIglesia.IsSuccessStatusCode && resDistrito.IsSuccessStatusCode)
                 {
-                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    var auxResIglesia = resIglesia.Content.ReadAsStringAsync().Result;
+                    var auxResDistrito = resDistrito.Content.ReadAsStringAsync().Result;
 
-                    aux = JsonConvert.DeserializeObject<Iglesia>(auxRes);
+                    iglesia = JsonConvert.DeserializeObject<Iglesia>(auxResIglesia);
+                 
+                    ViewData["Distritos"] = JsonConvert.DeserializeObject<List<DistritoEclesiastico>>(auxResDistrito);
+
                 }
+             
             }
-            return View(aux);
+            return View(iglesia);
         }
 
         [HttpPost]

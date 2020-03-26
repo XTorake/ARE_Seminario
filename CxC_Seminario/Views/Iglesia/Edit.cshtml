@@ -1,4 +1,5 @@
-﻿@model CxC_Seminario.DO.Iglesia
+﻿@using CxC_Seminario.DO
+@model CxC_Seminario.DO.Iglesia
 
 @{
     ViewBag.Title = "Edit";
@@ -6,11 +7,14 @@
 
 <h2>Edit</h2>
 
+@{
+    IEnumerable<DistritoEclesiastico> distritos = ViewData["Distritos"] as IEnumerable<DistritoEclesiastico>;
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Iglesia</h4>
         <hr />
@@ -28,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IdDistritoEclesiastico, "idDistritoEclesiastico", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("idDistritoEclesiastico", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("idDistritoEclesiastico", new SelectList(distritos,"IdDistritoEclesiastico","Nombre"),"Seleciona un distrito", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IdDistritoEclesiastico, "", new { @class = "text-danger" })
             </div>
         </div>
