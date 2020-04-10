@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using AutoMapper;
 using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
@@ -34,6 +36,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.DistritoEclesiastico, DO.Objects.DistritoEclesiastico>(detailsQuery);
             return res;
         }
+
+        public DO.Objects.DistritoEclesiastico GetOne(Expression<Func<DO.Objects.DistritoEclesiastico, bool>> predicado)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Insert(DO.Objects.DistritoEclesiastico t)
         {
             var ent = Mapper.Map<DO.Objects.DistritoEclesiastico, data.DistritoEclesiastico>(t);

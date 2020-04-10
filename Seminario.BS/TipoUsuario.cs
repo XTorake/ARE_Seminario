@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using AutoMapper;
 using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
@@ -33,6 +35,11 @@ namespace Seminario.BS
             var detailsQuery = new dal.TipoUsuario().GetOneById(id);
             var res = Mapper.Map<data.TipoUsuario, DO.Objects.TipoUsuario>(detailsQuery);
             return res;
+        }
+
+        public DO.Objects.TipoUsuario GetOne(Expression<Func<DO.Objects.TipoUsuario, bool>> predicado)
+        {
+            throw new NotImplementedException();
         }
 
         public void Insert(DO.Objects.TipoUsuario t)

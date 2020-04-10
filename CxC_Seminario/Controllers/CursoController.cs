@@ -34,28 +34,58 @@ namespace CxC_Seminario.Controllers
         }
         public async Task<ActionResult> Details(int? id)
         {
-            Curso aux = new Curso();
+            Curso curso = new Curso();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Curso/GetOneById/5?id= " + id);
+                HttpResponseMessage resCurso = await client.GetAsync("api/Curso/GetOneById/5?id= " + id);
+              
 
-                if (res.IsSuccessStatusCode)
+                if (resCurso.IsSuccessStatusCode)
                 {
-                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    var auxResCurso = resCurso.Content.ReadAsStringAsync().Result;
+                 
 
-                    aux = JsonConvert.DeserializeObject<Curso>(auxRes);
+                    curso = JsonConvert.DeserializeObject<Curso>(auxResCurso);
+
+                    
+
                 }
             }
-            return View(aux);
+            return View(curso);
         }
         #region Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
-        }
+                       using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                            HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetAll");
+                
+                if (resUsuario.IsSuccessStatusCode)
+                {
+                                      var auxResUsuario = resUsuario.Content.ReadAsStringAsync().Result;
+                                       
+                    List<Usuario> usuarios = new List<Usuario>();
+                    List<Usuario> usuariosFiltrados = new List<Usuario>();
+                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(auxResUsuario);
+                    foreach (var item in usuarios)
+                    {
+                        if (item.IdTipoUsuario == 2)
+                        {
+                            usuariosFiltrados.Add(item);
+                        }
+                    }
+                    ViewData["Usuarios"] = usuariosFiltrados;
+
+                }
+                return View();
+            }
+            }
 
         [HttpPost]
         public ActionResult Create(Curso entidad)
@@ -83,22 +113,37 @@ namespace CxC_Seminario.Controllers
         #region Edit
         public async Task<ActionResult> Edit(int? id)
         {
-            Curso aux = new Curso();
+            Curso curso = new Curso();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Curso/GetOneById/5?id=" + id);
+                HttpResponseMessage resCurso = await client.GetAsync("api/Curso/GetOneById/5?id=" + id);
+                HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetAll");
 
-                if (res.IsSuccessStatusCode)
+
+                if (resUsuario.IsSuccessStatusCode && resCurso.IsSuccessStatusCode)
                 {
-                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    var auxResCurso = resCurso.Content.ReadAsStringAsync().Result;
+                    var auxResUsuario = resUsuario.Content.ReadAsStringAsync().Result;
 
-                    aux = JsonConvert.DeserializeObject<Curso>(auxRes);
+                    curso = JsonConvert.DeserializeObject<Curso>(auxResCurso);
+                    List<Usuario> usuarios = new List<Usuario>();
+                    List<Usuario> usuariosFiltrados = new List<Usuario>();
+                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(auxResUsuario);
+                    foreach (var item in usuarios)
+                    {
+                        if (item.IdTipoUsuario == 2)
+                        {
+                            usuariosFiltrados.Add(item);
+                        }
+                    }
+                    ViewData["Usuarios"] = usuariosFiltrados;
+
                 }
             }
-            return View(aux);
+            return View(curso);
         }
 
         [HttpPost]

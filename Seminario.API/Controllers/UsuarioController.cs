@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Web.Http;
 using Seminario.BS;
 using ent = Seminario.DO.Objects;
@@ -15,6 +17,14 @@ namespace Seminario.API.Controllers
         {
             return new Usuario().GetAll();
         }
+        [Route("api/Usuario/GetOne/5")]
+        [HttpGet]
+        public ent.Usuario GetOne(string usuario)
+        {
+            Expression<Func<DO.Objects.Usuario, bool>> predicado = x => x.Usuario1 == usuario;
+
+            return new Usuario().GetOne(predicado);
+        }
 
         [Route("api/Usuario/GetOneById/5")]
         [HttpGet]
@@ -22,7 +32,7 @@ namespace Seminario.API.Controllers
         {
             return new Usuario().GetOneById(id);
         }
-        [Route("api/Usuario/GetOneByString/")]
+        [Route("api/Usuario/GetOneByString/5")]
         [HttpGet]
         public ent.Usuario GetOneById(string id)
         {

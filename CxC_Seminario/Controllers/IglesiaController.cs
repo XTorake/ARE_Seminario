@@ -54,8 +54,30 @@ namespace CxC_Seminario.Controllers
             return View(aux);
         }
         #region Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            
+            List<DistritoEclesiastico> distritos = new List<DistritoEclesiastico>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+               
+                HttpResponseMessage resDistrito = await client.GetAsync("api/DistritoEclesiastico/GetAll");
+
+                if (resDistrito.IsSuccessStatusCode)
+                {
+                   
+                    var auxResDistrito = resDistrito.Content.ReadAsStringAsync().Result;
+
+
+                    ViewData["Distritos"] = JsonConvert.DeserializeObject<List<DistritoEclesiastico>>(auxResDistrito);
+
+                }
+
+            }
             return View();
         }
 

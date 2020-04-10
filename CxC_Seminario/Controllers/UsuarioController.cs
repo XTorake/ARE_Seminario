@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -41,7 +43,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/id= " + id);
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -50,45 +52,67 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                 }
 
-                HttpResponseMessage restipoUsuarios = await client.GetAsync("api/TipoUsuario/GetOneById/5?id=" + aux.IdTipoUsuario);
-                if (restipoUsuarios.IsSuccessStatusCode)
-                {
-
-                }
-
-                if (aux.IdIglesia != null)
-                {
-                    HttpResponseMessage resIglesias = await client.GetAsync("api/Iglesia/GetOneById/5?id=" + aux.IdIglesia);
-                    if (resIglesias.IsSuccessStatusCode)
-                    {
-
-                    }
-                }
-
-                if (aux.IdMetodoPago != null)
-                {
-                    HttpResponseMessage resMetodoPagos = await client.GetAsync("api/MetodoPago/GetOneById/5?id=" + aux.IdMetodoPago);
-                    if (resMetodoPagos.IsSuccessStatusCode)
-                    {
-
-                    }
-                }
-
-                if (aux.IdCarrera != null)
-                {
-                    HttpResponseMessage resCarreras = await client.GetAsync("api/Carrera/GetOneById/5?id=" + aux.IdCarrera);
-                    if (resCarreras.IsSuccessStatusCode)
-                    {
-
-                    }
-                }
             }
-
             return View(aux);
         }
         #region Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+
+            List<Persona> personas = new List<Persona>();
+            List<Persona> personasFiltradas = new List<Persona>();
+            List<Usuario> usuarios = new List<Usuario>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage resTipoUsuarios = await client.GetAsync("api/TipoUsuario/GetAll");
+                HttpResponseMessage resIglesia = await client.GetAsync("api/Iglesia/GetAll");
+                HttpResponseMessage resMetodoPagos = await client.GetAsync("api/MetodoPago/GetAll");
+                HttpResponseMessage resCarreras = await client.GetAsync("api/Carrera/GetAll");
+                HttpResponseMessage resPersonas = await client.GetAsync("api/Persona/GetAll");
+                HttpResponseMessage resUsuarios = await client.GetAsync("api/Usuario/GetAll");
+
+                if (resTipoUsuarios.IsSuccessStatusCode && resIglesia.IsSuccessStatusCode && resMetodoPagos.IsSuccessStatusCode && resCarreras.IsSuccessStatusCode && resPersonas.IsSuccessStatusCode && resUsuarios.IsSuccessStatusCode)
+                {
+
+                    var auxResTipoUsuarios = resTipoUsuarios.Content.ReadAsStringAsync().Result;
+                    var auxResIglesia = resIglesia.Content.ReadAsStringAsync().Result;
+                    var auxResMetodoPagos = resMetodoPagos.Content.ReadAsStringAsync().Result;
+                    var auxResCarreras = resCarreras.Content.ReadAsStringAsync().Result;
+                    var auxResPersonas = resPersonas.Content.ReadAsStringAsync().Result;
+                    var auxResUsuarios = resUsuarios.Content.ReadAsStringAsync().Result;
+
+                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(auxResUsuarios);
+                    personas = JsonConvert.DeserializeObject<List<Persona>>(auxResPersonas);
+                    personasFiltradas = personas;
+                    foreach (var item in usuarios)
+                    {
+                        Persona itemToRemove = personas.SingleOrDefault(r => r.Cedula == item.Cedula);
+
+                        if (itemToRemove != null)
+                        {
+                            personasFiltradas.Remove(itemToRemove);
+                        }
+
+
+                    }
+                    if (personasFiltradas.Any())
+                    {
+
+                    }
+                    ViewData["TipoUsuarios"] = JsonConvert.DeserializeObject<List<TipoUsuario>>(auxResTipoUsuarios);
+                    ViewData["Iglesias"] = JsonConvert.DeserializeObject<List<Iglesia>>(auxResIglesia);
+                    ViewData["MetodoPagos"] = JsonConvert.DeserializeObject<List<MetodoPago>>(auxResMetodoPagos);
+                    ViewData["Carreras"] = JsonConvert.DeserializeObject<List<Carrera>>(auxResCarreras);
+                    ViewData["Personas"] = personasFiltradas;
+
+                }
+
+            }
             return View();
         }
 
@@ -132,13 +156,13 @@ namespace CxC_Seminario.Controllers
 
                 HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
 
-            if (resUsuario.IsSuccessStatusCode)
+                if (resUsuario.IsSuccessStatusCode)
                 {
                     var auxRes = resUsuario.Content.ReadAsStringAsync().Result;
-                
+
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                 }
-            
+
             }
             return View(aux);
         }
@@ -228,27 +252,29 @@ namespace CxC_Seminario.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Usuario entidad)
+        public async Task<ActionResult> Login(Usuario entidad)
         {
+            Usuario aux = new Usuario();
             using (var client = new HttpClient())
             {
-                //string nomb = ModelState["Nombre"].Value.AttemptedValue;
                 client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Usuario1);
 
-                var myContent = JsonConvert.SerializeObject(entidad);
-                var buffer = Encoding.UTF8.GetBytes(myContent);
-                var byteContent = new ByteArrayContent(buffer);
-                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var postTask = client.PostAsync("api/Usuario/Insert", byteContent).Result;
-
-                var result = postTask;
-                if (result.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index");
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
+                    if (aux != null)
+                    {
+                        return View()
+                        ViewData["Personas"] = personasFiltradas;
+                    }
                 }
             }
-            ModelState.AddModelError(string.Empty, "Server Error, Please contact administrator");
             return View(entidad);
+
         }
         #endregion
     }

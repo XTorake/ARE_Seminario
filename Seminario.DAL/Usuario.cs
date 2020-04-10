@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
@@ -18,6 +20,11 @@ namespace Seminario.DAL
         public IEnumerable<data.Usuario> GetAll()
         {
             return _repository.GetAll();
+        }
+
+        public data.Usuario GetOne(Expression<Func<data.Usuario, bool>> predicado)
+        {
+            throw new NotImplementedException();
         }
 
         public data.Usuario GetOneById(int id)

@@ -33,7 +33,7 @@ namespace CxC_Seminario.Controllers
             }
             return View(aux);
         }
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(string id)
         {
             Persona aux = new Persona();
             using (var client = new HttpClient())
@@ -41,7 +41,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/5?id= " + id);
+                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -53,13 +53,34 @@ namespace CxC_Seminario.Controllers
             return View(aux);
         }
         #region Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            List<Pais> paises = new List<Pais>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage resPais = await client.GetAsync("api/Pais/GetAll");
+
+                if (resPais.IsSuccessStatusCode)
+                {
+
+                    var auxResPais = resPais.Content.ReadAsStringAsync().Result;
+
+
+                    ViewData["Paises"] = JsonConvert.DeserializeObject<List<Pais>>(auxResPais);
+
+                }
+
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(LineaFactura entidad)
+        public ActionResult Create(Persona entidad)
         {
             using (var client = new HttpClient())
             {
@@ -82,21 +103,26 @@ namespace CxC_Seminario.Controllers
         }
         #endregion
         #region Edit
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(string id)
         {
+            List<Pais> paises = new List<Pais>();
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/5?id=" + id);
-
-                if (res.IsSuccessStatusCode)
+                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + id);
+                HttpResponseMessage resPais = await client.GetAsync("api/Pais/GetAll");
+                if (res.IsSuccessStatusCode && resPais.IsSuccessStatusCode)
                 {
                     var auxRes = res.Content.ReadAsStringAsync().Result;
 
                     aux = JsonConvert.DeserializeObject<Persona>(auxRes);
+                    var auxResPais = resPais.Content.ReadAsStringAsync().Result;
+
+
+                    ViewData["Paises"] = JsonConvert.DeserializeObject<List<Pais>>(auxResPais);
                 }
             }
             return View(aux);

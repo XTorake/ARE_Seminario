@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Seminario.DO.Interfaces
 {
@@ -10,6 +12,6 @@ namespace Seminario.DO.Interfaces
         IEnumerable<T> GetAll();
         T GetOneById(int id);
         T GetOneById(string id);
-
+        T GetOne(Expression<Func<T, bool>> predicado);
     }
 }

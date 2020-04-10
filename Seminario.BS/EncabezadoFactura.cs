@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using AutoMapper;
 using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
@@ -34,6 +36,12 @@ namespace Seminario.BS
             var res = Mapper.Map<data.EncabezadoFactura, DO.Objects.EncabezadoFactura>(detailsQuery);
             return res;
         }
+
+        public DO.Objects.EncabezadoFactura GetOne(Expression<Func<DO.Objects.EncabezadoFactura, bool>> predicado)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Insert(DO.Objects.EncabezadoFactura t)
         {
             var ent = Mapper.Map<DO.Objects.EncabezadoFactura, data.EncabezadoFactura>(t);

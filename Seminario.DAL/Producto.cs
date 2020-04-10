@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Seminario.DAL.Repository;
 using Seminario.DO.Interfaces;
 using data = Seminario.DAL.EF;
@@ -27,6 +29,11 @@ namespace Seminario.DAL
         public data.Producto GetOneById(string id)
         {
             return _repository.GetOneByID(id);
+        }
+
+        public data.Producto GetOne(Expression<Func<data.Producto, bool>> predicado)
+        {
+            throw new NotImplementedException();
         }
 
         public void Insert(data.Producto t)
