@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="ARE_SeminarioModel.Carrera" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.CarreraxCurso" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.CategoriaProducto" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARE_SeminarioModel.Correo" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.Curso" Width="1.5" PointX="6" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.DistritoEclesiastico" Width="1.5" PointX="3.75" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.EncabezadoFactura" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
@@ -27,7 +26,6 @@
         <AssociationConnector Association="ARE_SeminarioModel.FK_Usuario_Carrera" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_CarreraxCurso_Curso" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Producto_CategoriaProducto" ManuallyRouted="false" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_Correo_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Iglesia_DistritoEclesiastico" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_EncabezadoFactura_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_LineaFactura_EncabezadoFactura" ManuallyRouted="false" />

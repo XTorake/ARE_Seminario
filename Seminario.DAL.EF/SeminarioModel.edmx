@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ARE_SeminarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ARE_SeminarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auditoria">
           <Key>
             <PropertyRef Name="idAuditoria" />
@@ -40,14 +40,6 @@
           <Property Name="idCategoriaProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <EntityType Name="Correo">
-          <Key>
-            <PropertyRef Name="idCorreo" />
-          </Key>
-          <Property Name="idCorreo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="correo" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="idPersona" Type="varchar" MaxLength="12" Nullable="false" />
-        </EntityType>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="idCurso" />
@@ -63,7 +55,7 @@
             <PropertyRef Name="idDistritoEclesiastico" />
           </Key>
           <Property Name="idDistritoEclesiastico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="EncabezadoFactura">
           <Key>
@@ -109,9 +101,9 @@
             <PropertyRef Name="idPais" />
           </Key>
           <Property Name="idPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="codigoPais" Type="int" Nullable="false" />
-          <Property Name="descuento" Type="float" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigoPais" Type="int" />
+          <Property Name="descuento" Type="float" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -162,13 +154,16 @@
           <Key>
             <PropertyRef Name="usuario" />
           </Key>
-          <Property Name="cedula" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="usuario" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="contrasena" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="idTipoUsuario" Type="int" Nullable="false" />
           <Property Name="idIglesia" Type="int" />
           <Property Name="idMetodoPago" Type="int" />
           <Property Name="idCarrera" Type="int" />
+          <Property Name="isTemp" Type="bit" />
+          <Property Name="loginCount" Type="int" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_CarreraxCurso_Carrera">
           <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
@@ -191,18 +186,6 @@
             </Principal>
             <Dependent Role="CarreraxCurso">
               <PropertyRef Name="idCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Correo_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Correo" Type="Self.Correo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="Correo">
-              <PropertyRef Name="idPersona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,72 +285,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Carrera">
-          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="idCarrera" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Iglesia">
-          <End Role="Iglesia" Type="Self.Iglesia" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Iglesia">
-              <PropertyRef Name="idIglesia" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idIglesia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_MetodoPago">
-          <End Role="MetodoPago" Type="Self.MetodoPago" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MetodoPago">
-              <PropertyRef Name="idMetodoPago" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idMetodoPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="cedula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_TipoUsuario">
-          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoUsuario">
-              <PropertyRef Name="idTipoUsuario" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idTipoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ARE_SeminarioModelStoreContainer">
           <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarreraxCurso" EntityType="Self.CarreraxCurso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoriaProducto" EntityType="Self.CategoriaProducto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Correo" EntityType="Self.Correo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DistritoEclesiastico" EntityType="Self.DistritoEclesiastico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EncabezadoFactura" EntityType="Self.EncabezadoFactura" Schema="dbo" store:Type="Tables" />
@@ -388,10 +310,6 @@
           <AssociationSet Name="FK_CarreraxCurso_Curso" Association="Self.FK_CarreraxCurso_Curso">
             <End Role="Curso" EntitySet="Curso" />
             <End Role="CarreraxCurso" EntitySet="CarreraxCurso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Correo_Persona" Association="Self.FK_Correo_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Correo" EntitySet="Correo" />
           </AssociationSet>
           <AssociationSet Name="FK_EncabezadoFactura_Usuario" Association="Self.FK_EncabezadoFactura_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -425,29 +343,8 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Telefono" EntitySet="Telefono" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Carrera" Association="Self.FK_Usuario_Carrera">
-            <End Role="Carrera" EntitySet="Carrera" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Iglesia" Association="Self.FK_Usuario_Iglesia">
-            <End Role="Iglesia" EntitySet="Iglesia" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_MetodoPago" Association="Self.FK_Usuario_MetodoPago">
-            <End Role="MetodoPago" EntitySet="MetodoPago" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ARE_SeminarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -491,15 +388,6 @@
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Productoes" Relationship="Self.FK_Producto_CategoriaProducto" FromRole="CategoriaProducto" ToRole="Producto" />
         </EntityType>
-        <EntityType Name="Correo">
-          <Key>
-            <PropertyRef Name="idCorreo" />
-          </Key>
-          <Property Name="idCorreo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="correo1" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cedula" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Correo_Persona" FromRole="Correo" ToRole="Persona" />
-        </EntityType>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="idCurso" />
@@ -516,8 +404,8 @@
             <PropertyRef Name="idDistritoEclesiastico" />
           </Key>
           <Property Name="idDistritoEclesiastico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Iglesias" Relationship="Self.FK_Iglesia_DistritoEclesiastico" FromRole="DistritoEclesiastico" ToRole="Iglesia" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EncabezadoFactura">
           <Key>
@@ -570,9 +458,9 @@
             <PropertyRef Name="idPais" />
           </Key>
           <Property Name="idPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codigoPais" Type="Int32" Nullable="false" />
-          <Property Name="descuento" Type="Double" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigoPais" Type="Int32" />
+          <Property Name="descuento" Type="Double" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Pais" FromRole="Pais" ToRole="Persona" />
           <NavigationProperty Name="Telefonoes" Relationship="Self.FK_Telefono_Pais" FromRole="Pais" ToRole="Telefono" />
         </EntityType>
@@ -585,7 +473,6 @@
           <Property Name="apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idPais" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Correos" Relationship="Self.FK_Correo_Persona" FromRole="Persona" ToRole="Correo" />
           <NavigationProperty Name="Pai" Relationship="Self.FK_Persona_Pais" FromRole="Persona" ToRole="Pais" />
           <NavigationProperty Name="Telefonoes" Relationship="Self.FK_Telefono_Persona" FromRole="Persona" ToRole="Telefono" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
@@ -636,7 +523,7 @@
           </Key>
           <Property Name="cedula" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contrasena" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idTipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="idIglesia" Type="Int32" />
           <Property Name="idMetodoPago" Type="Int32" />
@@ -647,6 +534,9 @@
           <NavigationProperty Name="MetodoPago" Relationship="Self.FK_Usuario_MetodoPago" FromRole="Usuario" ToRole="MetodoPago" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <Property Name="isTemp" Type="Boolean" />
+          <Property Name="loginCount" Type="Int32" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="FK_CarreraxCurso_Carrera">
           <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
@@ -693,18 +583,6 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="idCategoriaProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Correo_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Correo" Type="Self.Correo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="Correo">
-              <PropertyRef Name="cedula" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -845,7 +723,6 @@
           <EntitySet Name="Carreras" EntityType="Self.Carrera" />
           <EntitySet Name="CarreraxCursoes" EntityType="Self.CarreraxCurso" />
           <EntitySet Name="CategoriaProductoes" EntityType="Self.CategoriaProducto" />
-          <EntitySet Name="Correos" EntityType="Self.Correo" />
           <EntitySet Name="Cursoes" EntityType="Self.Curso" />
           <EntitySet Name="DistritoEclesiasticoes" EntityType="Self.DistritoEclesiastico" />
           <EntitySet Name="EncabezadoFacturas" EntityType="Self.EncabezadoFactura" />
@@ -874,10 +751,6 @@
           <AssociationSet Name="FK_Producto_CategoriaProducto" Association="Self.FK_Producto_CategoriaProducto">
             <End Role="CategoriaProducto" EntitySet="CategoriaProductoes" />
             <End Role="Producto" EntitySet="Productoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Correo_Persona" Association="Self.FK_Correo_Persona">
-            <End Role="Persona" EntitySet="Personas" />
-            <End Role="Correo" EntitySet="Correos" />
           </AssociationSet>
           <AssociationSet Name="FK_Iglesia_DistritoEclesiastico" Association="Self.FK_Iglesia_DistritoEclesiastico">
             <End Role="DistritoEclesiastico" EntitySet="DistritoEclesiasticoes" />
@@ -969,15 +842,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Correos">
-            <EntityTypeMapping TypeName="ARE_SeminarioModel.Correo">
-              <MappingFragment StoreEntitySet="Correo">
-                <ScalarProperty Name="idCorreo" ColumnName="idCorreo" />
-                <ScalarProperty Name="correo1" ColumnName="correo" />
-                <ScalarProperty Name="cedula" ColumnName="idPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cursoes">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.Curso">
               <MappingFragment StoreEntitySet="Curso">
@@ -992,8 +856,8 @@
           <EntitySetMapping Name="DistritoEclesiasticoes">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.DistritoEclesiastico">
               <MappingFragment StoreEntitySet="DistritoEclesiastico">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="idDistritoEclesiastico" ColumnName="idDistritoEclesiastico" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1103,6 +967,9 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="loginCount" ColumnName="loginCount" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="isTemp" ColumnName="isTemp" />
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
                 <ScalarProperty Name="usuario1" ColumnName="usuario" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />

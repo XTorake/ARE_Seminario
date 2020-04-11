@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Producto
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
             this.LineaFacturas = new HashSet<LineaFactura>();
@@ -26,7 +26,7 @@ namespace Seminario.DAL.EF
         public double precio { get; set; }
     
         public virtual CategoriaProducto CategoriaProducto { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LineaFactura> LineaFacturas { get; set; }
     }
 }

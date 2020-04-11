@@ -22,8 +22,7 @@ namespace CxC_Seminario.DO
         [RegularExpression("([0-9]+)")]
         public int IdPais { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Correo> Correos { get; set; }
+      
         public virtual Pais Pais { get; set; }
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Telefono> Telefonoes { get; set; }

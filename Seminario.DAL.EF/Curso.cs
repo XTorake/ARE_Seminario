@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Curso
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Curso()
         {
             this.CarreraxCursoes = new HashSet<CarreraxCurso>();
@@ -26,7 +26,7 @@ namespace Seminario.DAL.EF
         public double precio { get; set; }
         public int creditos { get; set; }
     
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarreraxCurso> CarreraxCursoes { get; set; }
     }
 }

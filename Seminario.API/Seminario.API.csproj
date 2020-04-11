@@ -169,7 +169,6 @@
     <Compile Include="Controllers\CarreraController.cs" />
     <Compile Include="Controllers\CarreraxCursoController.cs" />
     <Compile Include="Controllers\CategoriaProductoController.cs" />
-    <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\DistritoEclesiasticoController.cs" />
     <Compile Include="Controllers\EncabezadoFacturaController.cs" />

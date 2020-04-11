@@ -16,7 +16,7 @@ namespace Seminario.Maps
                 cfg.CreateMap<ent.Carrera, data.Carrera>();
                 cfg.CreateMap<ent.CarreraxCurso, data.CarreraxCurso>();
                 cfg.CreateMap<ent.CategoriaProducto, data.CategoriaProducto>();
-                cfg.CreateMap<ent.Correo, data.Correo>();
+            
                 cfg.CreateMap<ent.Curso, data.Curso>();
                 cfg.CreateMap<ent.DistritoEclesiastico, data.DistritoEclesiastico>();
                 cfg.CreateMap<ent.EncabezadoFactura, data.EncabezadoFactura>();
@@ -35,7 +35,7 @@ namespace Seminario.Maps
                 cfg.CreateMap<data.Carrera, ent.Carrera>();
                 cfg.CreateMap<data.CarreraxCurso, ent.CarreraxCurso>();
                 cfg.CreateMap<data.CategoriaProducto, ent.CategoriaProducto>();
-                cfg.CreateMap<data.Correo, ent.Correo>();
+                
                 cfg.CreateMap<data.Curso, ent.Curso>();
                 cfg.CreateMap<data.DistritoEclesiastico, ent.DistritoEclesiastico>();
                 cfg.CreateMap<data.EncabezadoFactura, ent.EncabezadoFactura>();

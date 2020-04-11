@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using CxC_Seminario.DO;
 using Newtonsoft.Json;
-
+using System.Net;
+using System.Net.Mail;
 namespace CxC_Seminario.Controllers
 {
     public class UsuarioController : Controller
@@ -119,6 +120,7 @@ namespace CxC_Seminario.Controllers
         [HttpPost]
         public ActionResult Create(Usuario entidad)
         {
+            entidad.Contrasena = Cryptography.Encrypt(entidad.Contrasena);
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
@@ -257,10 +259,12 @@ namespace CxC_Seminario.Controllers
             Usuario aux = new Usuario();
             using (var client = new HttpClient())
             {
+                
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Usuario1);
+
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -268,14 +272,56 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                     if (aux != null)
                     {
-                        return View()
-                        ViewData["Personas"] = personasFiltradas;
+                        if (aux.Contrasena != entidad.Contrasena)
+                        {
+                            if (aux.LoginCount>=3)
+                            {
+                                aux.IsTemp = true;
+                                aux.Contrasena = Cryptography.RandomPassword();
+                            }
+                            client.BaseAddress = new Uri(_baseurl);
+                            aux.LoginCount=aux.LoginCount + 1;
+                            var myContent = JsonConvert.SerializeObject(aux);
+                            var buffer = Encoding.UTF8.GetBytes(myContent);
+                            var byteContent = new ByteArrayContent(buffer);
+                            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                            var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+
+                            var result = postTask;
+                            if (result.IsSuccessStatusCode)
+                            {
+                                return RedirectToAction("Index");
+                            }
+
+
+
+                            ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+
+                            return View(entidad);
+                        }
+                        else
+                        {
+                            Session["Usuario"] = aux.Usuario1;
+
+                            Session["Tipo"] = aux.TipoUsuario;
+
+                            return RedirectToAction("", "");
+                        }
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+                        return View(entidad);
                     }
                 }
             }
             return View(entidad);
 
         }
+
+        
+
         #endregion
     }
 }

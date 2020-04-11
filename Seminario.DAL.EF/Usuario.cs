@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Usuario
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
             this.EncabezadoFacturas = new HashSet<EncabezadoFactura>();
@@ -28,9 +27,12 @@ namespace Seminario.DAL.EF
         public Nullable<int> idIglesia { get; set; }
         public Nullable<int> idMetodoPago { get; set; }
         public Nullable<int> idCarrera { get; set; }
+        public Nullable<bool> isTemp { get; set; }
+        public int loginCount { get; set; }
+        public string correo { get; set; }
     
         public virtual Carrera Carrera { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EncabezadoFactura> EncabezadoFacturas { get; set; }
         public virtual Iglesia Iglesia { get; set; }
         public virtual MetodoPago MetodoPago { get; set; }

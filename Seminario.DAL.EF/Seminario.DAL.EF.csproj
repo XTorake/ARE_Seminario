@@ -65,9 +65,6 @@
     <Compile Include="CategoriaProducto.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Correo.cs">
-      <DependentUpon>SeminarioModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Curso.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>

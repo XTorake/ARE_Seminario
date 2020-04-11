@@ -58,7 +58,6 @@
     <Compile Include="Carrera.cs" />
     <Compile Include="CarreraxCurso.cs" />
     <Compile Include="CategoriaProducto.cs" />
-    <Compile Include="Correo.cs" />
     <Compile Include="Curso.cs" />
     <Compile Include="DistritoEclesiastico.cs" />
     <Compile Include="EncabezadoFactura.cs" />

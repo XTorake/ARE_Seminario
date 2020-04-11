@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Auditoria
     {
         public int idAuditoria { get; set; }
@@ -19,7 +20,7 @@ namespace Seminario.DAL.EF
         public string columna { get; set; }
         public string valorViejo { get; set; }
         public string valorNuevo { get; set; }
-        public DateTime fecha { get; set; }
+        public System.DateTime fecha { get; set; }
         public string accion { get; set; }
     }
 }

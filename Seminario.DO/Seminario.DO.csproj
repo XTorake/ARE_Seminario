@@ -47,7 +47,6 @@
     <Compile Include="Objects\Carrera.cs" />
     <Compile Include="Objects\CarreraxCurso.cs" />
     <Compile Include="Objects\CategoriaProducto.cs" />
-    <Compile Include="Objects\Correo.cs" />
     <Compile Include="Objects\Curso.cs" />
     <Compile Include="Objects\DistritoEclesiastico.cs" />
     <Compile Include="Objects\EncabezadoFactura.cs" />

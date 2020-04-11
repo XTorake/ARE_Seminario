@@ -22,6 +22,8 @@ namespace CxC_Seminario.DO
         public int? IdMetodoPago { get; set; }
         [RegularExpression("([0-9]+)")]
         public int? IdCarrera { get; set; }
+        public bool? IsTemp { get; set; }
+        public int? LoginCount { get; set; }
 
         public virtual Carrera Carrera { get; set; }
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

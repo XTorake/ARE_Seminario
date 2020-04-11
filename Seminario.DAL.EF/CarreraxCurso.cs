@@ -9,6 +9,9 @@
 
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class CarreraxCurso
     {
         public int idRelacion { get; set; }

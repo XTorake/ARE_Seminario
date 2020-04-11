@@ -7,11 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-
 namespace Seminario.DAL.EF
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
     public partial class ARE_SeminarioEntities : DbContext
     {
         public ARE_SeminarioEntities()
@@ -28,7 +29,6 @@ namespace Seminario.DAL.EF
         public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<CarreraxCurso> CarreraxCursoes { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProductoes { get; set; }
-        public virtual DbSet<Correo> Correos { get; set; }
         public virtual DbSet<Curso> Cursoes { get; set; }
         public virtual DbSet<DistritoEclesiastico> DistritoEclesiasticoes { get; set; }
         public virtual DbSet<EncabezadoFactura> EncabezadoFacturas { get; set; }
