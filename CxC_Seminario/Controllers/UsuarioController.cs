@@ -121,6 +121,8 @@ namespace CxC_Seminario.Controllers
         public ActionResult Create(Usuario entidad)
         {
             entidad.Contrasena = Cryptography.Encrypt(entidad.Contrasena);
+            entidad.IsTemp = true;
+            entidad.LoginCount = 0;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
@@ -259,12 +261,11 @@ namespace CxC_Seminario.Controllers
             Usuario aux = new Usuario();
             using (var client = new HttpClient())
             {
-                
+
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Usuario1);
-
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -272,40 +273,58 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                     if (aux != null)
                     {
+
                         if (aux.Contrasena != entidad.Contrasena)
                         {
-                            if (aux.LoginCount>=3)
+                            if (aux.LoginCount > 3)
                             {
                                 aux.IsTemp = true;
                                 aux.Contrasena = Cryptography.RandomPassword();
+                                aux.LoginCount = 0;
+                                var myContent = JsonConvert.SerializeObject(aux);
+                                var buffer = Encoding.UTF8.GetBytes(myContent);
+                                var byteContent = new ByteArrayContent(buffer);
+                                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                                var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+                                var result = postTask;
+                                if (result.IsSuccessStatusCode)
+                                {
+                                    PasswordMail.UsuarioBloqueado(aux.Usuario1, aux.Correo);
+                                    ModelState.AddModelError(string.Empty, "Su usuario ha sido bloqueado debido a multiples inicios erroneos.\n Seleccione Olvido su contraseña para restablecerla.");
+                                    return View(entidad);
+                                }
                             }
-                            client.BaseAddress = new Uri(_baseurl);
-                            aux.LoginCount=aux.LoginCount + 1;
-                            var myContent = JsonConvert.SerializeObject(aux);
-                            var buffer = Encoding.UTF8.GetBytes(myContent);
-                            var byteContent = new ByteArrayContent(buffer);
-                            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                            var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
-
-                            var result = postTask;
-                            if (result.IsSuccessStatusCode)
+                            else
                             {
-                                return RedirectToAction("Index");
+                                aux.LoginCount = aux.LoginCount + 1;
+                                var myContent = JsonConvert.SerializeObject(aux);
+                                var buffer = Encoding.UTF8.GetBytes(myContent);
+                                var byteContent = new ByteArrayContent(buffer);
+                                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                                var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+                                var result = postTask;
+                                if (result.IsSuccessStatusCode)
+                                {
+                                    ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+                                    return View(entidad);
+                                }
                             }
-
-
-
-                            ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
-
-                            return View(entidad);
                         }
                         else
                         {
-                            Session["Usuario"] = aux.Usuario1;
+                            if (aux.IsTemp != true)
+                            {
+                                Session["Usuario"] = aux.Usuario1;
+                                Session["Tipo"] = aux.TipoUsuario;
+                                return RedirectToAction("", "");
+                            }
+                            else
+                            {
+                                Session["Usuario"] = aux.Usuario1;
+                                Session["Tipo"] = aux.TipoUsuario;
+                                return RedirectToAction("PasswordReset", "Usuario");
+                            }
 
-                            Session["Tipo"] = aux.TipoUsuario;
-
-                            return RedirectToAction("", "");
                         }
 
                     }
@@ -315,12 +334,110 @@ namespace CxC_Seminario.Controllers
                         return View(entidad);
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "No hay conexion con el servidor. Contacte un administrador");
+                    return View(entidad);
+                }
             }
             return View(entidad);
 
         }
 
-        
+
+
+        #endregion
+        #region ForgotPassword
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> ForgotPassword(Usuario entidad)
+        {
+            Usuario aux = new Usuario();
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Usuario1);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
+                    if (aux != null)
+                    {
+                        if (aux.Cedula == entidad.Cedula && aux.Correo == entidad.Correo)
+                        {
+                            PasswordMail.RestablecerContraseña(aux.Usuario1, aux.Contrasena, aux.Correo);
+                            return RedirectToAction("Login", "Usuario");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Los datos ingresados no son validos.");
+                            return View(entidad);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Los datos ingresados no son correctos");
+                        return View(entidad);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+                    return View(entidad);
+                }
+            }
+        }
+
+        #endregion
+        #region PasswordReset
+        public ActionResult PasswordReset()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> PasswordReset(PasswordConfirmation entidad)
+        {
+            if (ModelState.IsValid)
+            {
+                Usuario aux = new Usuario();
+                using (var client = new HttpClient())
+                {
+
+                    client.BaseAddress = new Uri(_baseurl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + Session["Usuario"]);
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        var auxRes = res.Content.ReadAsStringAsync().Result;
+                        aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
+
+                        aux.Contrasena = Cryptography.Encrypt(entidad.Contrasena);
+                        var myContent = JsonConvert.SerializeObject(aux);
+                        var buffer = Encoding.UTF8.GetBytes(myContent);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+                        var result = postTask;
+                        if (result.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("", "");
+                        }
+
+                    }
+                }
+            }
+            return View();
+        }
+
 
         #endregion
     }

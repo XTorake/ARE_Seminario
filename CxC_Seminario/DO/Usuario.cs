@@ -25,6 +25,8 @@ namespace CxC_Seminario.DO
         public bool? IsTemp { get; set; }
         public int? LoginCount { get; set; }
 
+        public string Correo { get; set; }
+
         public virtual Carrera Carrera { get; set; }
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EncabezadoFactura> EncabezadoFacturas { get; set; }
