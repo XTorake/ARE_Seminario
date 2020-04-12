@@ -273,7 +273,7 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                     if (aux != null)
                     {
-
+                        aux.Contrasena = Cryptography.Decrypt(aux.Contrasena);
                         if (aux.Contrasena != entidad.Contrasena)
                         {
                             if (aux.LoginCount > 3)
@@ -314,14 +314,29 @@ namespace CxC_Seminario.Controllers
                         {
                             if (aux.IsTemp != true)
                             {
+                                client.DefaultRequestHeaders.Clear();
+                                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + aux.Cedula);
+                                auxRes = res.Content.ReadAsStringAsync().Result;
+                                Persona persona =  JsonConvert.DeserializeObject<Persona>(auxRes);
+                                Session["Nombre"] = persona.Nombre;
                                 Session["Usuario"] = aux.Usuario1;
-                                Session["Tipo"] = aux.TipoUsuario;
+                                Session["Tipo"] = aux.IdTipoUsuario;
+
+                                aux.LoginCount = 0;
+                                var myContent = JsonConvert.SerializeObject(aux);
+                                var buffer = Encoding.UTF8.GetBytes(myContent);
+                                var byteContent = new ByteArrayContent(buffer);
+                                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                                var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+                                var result = postTask;
                                 return RedirectToAction("", "");
                             }
                             else
                             {
                                 Session["Usuario"] = aux.Usuario1;
                                 Session["Tipo"] = aux.TipoUsuario;
+                                
                                 return RedirectToAction("PasswordReset", "Usuario");
                             }
 
@@ -372,8 +387,30 @@ namespace CxC_Seminario.Controllers
                     {
                         if (aux.Cedula == entidad.Cedula && aux.Correo == entidad.Correo)
                         {
+                            aux.Contrasena = Cryptography.RandomPassword();
+
                             PasswordMail.RestablecerContraseña(aux.Usuario1, aux.Contrasena, aux.Correo);
-                            return RedirectToAction("Login", "Usuario");
+                            aux.Contrasena = Cryptography.Encrypt(aux.Contrasena);
+                            aux.LoginCount = 0;
+                            aux.IsTemp = false;
+                            var myContent = JsonConvert.SerializeObject(aux);
+                            var buffer = Encoding.UTF8.GetBytes(myContent);
+                            var byteContent = new ByteArrayContent(buffer);
+                            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                            var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
+
+                            var result = postTask;
+                            if (result.IsSuccessStatusCode)
+                            {
+                                return RedirectToAction("Login", "Usuario");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError(string.Empty, "No hay conexion con el servidor. Contacte a su administrador");
+                                return View(entidad);
+                            }
+
+                          
                         }
                         else
                         {
@@ -389,7 +426,7 @@ namespace CxC_Seminario.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+                    ModelState.AddModelError(string.Empty, "No hay conexion con el servidor. Contacte a su administrador");
                     return View(entidad);
                 }
             }
@@ -419,7 +456,8 @@ namespace CxC_Seminario.Controllers
                     {
                         var auxRes = res.Content.ReadAsStringAsync().Result;
                         aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
-
+                        aux.IsTemp = false;
+                        aux.LoginCount = 0;
                         aux.Contrasena = Cryptography.Encrypt(entidad.Contrasena);
                         var myContent = JsonConvert.SerializeObject(aux);
                         var buffer = Encoding.UTF8.GetBytes(myContent);

@@ -258,8 +258,8 @@
     <Content Include="img\favicon.ico" />
     <Content Include="img\green1.png" />
     <Content Include="img\loading.gif" />
-    <Content Include="img\logo\logo.png" />
     <Content Include="img\logo\logosn.png" />
+    <Content Include="img\logo\logo.png" />
     <Content Include="img\notification\1.jpg" />
     <Content Include="img\notification\2.jpg" />
     <Content Include="img\notification\3.jpg" />

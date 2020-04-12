@@ -11,7 +11,7 @@ namespace CxC_Seminario.DO
     {
         public static string Encrypt(string encryptString)
         {
-            string EncryptionKey = "98f7U;p|5|Q$AN%";  //we can change the code converstion key as per our requirement    
+            string EncryptionKey = "98f7U/p+5+Q+AN/";  //we can change the code converstion key as per our requirement    
             byte[] clearBytes = Encoding.Unicode.GetBytes(encryptString);
             using (Aes encryptor = Aes.Create())
             {
@@ -35,7 +35,7 @@ namespace CxC_Seminario.DO
 
         public static string Decrypt(string cipherText)
         {
-            string EncryptionKey = "98f7U;p|5|Q$AN%";  //we can change the code converstion key as per our requirement, but the decryption key should be same as encryption key    
+            string EncryptionKey = "98f7U/p+5+Q+AN/";  //we can change the code converstion key as per our requirement, but the decryption key should be same as encryption key    
             cipherText = cipherText.Replace(" ", "+");
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
