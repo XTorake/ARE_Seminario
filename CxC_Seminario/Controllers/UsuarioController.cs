@@ -273,13 +273,13 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                     if (aux != null)
                     {
-                        aux.Contrasena = Cryptography.Decrypt(aux.Contrasena);
-                        if (aux.Contrasena != entidad.Contrasena)
+                        if (Cryptography.Decrypt(aux.Contrasena) != entidad.Contrasena)
                         {
                             if (aux.LoginCount > 3)
                             {
                                 aux.IsTemp = true;
-                                aux.Contrasena = Cryptography.RandomPassword();
+                                aux.Contrasena = Cryptography.Encrypt( Cryptography.RandomPassword());
+                                
                                 aux.LoginCount = 0;
                                 var myContent = JsonConvert.SerializeObject(aux);
                                 var buffer = Encoding.UTF8.GetBytes(myContent);
@@ -297,6 +297,7 @@ namespace CxC_Seminario.Controllers
                             else
                             {
                                 aux.LoginCount = aux.LoginCount + 1;
+
                                 var myContent = JsonConvert.SerializeObject(aux);
                                 var buffer = Encoding.UTF8.GetBytes(myContent);
                                 var byteContent = new ByteArrayContent(buffer);
@@ -318,11 +319,10 @@ namespace CxC_Seminario.Controllers
                                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                                 res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + aux.Cedula);
                                 auxRes = res.Content.ReadAsStringAsync().Result;
-                                Persona persona =  JsonConvert.DeserializeObject<Persona>(auxRes);
+                                Persona persona = JsonConvert.DeserializeObject<Persona>(auxRes);
                                 Session["Nombre"] = persona.Nombre;
                                 Session["Usuario"] = aux.Usuario1;
                                 Session["Tipo"] = aux.IdTipoUsuario;
-
                                 aux.LoginCount = 0;
                                 var myContent = JsonConvert.SerializeObject(aux);
                                 var buffer = Encoding.UTF8.GetBytes(myContent);
@@ -336,7 +336,7 @@ namespace CxC_Seminario.Controllers
                             {
                                 Session["Usuario"] = aux.Usuario1;
                                 Session["Tipo"] = aux.TipoUsuario;
-                                
+
                                 return RedirectToAction("PasswordReset", "Usuario");
                             }
 
@@ -392,7 +392,7 @@ namespace CxC_Seminario.Controllers
                             PasswordMail.RestablecerContraseña(aux.Usuario1, aux.Contrasena, aux.Correo);
                             aux.Contrasena = Cryptography.Encrypt(aux.Contrasena);
                             aux.LoginCount = 0;
-                            aux.IsTemp = false;
+                            aux.IsTemp = true;
                             var myContent = JsonConvert.SerializeObject(aux);
                             var buffer = Encoding.UTF8.GetBytes(myContent);
                             var byteContent = new ByteArrayContent(buffer);
@@ -410,7 +410,7 @@ namespace CxC_Seminario.Controllers
                                 return View(entidad);
                             }
 
-                          
+
                         }
                         else
                         {
