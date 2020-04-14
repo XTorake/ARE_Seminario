@@ -85,5 +85,12 @@ namespace CxC_Seminario.DO
             builder.Append(RandomString(2, false));
             return builder.ToString();
         }
+        public static string RandomID()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(RandomString(3, true));
+            builder.Append(RandomNumber(10, 99));
+            return builder.ToString();
+        }
     }
 }

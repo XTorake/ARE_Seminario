@@ -151,6 +151,7 @@
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DO\Cryptography.cs" />
+    <Compile Include="DO\Factura.cs" />
     <Compile Include="DO\PasswordMail.cs" />
     <Compile Include="DO\PasswordConfirmation.cs" />
     <Compile Include="Global.asax.cs">

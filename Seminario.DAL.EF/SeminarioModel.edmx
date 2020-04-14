@@ -84,7 +84,6 @@
           </Key>
           <Property Name="idLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idProducto" Type="int" Nullable="false" />
-          <Property Name="monto" Type="float" Nullable="false" />
           <Property Name="pago" Type="float" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idEncabezado" Type="varchar" MaxLength="5" Nullable="false" />
@@ -438,7 +437,6 @@
           </Key>
           <Property Name="idLinea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
-          <Property Name="monto" Type="Double" Nullable="false" />
           <Property Name="pago" Type="Double" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idEncabezado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
@@ -889,7 +887,6 @@
               <MappingFragment StoreEntitySet="LineaFactura">
                 <ScalarProperty Name="idLinea" ColumnName="idLinea" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="pago" ColumnName="pago" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idEncabezado" ColumnName="idEncabezado" />

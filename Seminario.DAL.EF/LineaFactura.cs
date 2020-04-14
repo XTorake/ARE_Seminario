@@ -16,7 +16,6 @@ namespace Seminario.DAL.EF
     {
         public int idLinea { get; set; }
         public int idProducto { get; set; }
-        public double monto { get; set; }
         public double pago { get; set; }
         public string descripcion { get; set; }
         public string idEncabezado { get; set; }

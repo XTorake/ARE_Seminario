@@ -24,10 +24,9 @@ namespace CxC_Seminario.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Producto/GetAll");
 
-                if (res.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode )
                 {
                     var auxRes = res.Content.ReadAsStringAsync().Result;
-
                     aux = JsonConvert.DeserializeObject<List<Producto>>(auxRes);
                 }
             }
@@ -53,8 +52,21 @@ namespace CxC_Seminario.Controllers
             return View(aux);
         }
         #region Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage resCategoriaProducto = await client.GetAsync("api/CategoriaProducto/GetAll");
+
+                if (resCategoriaProducto.IsSuccessStatusCode)
+                {
+                    var auxResCategoriaProducto = resCategoriaProducto.Content.ReadAsStringAsync().Result;
+                    ViewData["CategoriaProducto"] = JsonConvert.DeserializeObject<List<CategoriaProducto>>(auxResCategoriaProducto);
+                }
+            }
             return View();
         }
 
@@ -91,12 +103,15 @@ namespace CxC_Seminario.Controllers
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res = await client.GetAsync("api/Producto/GetOneById/5?id=" + id);
+                HttpResponseMessage resCategoriaProducto = await client.GetAsync("api/CategoriaProducto/GetAll");
 
-                if (res.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode && resCategoriaProducto.IsSuccessStatusCode)
                 {
                     var auxRes = res.Content.ReadAsStringAsync().Result;
 
                     aux = JsonConvert.DeserializeObject<Producto>(auxRes);
+                    var auxResCategoriaProducto = resCategoriaProducto.Content.ReadAsStringAsync().Result;
+                    ViewData["CategoriaProducto"] = JsonConvert.DeserializeObject<List<CategoriaProducto>>(auxResCategoriaProducto);
                 }
             }
             return View(aux);

@@ -16,7 +16,7 @@ namespace CxC_Seminario.DO
         [Required]
         [RegularExpression("([0-9]+)")]
         public double Precio { get; set; }
-
+        public bool isChecked { get; set; }
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LineaFactura> LineaFacturas { get; set; }

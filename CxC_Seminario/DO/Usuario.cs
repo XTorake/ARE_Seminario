@@ -12,11 +12,14 @@ namespace CxC_Seminario.DO
         public string Usuario1 { get; set; }
         [Required]
         [StringLength(20)]
+        [MinLength(8)]
+        
         public string Contrasena { get; set; }
         [Required]
         [RegularExpression("([0-9]+)")]
         public int IdTipoUsuario { get; set; }
         [RegularExpression("([0-9]+)")]
+        
         public int? IdIglesia { get; set; }
         [RegularExpression("([0-9]+)")]
         public int? IdMetodoPago { get; set; }

@@ -1,16 +1,20 @@
 ﻿@model CxC_Seminario.DO.Producto
-
+@using CxC_Seminario.DO
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
 
+@{
+    IEnumerable<CategoriaProducto> categoriaProductos = ViewData["CategoriaProducto"] as IEnumerable<CategoriaProducto>;
+
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Producto</h4>
         <hr />
@@ -28,7 +32,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IdCategoriaProducto, "idCategoriaProducto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("idCategoriaProducto", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("idCategoriaProducto", new SelectList(categoriaProductos, "idCategoriaProducto", "Nombre"), "Seleciona una Categoria", htmlAttributes: new { @class = "form-control" })
+
                 @Html.ValidationMessageFor(model => model.IdCategoriaProducto, "", new { @class = "text-danger" })
             </div>
         </div>

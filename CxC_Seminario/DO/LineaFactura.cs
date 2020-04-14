@@ -8,9 +8,7 @@ namespace CxC_Seminario.DO
         [Required]
         [RegularExpression("([0-9]+)")]
         public int IdProducto { get; set; }
-        [Required]
-        [RegularExpression("([0-9]+)")]
-        public double Monto { get; set; }
+       
         [Required]
         [RegularExpression("([0-9]+)")]
         public double Pago { get; set; }
