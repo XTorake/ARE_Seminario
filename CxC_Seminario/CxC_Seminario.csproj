@@ -291,10 +291,12 @@
     <Content Include="img\courses\3.jpg" />
     <Content Include="img\cropper\1.jpg" />
     <Content Include="img\favicon.ico" />
+    <Content Include="img\Administrador.jpg" />
     <Content Include="img\green1.png" />
     <Content Include="img\loading.gif" />
     <Content Include="img\logo\logosn.png" />
     <Content Include="img\logo\logo.png" />
+    <Content Include="img\Estudiante.jpg" />
     <Content Include="img\notification\1.jpg" />
     <Content Include="img\notification\2.jpg" />
     <Content Include="img\notification\3.jpg" />
@@ -312,6 +314,7 @@
     <Content Include="img\student\2.jpg" />
     <Content Include="img\student\3.jpg" />
     <Content Include="img\student\4.jpg" />
+    <Content Include="img\Profesor.jpg" />
     <Content Include="Login\css\main.css" />
     <Content Include="Login\css\util.css" />
     <Content Include="Login\fonts\font-awesome-4.7.0\css\font-awesome.css" />

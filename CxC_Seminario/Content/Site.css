@@ -5785,3 +5785,9 @@ div#sparklinehome canvas {
     color: #fff;
     text-decoration: none;
 }
+
+#Fondo {
+    
+    background-repeat: no-repeat;
+    background-size: auto;
+}
