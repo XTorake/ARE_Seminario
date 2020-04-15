@@ -37,7 +37,7 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <div class="login100-form-title" style="background-image: url(/Login/images/bg-01.jpg);">
+                <div class="login100-form-title" style="background-image: url(/Login/images/descarga.png);">
                     <span class="login100-form-title-1">
                        Inicio de sesion
                     </span>
@@ -62,7 +62,7 @@
 
                     <div class="wrap-input100 validate-input m-b-18" data-validate="La Contraseña es requerida">
                         <label class="label-input100" for="Contrasena">Contraseña</label>
-                        @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "input100", placeholder = "Ingrese la contraseña" } })
+                        @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { type = "password", @class = "input100", placeholder = "Ingrese la contraseña"} })
                         <span class="focus-input100"></span>
                         @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger" })
 

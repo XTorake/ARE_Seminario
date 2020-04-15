@@ -2,62 +2,68 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <div class="container-fluid">
+        <a href="@Url.Action("Create", "EncabezadoFactura")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descuento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPagar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalCobrar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.Cedula)
-        </th>
-        <th></th>
-    </tr>
+<div class="sparkline8-list">
+    <div class="sparkline8-graph">
+        <div class="static-table-list">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaPago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Direccion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descuento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalPagar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalCobrar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.Cedula)
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaPago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descuento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPagar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalCobrar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.Cedula)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdEncabezado }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdEncabezado }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdEncabezado })
-        </td>
-    </tr>
-}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaPago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descuento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPagar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCobrar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.Cedula)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdEncabezado }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IdEncabezado })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+    </div>
+</div>

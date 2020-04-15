@@ -460,6 +460,8 @@ namespace CxC_Seminario.Controllers
                         byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                         var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
                         var result = postTask;
+                        Session["Usuario"] = aux.Usuario1;
+                        Session["Tipo"] = aux.IdTipoUsuario;
                         if (result.IsSuccessStatusCode)
                         {
                             return RedirectToAction("", "");

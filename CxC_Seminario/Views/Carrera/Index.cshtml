@@ -31,9 +31,8 @@
                                 <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
                             </div>
                             <div class="product-buttons">
-                                
-                               
-                                @Html.ActionLink("Detalles", "Details", new { id = item.IdCarrera }, new { @class = "btn btn-primary btn-sm" }) |
+
+                                @Html.ActionLink("Editar", "Edit", new { id = item.IdCarrera }, new { @class = "btn btn-primary btn-sm" }) |
                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCarrera }, new { @class = "btn btn-danger btn-sm" })
                             </div>
                         </div>

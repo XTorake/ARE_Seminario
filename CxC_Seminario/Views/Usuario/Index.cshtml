@@ -2,70 +2,67 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
 }
+<p>
+    <div class="container-fluid">
+        <a href="@Url.Action("Create", "Usuario")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
+    </div>
+</p>
+<div class="sparkline8-list">
+    <div class="sparkline8-graph">
+        <div class="static-table-list">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contrasena)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Carrera)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Iglesia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MetodoPago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Persona)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoUsuario)
+                    </th>
+                    <th></th>
+                </tr>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Contrasena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Carrera)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iglesia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MetodoPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Persona)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoUsuario)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contrasena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Iglesia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetodoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Persona)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoUsuario)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Usuario1 }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Usuario1 }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Usuario1 })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Contrasena)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Iglesia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MetodoPago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Persona)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoUsuario)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Usuario1 }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

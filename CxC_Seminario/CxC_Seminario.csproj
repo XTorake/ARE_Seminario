@@ -321,8 +321,10 @@
     <Content Include="Login\fonts\Linearicons-Free-v1.0.0\icon-font.min.css" />
     <Content Include="Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
     <Content Include="Login\images\bg-01.jpg" />
+    <Content Include="Login\images\descarga.png" />
     <Content Include="Login\images\icons\favicon.ico" />
     <Content Include="Login\images\icons\map-marker.png" />
+    <Content Include="Login\images\logo.png" />
     <Content Include="Login\js\main.js" />
     <Content Include="Login\js\map-custom.js" />
     <Content Include="Login\vendor\animate\animate.css" />
@@ -634,11 +636,6 @@
     <Content Include="Views\CategoriaProducto\Details.cshtml" />
     <Content Include="Views\CategoriaProducto\Edit.cshtml" />
     <Content Include="Views\CategoriaProducto\Index.cshtml" />
-    <Content Include="Views\Correo\Create.cshtml" />
-    <Content Include="Views\Correo\Delete.cshtml" />
-    <Content Include="Views\Correo\Details.cshtml" />
-    <Content Include="Views\Correo\Edit.cshtml" />
-    <Content Include="Views\Correo\Index.cshtml" />
     <Content Include="Views\Curso\Create.cshtml" />
     <Content Include="Views\Curso\Delete.cshtml" />
     <Content Include="Views\Curso\Details.cshtml" />

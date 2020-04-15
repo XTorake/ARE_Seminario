@@ -12,7 +12,7 @@ namespace CxC_Seminario.DO
         public string Usuario1 { get; set; }
         [Required]
         [StringLength(20)]
-        [MinLength(8)]
+        //[MinLength(8)]
         
         public string Contrasena { get; set; }
         [Required]

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="DataSetFactura_Usuario" targetNamespace="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns:mstns="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ARE_SeminarioConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ARE_SeminarioConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ARE_SeminarioConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ARE_SeminarioConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ARE_SeminarioConnectionString1 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ARE_SeminarioConnectionString1.ConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Factura_UsuarioTableAdapter" GeneratorDataComponentClassName="Factura_UsuarioTableAdapter" Name="Factura_Usuario" UserDataComponentName="Factura_UsuarioTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ARE_SeminarioConnectionString (Web.config)" DbObjectName="ARE_Seminario.dbo.Factura_Usuario" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ARE_SeminarioConnectionString1 (Web.config)" DbObjectName="ARE_Seminario.dbo.Factura_Usuario" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT Cedula, Nombre, Usuario, [N° de Factura], [Fecha de Pago], [Total a Cobrar], Descuento, [Total a Pagar], [ID de Producto], [Pago Realizado], Descripcion, Precio FROM dbo.Factura_Usuario</CommandText>
@@ -39,7 +39,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet" msprop:Generator_UserDSName="DataSet">
+  <xs:element name="DataSetFactura_Usuario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetFactura_Usuario" msprop:Generator_UserDSName="DataSetFactura_Usuario">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Factura_Usuario" msprop:Generator_TableClassName="Factura_UsuarioDataTable" msprop:Generator_TableVarName="tableFactura_Usuario" msprop:Generator_TablePropName="Factura_Usuario" msprop:Generator_RowDeletingName="Factura_UsuarioRowDeleting" msprop:Generator_RowChangingName="Factura_UsuarioRowChanging" msprop:Generator_RowEvHandlerName="Factura_UsuarioRowChangeEventHandler" msprop:Generator_RowDeletedName="Factura_UsuarioRowDeleted" msprop:Generator_UserTableName="Factura_Usuario" msprop:Generator_RowChangedName="Factura_UsuarioRowChanged" msprop:Generator_RowEvArgName="Factura_UsuarioRowChangeEvent" msprop:Generator_RowClassName="Factura_UsuarioRow">

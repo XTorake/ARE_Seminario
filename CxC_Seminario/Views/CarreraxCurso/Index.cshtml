@@ -2,38 +2,43 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <div class="container-fluid">
+        <a href="@Url.Action("Create", "CarreraxCurso")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Carrera.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Curso.Nombre)
-        </th>
-        <th></th>
-    </tr>
+<div class="sparkline8-list">
+    <div class="sparkline8-graph">
+        <div class="static-table-list">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Carrera.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Curso.Nombre)
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Carrera.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Curso.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdRelacion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdRelacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdRelacion })
-        </td>
-    </tr>
-}
-
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Carrera.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Curso.Nombre)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IdRelacion }, new { @class = "btn btn-warning btn-sm" }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRelacion },new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
