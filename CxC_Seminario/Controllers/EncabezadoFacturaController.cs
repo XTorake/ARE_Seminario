@@ -101,33 +101,46 @@ namespace CxC_Seminario.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Factura entidad)
+        public async Task<ActionResult> Create(Factura entidad)
         {
-            entidad.Encabezado.IdEncabezado = Cryptography.RandomID();
-            entidad.Encabezado.FechaPago = System.DateTime.Now;
-            List<LineaFactura> lineas = new List<LineaFactura>();
-            double cobrar = 0;
-            double pagar = 0;
-            for (int i = 0; i < entidad.Productos.Count(); i++)
-            {
-                if (entidad.Productos[i].isChecked)
-                {
-                    entidad.Lineas[i].IdProducto = entidad.Productos[i].IdProducto;
-                    entidad.Lineas[i].IdEncabezado = entidad.Encabezado.IdEncabezado;
-                    pagar += entidad.Lineas[i].Pago;
-                    cobrar += entidad.Productos[i].Precio;
-                    entidad.Lineas[i].Descripcion = "test";
-                    lineas.Add(entidad.Lineas[i]);
-                }
-
-            }
-            entidad.Encabezado.TotalCobrar = cobrar - ((cobrar * entidad.Encabezado.Descuento) / 100);
-            entidad.Encabezado.TotalPagar = pagar;
-            //DiscountPrice = FullPrice - (FullPrice * DiscountPercent)
-
+         
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Encabezado.IdEstudiante);
+                var auxRes = res.Content.ReadAsStringAsync().Result;
+                Usuario aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
+
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res2 = await client.GetAsync("api/Iglesia/GetOneById/5?id= " + aux.IdIglesia);
+                var auxRes2 = res2.Content.ReadAsStringAsync().Result;
+                Iglesia aux2 = JsonConvert.DeserializeObject<Iglesia>(auxRes);
+
+                entidad.Encabezado.IdEncabezado = Cryptography.RandomID();
+                entidad.Encabezado.FechaPago = System.DateTime.Now;
+                entidad.Encabezado.Descuento = aux2.Descuento;
+                List<LineaFactura> lineas = new List<LineaFactura>();
+                double cobrar = 0;
+                double pagar = 0;
+                for (int i = 0; i < entidad.Productos.Count(); i++)
+                {
+                    if (entidad.Productos[i].isChecked)
+                    {
+                        entidad.Lineas[i].IdProducto = entidad.Productos[i].IdProducto;
+                        entidad.Lineas[i].IdEncabezado = entidad.Encabezado.IdEncabezado;
+                        pagar += entidad.Lineas[i].Pago;
+                        cobrar += entidad.Productos[i].Precio;
+                        entidad.Lineas[i].Descripcion = "test";
+                        lineas.Add(entidad.Lineas[i]);
+                    }
+
+                }
+                entidad.Encabezado.TotalCobrar = cobrar - ((cobrar * entidad.Encabezado.Descuento) / 100);
+                entidad.Encabezado.TotalPagar = pagar;
+
 
                 var myContent = JsonConvert.SerializeObject(entidad.Encabezado);
                 var buffer = Encoding.UTF8.GetBytes(myContent);

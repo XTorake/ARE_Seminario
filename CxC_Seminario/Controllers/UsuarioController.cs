@@ -274,8 +274,8 @@ namespace CxC_Seminario.Controllers
                             if (aux.LoginCount > 3)
                             {
                                 aux.IsTemp = true;
-                                aux.Contrasena = Cryptography.Encrypt( Cryptography.RandomPassword());
-                                
+                                aux.Contrasena = Cryptography.Encrypt(Cryptography.RandomPassword());
+
                                 aux.LoginCount = 0;
                                 var myContent = JsonConvert.SerializeObject(aux);
                                 var buffer = Encoding.UTF8.GetBytes(myContent);
@@ -395,6 +395,11 @@ namespace CxC_Seminario.Controllers
                             var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
 
                             var result = postTask;
+                            if (entidad.IdTipoUsuario == 4)
+                            {
+                                return RedirectToAction("Index", "Usuario");
+                                
+                            }
                             if (result.IsSuccessStatusCode)
                             {
                                 return RedirectToAction("Login", "Usuario");
@@ -474,6 +479,15 @@ namespace CxC_Seminario.Controllers
         }
 
 
+        #endregion
+        #region LogOut
+        public ActionResult LogOut()
+        {
+
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("Login", "Usuario");
+        }
         #endregion
     }
 }

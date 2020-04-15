@@ -80,7 +80,9 @@ a:focus {
 
 img {
     max-width: 100%;
-    height: auto
+    height: auto ;
+    padding-right: 11px;
+    padding-left: 11px;
 }
 
 .fix {
@@ -4448,7 +4450,7 @@ div#sparklinehome canvas {
 }
 
 .header-top-area {
-    background: #006DF0;
+    background: #ce372d;
 }
 
 .sidebar-nav .metismenu {
@@ -4542,7 +4544,7 @@ div#sparklinehome canvas {
 }
 
 .footer-copyright-area {
-    background: #006DF0;
+    background: #ce372d;
     padding: 20px 0px;
     text-align: center;
 }

@@ -5,48 +5,62 @@
     ViewBag.Title = "Index";
 }
 
-<p>
+<div class="product-status mg-b-15">
     <div class="container-fluid">
-        <a href="@Url.Action("Create", "Producto")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
-    </div>
-</p>
-<div class="sparkline8-list">
-    <div class="sparkline8-graph">
-        <div class="static-table-list">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Precio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CategoriaProducto.IdCategoriaProducto)
-                    </th>
-                    <th></th>
-                </tr>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst">
+                    <h4>Lista de Produtos</h4>
+                    <div class="add-product">
+                        <a href="@Url.Action("Create", "Producto")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Precio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CategoriaProducto.IdCategoriaProducto)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }, new { @class = "btn btn-warning btn-sm" }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProducto }, new { @class = "btn btn-danger btn-sm" })
-                        </td>
-                    </tr>
-                }
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>
+                                    #ID
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
 
-            </table>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Precio)
+                                </th>
+                                <th>
+                                    Categoria
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdCategoriaProducto)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }, new { @class = "btn btn-warning btn-sm" }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProducto }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

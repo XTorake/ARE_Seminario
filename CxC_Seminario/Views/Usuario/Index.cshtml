@@ -5,73 +5,79 @@
     ViewBag.Title = "Index";
 }
 
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst">
+                    <h4>Lista de Carreras</h4>
+                    <div class="add-product">
+                        <a href="@Url.Action("Create", "Usuario")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div >
-    <div class="sparkline8-list">
-        <div class="sparkline8-hd">
-            <div class="main-sparkline8-hd">
-                <h1>Basic Table</h1>
-            </div>
-        </div>
-        <div class="sparkline8-graph">
-            <div class="static-table-list">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Contrasena)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Carrera)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Iglesia)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.MetodoPago)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Persona)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TipoUsuario)
-                        </th>
-                        <th></th>
-                    </tr>
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>
+                                    Cedula
+                                </th>
+                                <th>
+                                    Nombre de Usuario
+                                </th>
+                                <th>
+                                    Contraseña
+                                </th>
+                                <th>
+                                    Correo
+                                </th>
+                                <th>
+                                    Tipo de Usuario
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Contrasena)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Iglesia)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MetodoPago)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Persona)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TipoUsuario)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Usuario1 },new { @class = "btn btn-success"} ) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Usuario1 }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Usuario1 })
-                            </td>
-                        </tr>
-                    }
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cedula)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario1)
+                                    </td>
+                                    <td>
+                                        @using (Html.BeginForm("ForgotPassword", "Usuario",
+                            FormMethod.Post, new { @class = "login100-form validate-form" }))
+                                        {
+                                            @Html.Hidden("Usuario1",item.Usuario1)
+                                            @Html.Hidden("Cedula",item.Cedula)
+                                            @Html.Hidden("Correo",item.Correo)
+                                            @Html.Hidden("IdTipoUsuario", 4)
+                                            
+                                            <input type="submit" value="Restablecer Contraseña" class="btn btn-warning btn-sm" />
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Correo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoUsuario)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" })  |
+                                        @Html.ActionLink("Details", "Details", new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" })
+                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Usuario1 }, new { @class = "btn btn-danger btn-sm" })
 
-                </table>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+

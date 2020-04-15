@@ -183,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DO\CarreraCompleta.cs" />
     <Compile Include="DO\Cryptography.cs" />
     <Compile Include="DO\Factura.cs" />
     <Compile Include="DO\PasswordMail.cs" />
