@@ -12,7 +12,7 @@ namespace CxC_Seminario.Controllers
 {
     public class PersonaController : Controller
     {
-        string _baseurl = "https://localhost:44313/";
+        readonly string _baseurl = "https://localhost:44313/";
         // GET: Persona
         public async Task<ActionResult> Index()
         {
@@ -55,7 +55,6 @@ namespace CxC_Seminario.Controllers
         #region Create
         public async Task<ActionResult> Create()
         {
-            List<Pais> paises = new List<Pais>();
 
             using (var client = new HttpClient())
             {
@@ -105,7 +104,6 @@ namespace CxC_Seminario.Controllers
         #region Edit
         public async Task<ActionResult> Edit(string id)
         {
-            List<Pais> paises = new List<Pais>();
             Persona aux = new Persona();
             using (var client = new HttpClient())
             {

@@ -13,7 +13,7 @@ namespace CxC_Seminario.Controllers
 {
     public class IglesiaController : Controller
     {
-        string _baseurl = "https://localhost:44313/";
+        readonly string _baseurl = "https://localhost:44313/";
         // GET: Iglesia
         public async Task<ActionResult> Index()
         {
@@ -57,7 +57,6 @@ namespace CxC_Seminario.Controllers
         public async Task<ActionResult> Create()
         {
             
-            List<DistritoEclesiastico> distritos = new List<DistritoEclesiastico>();
 
             using (var client = new HttpClient())
             {
@@ -109,7 +108,6 @@ namespace CxC_Seminario.Controllers
         {
    
             Iglesia iglesia= new Iglesia();
-            List<DistritoEclesiastico> distritos = new List<DistritoEclesiastico>();
 
             using (var client = new HttpClient())
             {

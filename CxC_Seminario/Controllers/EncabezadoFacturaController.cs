@@ -13,7 +13,7 @@ namespace CxC_Seminario.Controllers
 {
     public class EncabezadoFacturaController : Controller
     {
-        string _baseurl = "https://localhost:44313/";
+        readonly string _baseurl = "https://localhost:44313/";
         // GET: EncabezadoFactura
         public async Task<ActionResult> Index()
         {
@@ -116,6 +116,7 @@ namespace CxC_Seminario.Controllers
                     entidad.Lineas[i].IdEncabezado = entidad.Encabezado.IdEncabezado;
                     pagar += entidad.Lineas[i].Pago;
                     cobrar += entidad.Productos[i].Precio;
+                    entidad.Lineas[i].Descripcion = "test";
                     lineas.Add(entidad.Lineas[i]);
                 }
 
@@ -133,21 +134,17 @@ namespace CxC_Seminario.Controllers
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/EncabezadoFactura/Insert", byteContent).Result;
-                TimeSpan ts = TimeSpan.FromMilliseconds(150);
-                
-                Task t = Task.Delay(() =>
+                System.Threading.Thread.Sleep(1000);
+                foreach (LineaFactura item in lineas)
                 {
-                    foreach (LineaFactura item in lineas)
-                    {
-                        myContent = JsonConvert.SerializeObject(item);
-                        buffer = Encoding.UTF8.GetBytes(myContent);
-                        byteContent = new ByteArrayContent(buffer);
-                        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        postTask = client.PostAsync("api/LineaFactura/Insert", byteContent).Result;
-                    }
-                });
-                t.Wait(ts);
-                t.Start();
+                    client.DefaultRequestHeaders.Clear();
+                    myContent = JsonConvert.SerializeObject(item);
+                    buffer = Encoding.UTF8.GetBytes(myContent);
+                    byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    postTask = client.PostAsync("api/LineaFactura/Insert", byteContent).Result;
+                }
+
 
                 var result = postTask;
                 if (result.IsSuccessStatusCode)

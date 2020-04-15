@@ -15,7 +15,7 @@ namespace CxC_Seminario.Controllers
 {
     public class UsuarioController : Controller
     {
-        string _baseurl = "https://localhost:44313/";
+        readonly string _baseurl = "https://localhost:44313/";
         // GET: Usuario
         public async Task<ActionResult> Index()
         {
@@ -147,10 +147,6 @@ namespace CxC_Seminario.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             Usuario aux = new Usuario();
-            List<TipoUsuario> tipoUsuarios = new List<TipoUsuario>();
-            List<Iglesia> iglesias = new List<Iglesia>();
-            List<MetodoPago> metodoPagos = new List<MetodoPago>();
-            List<Carrera> carreras = new List<Carrera>();
 
             using (var client = new HttpClient())
             {
@@ -296,7 +292,7 @@ namespace CxC_Seminario.Controllers
                             }
                             else
                             {
-                                aux.LoginCount = aux.LoginCount + 1;
+                                aux.LoginCount += 1;
 
                                 var myContent = JsonConvert.SerializeObject(aux);
                                 var buffer = Encoding.UTF8.GetBytes(myContent);
@@ -329,7 +325,6 @@ namespace CxC_Seminario.Controllers
                                 var byteContent = new ByteArrayContent(buffer);
                                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                                 var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
-                                var result = postTask;
                                 return RedirectToAction("", "");
                             }
                             else

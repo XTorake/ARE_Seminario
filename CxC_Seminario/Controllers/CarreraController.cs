@@ -13,7 +13,7 @@ namespace CxC_Seminario.Controllers
 {
     public class CarreraController : Controller
     {
-        string _baseurl = "https://localhost:44313/";
+        readonly string _baseurl = "https://localhost:44313/";
         // GET: Carrera
         public async Task<ActionResult> Index()
         {

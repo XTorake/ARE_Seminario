@@ -8,6 +8,7 @@ namespace Seminario.API
 {
     public class WebApiApplication : HttpApplication
     {
+        [System.Obsolete]
         protected void Application_Start()
         {
             Maps.Maps.CreateMaps();

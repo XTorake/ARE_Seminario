@@ -36,16 +36,7 @@ namespace CxC_Seminario.DO
                     message.Body = Body;
                     message.To.Add(correo);
                     smtpClient.Send(message);
-                    try
-                    {
-                        
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        //Error, could not send the message
-                       
-                    }
+                  
                 }
             }
         }
@@ -77,16 +68,7 @@ namespace CxC_Seminario.DO
                     message.Body = Body;
                     message.To.Add(correo);
                     smtpClient.Send(message);
-                    try
-                    {
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                        //Error, could not send the message
-
-                    }
+                   
                 }
             }
         }
@@ -118,16 +100,7 @@ namespace CxC_Seminario.DO
                     message.Body = Body;
                     message.To.Add(correo);
                     smtpClient.Send(message);
-                    try
-                    {
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                        //Error, could not send the message
-
-                    }
+                   
                 }
             }
         }

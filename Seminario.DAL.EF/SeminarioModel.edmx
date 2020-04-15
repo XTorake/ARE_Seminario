@@ -85,7 +85,7 @@
           <Property Name="idLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idProducto" Type="int" Nullable="false" />
           <Property Name="pago" Type="float" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="idEncabezado" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="MetodoPago">
@@ -438,7 +438,7 @@
           <Property Name="idLinea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="pago" Type="Double" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idEncabezado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EncabezadoFactura" Relationship="Self.FK_LineaFactura_EncabezadoFactura" FromRole="LineaFactura" ToRole="EncabezadoFactura" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_LineaFactura_Producto" FromRole="LineaFactura" ToRole="Producto" />

@@ -15,6 +15,11 @@ namespace CxC_Seminario
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+               name: "Reporte",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Reporte", action = "Index", id = UrlParameter.Optional }
+           );
+            routes.MapRoute(
                 name: "Auditoria",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Auditoria", action = "Index", id = UrlParameter.Optional }
