@@ -1,23 +1,12 @@
 ﻿@using ReportViewerForMvc;
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     ViewBag.Title = "Report";
 }
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Factura_Usuario</title>
-</head>
-<body>
-    <div>
-
-        <h2>Report</h2>
-
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer);
     </div>
-</body>
-</html>
+</div>

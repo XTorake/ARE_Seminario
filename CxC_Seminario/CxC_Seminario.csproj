@@ -178,10 +178,10 @@
     <Compile Include="Controllers\TelefonoController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="DataSetFactura_Usuario.Designer.cs">
+    <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetFactura_Usuario.xsd</DependentUpon>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DO\Cryptography.cs" />
     <Compile Include="DO\Factura.cs" />
@@ -443,16 +443,16 @@
     <Content Include="Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="DataSetFactura_Usuario.xsc">
-      <DependentUpon>DataSetFactura_Usuario.xsd</DependentUpon>
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
-    <None Include="DataSetFactura_Usuario.xsd">
+    <None Include="DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetFactura_Usuario.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="DataSetFactura_Usuario.xss">
-      <DependentUpon>DataSetFactura_Usuario.xsd</DependentUpon>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\c3-charts\c3-active.js" />

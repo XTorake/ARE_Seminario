@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="DataSetFactura_Usuario" targetNamespace="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns:mstns="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns="http://tempuri.org/DataSetFactura_Usuario.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
@@ -39,7 +39,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="DataSetFactura_Usuario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetFactura_Usuario" msprop:Generator_UserDSName="DataSetFactura_Usuario">
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet" msprop:Generator_UserDSName="DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Factura_Usuario" msprop:Generator_TableClassName="Factura_UsuarioDataTable" msprop:Generator_TableVarName="tableFactura_Usuario" msprop:Generator_TablePropName="Factura_Usuario" msprop:Generator_RowDeletingName="Factura_UsuarioRowDeleting" msprop:Generator_RowChangingName="Factura_UsuarioRowChanging" msprop:Generator_RowEvHandlerName="Factura_UsuarioRowChangeEventHandler" msprop:Generator_RowDeletedName="Factura_UsuarioRowDeleted" msprop:Generator_UserTableName="Factura_Usuario" msprop:Generator_RowChangedName="Factura_UsuarioRowChanged" msprop:Generator_RowEvArgName="Factura_UsuarioRowChangeEvent" msprop:Generator_RowClassName="Factura_UsuarioRow">
