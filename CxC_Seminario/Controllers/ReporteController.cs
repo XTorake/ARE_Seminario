@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WebForms;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,13 +27,17 @@ namespace CxC_Seminario.Controllers
             dt.Columns.Add("Usuario");
             dt.Columns.Add("N° de Factura");
             dt.Columns.Add("Fecha de Pago");
-            dt.Columns.Add("Total a Cobrar");
-            dt.Columns.Add("Descuento");
-            dt.Columns.Add("Total a Pagar");
             dt.Columns.Add("ID de Producto");
-            dt.Columns.Add("Pago Realizado");
             dt.Columns.Add("Descripcion");
             dt.Columns.Add("Precio");
+            dt.Columns.Add("Descuento");
+            dt.Columns.Add("Total a Cobrar");
+            dt.Columns.Add("Total a Pagar");
+            dt.Columns[7].DataType = typeof(Int32);
+            dt.Columns[8].DataType = typeof(Int32);
+            dt.Columns[9].DataType = typeof(Int32);
+            dt.Columns[10].DataType = typeof(Int32);
+
 
             con.Open();
             string a = Session["Usuario"].ToString();
@@ -48,13 +53,12 @@ namespace CxC_Seminario.Controllers
                 row["Usuario"] = lector["Usuario"];
                 row["N° de Factura"] = lector["N° de Factura"];
                 row["Fecha de Pago"] = lector["Fecha de Pago"];
-                row["Total a Cobrar"] = lector["Total a Cobrar"];
-                row["Descuento"] = lector["Descuento"];
-                row["Total a Pagar"] = lector["Total a Pagar"];
                 row["ID de Producto"] = lector["ID de Producto"];
-                row["Pago Realizado"] = lector["Pago Realizado"];
                 row["Descripcion"] = lector["Descripcion"];
-                row["Precio"] = lector["Precio"];
+                row["Precio"] = Convert.ToInt32(lector["Precio"]);
+                row["Descuento"] = Convert.ToInt32(lector["Descuento"]);
+                row["Total a Cobrar"] = Convert.ToInt32(lector["Total a Cobrar"]);
+                row["Total a Pagar"] = Convert.ToInt32(lector["Total a Pagar"]);
 
                 dt.Rows.Add(row);
             }
@@ -63,14 +67,18 @@ namespace CxC_Seminario.Controllers
             {
                 ProcessingMode = ProcessingMode.Local,
                 SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
+                //  Width = Unit.Percentage(100),
+                // Height = Unit.Percentage(100),
                 ZoomMode = ZoomMode.FullPage
             };
-            ReportViewer1.LocalReport.ReportPath = "E:/Analisis/Proyecto/SeminarioReports/Report4.rdl";
+            ReportViewer1.LocalReport.ReportPath = "E:/Analisis/Proyecto/SeminarioReports/Factura_Usuario.rdl";
             ReportDataSource rpt = new ReportDataSource("DataSet1", ds.Tables[0]);
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(rpt);
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.SizeToReportContent = true;
+            //  ReportViewer1.Width = Unit.Percentage(100);
+            // ReportViewer1.Height = Unit.Percentage(100);
             ReportViewer1.LocalReport.Refresh();
             ViewBag.ReportViewer = ReportViewer1;
 
@@ -102,5 +110,16 @@ namespace CxC_Seminario.Controllers
 
             return View();
         }
+        public ActionResult Cuentas_Mes()
+        {
+            return View();
+
+        }
+        public ActionResult Pagos_Mes_Usuario()
+        {
+
+            return View();
+        }
+
     }
 }

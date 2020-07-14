@@ -5,12 +5,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+
 @{
 
     IEnumerable<Usuario> usuarios = ViewData["Usuarios"] as IEnumerable<Usuario>;
     IEnumerable<Producto> productos = ViewData["Productos"] as IEnumerable<Producto>;
+
 }
+
 
 <div class="container-fluid" style="padding-top:5%">
     <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -75,11 +77,11 @@
                                                                                         <th>Se Factura?</th>
                                                                                         <th>Producto</th>
                                                                                         <th>Precio</th>
-                                                                                        <th>Pago</th>
+
                                                                                     </tr>
                                                                                     @for (var i = 0; i < Model.Productos.Count(); i++)
                                                                                     {
-                                                                                        <tr>
+                                                                                        <tr id="@Model.Productos[i].IdProducto">
                                                                                             <td>
                                                                                                 @Html.HiddenFor(it => it.Productos[i].IdProducto)
                                                                                                 @i
@@ -93,14 +95,52 @@
                                                                                             </td>
                                                                                             <td>
 
-                                                                                                @Html.DisplayFor(model => model.Productos[i].Precio, new { htmlAttributes = new { @class = "form-control" } })
-                                                                                                @Html.HiddenFor(model => model.Productos[i].Precio, new { htmlAttributes = new { @class = "form-control" } })
+                                                                                                @Html.DisplayFor(model => model.Productos[i].Precio, new { htmlAttributes = new { @class = "form-control", } })
+                                                                                                @Html.HiddenFor(it => it.Productos[i].Precio)
                                                                                             </td>
-                                                                                            <td>
-                                                                                                @Html.EditorFor(model => model.Lineas[i].Pago, new { htmlAttributes = new { @class = "form-control" } })
-                                                                                            </td>
+
                                                                                         </tr>
                                                                                     }
+                                                                                    <tr>
+                                                                                        <th></th>
+
+                                                                                        <th>% Descuento</th>
+
+                                                                                        <th>Precio Total</th>
+                                                                                        <th>Total a pagar</th>
+
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                        </td>
+
+                                                                                        <td>
+                                                                                            @Html.EditorFor(model => model.Encabezado.Usuario.Descuento, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+                                                                                        </td>
+
+                                                                                        <td id="TotalCobrar">
+                                                                                            @Html.EditorFor(model => model.Encabezado.TotalCobrar, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @Html.EditorFor(model => model.Encabezado.TotalPagar, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+
+                                                                                        <td>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-custon-rounded-three btn-danger" })
+                                                                                            <input type="submit" value="Crear" class="btn btn-custon-rounded-three btn-primary " />
+                                                                                        </td>
+                                                                                    </tr>
                                                                                 </table>
                                                                             </div>
                                                                         </div>
@@ -110,20 +150,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group-inner">
-                                                    <div class="login-btn-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-3"></div>
-                                                            <div class="col-lg-9">
-                                                                <div class="login-horizental cancel-wp pull-left form-bc-ele">
-                                                                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-custon-rounded-three btn-danger" })
-                                                                    <input type="submit" value="Create" class="btn btn-sm btn-primary login-submit-cs" />
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -136,6 +163,42 @@
         </div>
     </div>
 </div>
+
+<script src="/Scripts/vendor/jquery-1.12.4.min.js"></script>
+
+<script>
+    var estudiante;
+    $("#Encabezado_IdEstudiante").change(function () {
+        estudiante = $(this).val();
+        var str = @Html.Raw(Json.Encode(ViewData["Usuarios"]));
+        for (var i = 0; str.length;i+=1){
+            if (str[i].Usuario1 == estudiante) {
+                $("#Encabezado_Usuario_Descuento").val(str[i].Descuento)
+
+                 if ($("#Encabezado_TotalCobrar").val() != 0 ) {
+                     b = b - ((b / 100) * $("#Encabezado_Usuario_Descuento").val());
+                      $("#Encabezado_TotalCobrar").val(b);
+                 }
+            }
+        }
+    });
+    var b = 0;
+    $("input[type=checkbox]").click(function () {
+        var a;
+        b = 0;
+        $.each($('input[type="checkbox"]:checked'), function () {
+
+            a = $(this).closest('tr').find('td').eq(3).html().trim();
+            b = b + parseInt(a);
+
+        });
+         if ($("#Encabezado_Usuario_Descuento").val() != 0) {
+                 b = b-((b / 100) * $("#Encabezado_Usuario_Descuento").val());
+            }
+        $("#Encabezado_TotalCobrar").val(b);
+    });
+
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

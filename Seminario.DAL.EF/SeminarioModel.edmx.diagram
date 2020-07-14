@@ -4,12 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="79fddae52eb641d98f0b5379aeade5a5" Name="Diagram1">
+      <Diagram DiagramId="79fddae52eb641d98f0b5379aeade5a5" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="ARE_SeminarioModel.Auditoria" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARE_SeminarioModel.Carrera" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARE_SeminarioModel.CarreraxCurso" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.CategoriaProducto" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARE_SeminarioModel.Curso" Width="1.5" PointX="6" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.DistritoEclesiastico" Width="1.5" PointX="3.75" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.EncabezadoFactura" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.Iglesia" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
@@ -19,12 +16,8 @@
         <EntityTypeShape EntityType="ARE_SeminarioModel.Persona" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.Producto" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARE_SeminarioModel.Telefono" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.TipoUsuario" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="ARE_SeminarioModel.Usuario" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_CarreraxCurso_Carrera" ManuallyRouted="false" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_Usuario_Carrera" ManuallyRouted="false" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_CarreraxCurso_Curso" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Producto_CategoriaProducto" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Iglesia_DistritoEclesiastico" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_EncabezadoFactura_Usuario" ManuallyRouted="false" />
@@ -33,10 +26,9 @@
         <AssociationConnector Association="ARE_SeminarioModel.FK_LineaFactura_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Usuario_MetodoPago" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Persona_Pais" ManuallyRouted="false" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_Telefono_Pais" ManuallyRouted="false" />
-        <AssociationConnector Association="ARE_SeminarioModel.FK_Telefono_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Usuario_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="ARE_SeminarioModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ARE_SeminarioModel.Factura_Usuario" Width="1.5" PointX="10.375" PointY="8.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

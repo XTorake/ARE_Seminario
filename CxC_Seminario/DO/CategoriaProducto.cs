@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
@@ -6,6 +7,7 @@ namespace CxC_Seminario.DO
 {
     public class CategoriaProducto
     {
+        [DisplayName("N° Categoria")]
         public int IdCategoriaProducto { get; set; }
         [Required]
         [StringLength(20)]

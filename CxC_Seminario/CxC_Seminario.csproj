@@ -161,10 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuditoriaController.cs" />
-    <Compile Include="Controllers\CarreraController.cs" />
-    <Compile Include="Controllers\CarreraxCursoController.cs" />
     <Compile Include="Controllers\CategoriaProductoController.cs" />
-    <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\DistritoEclesiasticoController.cs" />
     <Compile Include="Controllers\EncabezadoFacturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -175,7 +172,6 @@
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
-    <Compile Include="Controllers\TelefonoController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataSet1.Designer.cs">
@@ -183,7 +179,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DO\CarreraCompleta.cs" />
     <Compile Include="DO\Cryptography.cs" />
     <Compile Include="DO\Factura.cs" />
     <Compile Include="DO\PasswordMail.cs" />
@@ -192,10 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DO\Auditoria.cs" />
-    <Compile Include="DO\Carrera.cs" />
-    <Compile Include="DO\CarreraxCurso.cs" />
     <Compile Include="DO\CategoriaProducto.cs" />
-    <Compile Include="DO\Curso.cs" />
     <Compile Include="DO\DistritoEclesiastico.cs" />
     <Compile Include="DO\EncabezadoFactura.cs" />
     <Compile Include="DO\Iglesia.cs" />
@@ -204,7 +196,6 @@
     <Compile Include="DO\Pais.cs" />
     <Compile Include="DO\Persona.cs" />
     <Compile Include="DO\Producto.cs" />
-    <Compile Include="DO\Telefono.cs" />
     <Compile Include="DO\TipoUsuario.cs" />
     <Compile Include="DO\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -462,6 +453,7 @@
     <Content Include="Scripts\c3-charts\c3-active.js" />
     <Content Include="Scripts\c3-charts\c3.min.js" />
     <Content Include="Scripts\c3-charts\d3.min.js" />
+    <Content Include="Scripts\CalculoFactura.js" />
     <Content Include="Scripts\calendar\fullcalendar-active.js" />
     <Content Include="Scripts\calendar\fullcalendar.min.js" />
     <Content Include="Scripts\calendar\moment.min.js" />
@@ -625,26 +617,11 @@
     <Content Include="Views\Auditoria\Details.cshtml" />
     <Content Include="Views\Auditoria\Edit.cshtml" />
     <Content Include="Views\Auditoria\Index.cshtml" />
-    <Content Include="Views\Carrera\Create.cshtml" />
-    <Content Include="Views\Carrera\Delete.cshtml" />
-    <Content Include="Views\Carrera\Details.cshtml" />
-    <Content Include="Views\Carrera\Edit.cshtml" />
-    <Content Include="Views\Carrera\Index.cshtml" />
-    <Content Include="Views\CarreraxCurso\Create.cshtml" />
-    <Content Include="Views\CarreraxCurso\Delete.cshtml" />
-    <Content Include="Views\CarreraxCurso\Details.cshtml" />
-    <Content Include="Views\CarreraxCurso\Edit.cshtml" />
-    <Content Include="Views\CarreraxCurso\Index.cshtml" />
     <Content Include="Views\CategoriaProducto\Create.cshtml" />
     <Content Include="Views\CategoriaProducto\Delete.cshtml" />
     <Content Include="Views\CategoriaProducto\Details.cshtml" />
     <Content Include="Views\CategoriaProducto\Edit.cshtml" />
     <Content Include="Views\CategoriaProducto\Index.cshtml" />
-    <Content Include="Views\Curso\Create.cshtml" />
-    <Content Include="Views\Curso\Delete.cshtml" />
-    <Content Include="Views\Curso\Details.cshtml" />
-    <Content Include="Views\Curso\Edit.cshtml" />
-    <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\DistritoEclesiastico\Create.cshtml" />
     <Content Include="Views\DistritoEclesiastico\Delete.cshtml" />
     <Content Include="Views\DistritoEclesiastico\Details.cshtml" />
@@ -685,11 +662,6 @@
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
-    <Content Include="Views\Telefono\Create.cshtml" />
-    <Content Include="Views\Telefono\Delete.cshtml" />
-    <Content Include="Views\Telefono\Details.cshtml" />
-    <Content Include="Views\Telefono\Edit.cshtml" />
-    <Content Include="Views\Telefono\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />

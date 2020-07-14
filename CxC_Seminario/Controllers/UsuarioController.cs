@@ -73,17 +73,17 @@ namespace CxC_Seminario.Controllers
                 HttpResponseMessage resTipoUsuarios = await client.GetAsync("api/TipoUsuario/GetAll");
                 HttpResponseMessage resIglesia = await client.GetAsync("api/Iglesia/GetAll");
                 HttpResponseMessage resMetodoPagos = await client.GetAsync("api/MetodoPago/GetAll");
-                HttpResponseMessage resCarreras = await client.GetAsync("api/Carrera/GetAll");
+
                 HttpResponseMessage resPersonas = await client.GetAsync("api/Persona/GetAll");
                 HttpResponseMessage resUsuarios = await client.GetAsync("api/Usuario/GetAll");
 
-                if (resTipoUsuarios.IsSuccessStatusCode && resIglesia.IsSuccessStatusCode && resMetodoPagos.IsSuccessStatusCode && resCarreras.IsSuccessStatusCode && resPersonas.IsSuccessStatusCode && resUsuarios.IsSuccessStatusCode)
+                if (resTipoUsuarios.IsSuccessStatusCode && resIglesia.IsSuccessStatusCode && resMetodoPagos.IsSuccessStatusCode && resPersonas.IsSuccessStatusCode && resUsuarios.IsSuccessStatusCode)
                 {
 
                     var auxResTipoUsuarios = resTipoUsuarios.Content.ReadAsStringAsync().Result;
                     var auxResIglesia = resIglesia.Content.ReadAsStringAsync().Result;
                     var auxResMetodoPagos = resMetodoPagos.Content.ReadAsStringAsync().Result;
-                    var auxResCarreras = resCarreras.Content.ReadAsStringAsync().Result;
+
                     var auxResPersonas = resPersonas.Content.ReadAsStringAsync().Result;
                     var auxResUsuarios = resUsuarios.Content.ReadAsStringAsync().Result;
 
@@ -108,7 +108,6 @@ namespace CxC_Seminario.Controllers
                     ViewData["TipoUsuarios"] = JsonConvert.DeserializeObject<List<TipoUsuario>>(auxResTipoUsuarios);
                     ViewData["Iglesias"] = JsonConvert.DeserializeObject<List<Iglesia>>(auxResIglesia);
                     ViewData["MetodoPagos"] = JsonConvert.DeserializeObject<List<MetodoPago>>(auxResMetodoPagos);
-                    ViewData["Carreras"] = JsonConvert.DeserializeObject<List<Carrera>>(auxResCarreras);
                     ViewData["Personas"] = personasFiltradas;
 
                 }
@@ -118,8 +117,43 @@ namespace CxC_Seminario.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Usuario entidad)
+        public async Task<ActionResult> Create(Usuario entidad)
         {
+            Persona aux = new Persona();
+            Pais auxPais = new Pais();
+            Iglesia auxIgle = new Iglesia();
+            string contrasena = Cryptography.RandomPassword();
+            entidad.Contrasena = contrasena;
+            PasswordMail.UsuarioCreado(entidad.Usuario1, entidad.Contrasena, entidad.Correo);
+            entidad.MontoAdeudado = 0;
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + entidad.Cedula);
+                HttpResponseMessage resIglesia = await client.GetAsync("api/Iglesia/GetOneById/5?id= " + entidad.IdIglesia);
+
+                if (res.IsSuccessStatusCode && resIglesia.IsSuccessStatusCode)
+                {
+                    var auxRes = res.Content.ReadAsStringAsync().Result;
+                    var auxResIgle = resIglesia.Content.ReadAsStringAsync().Result;
+
+                    aux = JsonConvert.DeserializeObject<Persona>(auxRes);
+                    auxIgle = JsonConvert.DeserializeObject<Iglesia>(auxResIgle);
+
+                    res = await client.GetAsync("api/Pais/GetOneById/5?id= " + aux.IdPais);
+                    if (res.IsSuccessStatusCode)
+                    {
+                        auxRes = res.Content.ReadAsStringAsync().Result;
+
+                        auxPais = JsonConvert.DeserializeObject<Pais>(auxRes);
+                    }
+                }
+
+            }
+            entidad.Descuento = (int)auxPais.Descuento + (int)auxIgle.Descuento;
             entidad.Contrasena = Cryptography.Encrypt(entidad.Contrasena);
             entidad.IsTemp = true;
             entidad.LoginCount = 0;
@@ -136,6 +170,7 @@ namespace CxC_Seminario.Controllers
                 var result = postTask;
                 if (result.IsSuccessStatusCode)
                 {
+                    
                     return RedirectToAction("Index");
                 }
             }
@@ -154,14 +189,24 @@ namespace CxC_Seminario.Controllers
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
+                HttpResponseMessage resUsuario = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + id);
+                HttpResponseMessage resTipoUsuarios = await client.GetAsync("api/TipoUsuario/GetAll");
+                HttpResponseMessage resIglesia = await client.GetAsync("api/Iglesia/GetAll");
+                HttpResponseMessage resMetodoPagos = await client.GetAsync("api/MetodoPago/GetAll");
 
-                if (resUsuario.IsSuccessStatusCode)
+                if (resTipoUsuarios.IsSuccessStatusCode && resIglesia.IsSuccessStatusCode && resMetodoPagos.IsSuccessStatusCode && resUsuario.IsSuccessStatusCode)
                 {
+                    var auxResTipoUsuarios = resTipoUsuarios.Content.ReadAsStringAsync().Result;
+                    var auxResIglesia = resIglesia.Content.ReadAsStringAsync().Result;
+                    var auxResMetodoPagos = resMetodoPagos.Content.ReadAsStringAsync().Result;
                     var auxRes = resUsuario.Content.ReadAsStringAsync().Result;
-
+                    ViewData["TipoUsuarios"] = JsonConvert.DeserializeObject<List<TipoUsuario>>(auxResTipoUsuarios);
+                    ViewData["Iglesias"] = JsonConvert.DeserializeObject<List<Iglesia>>(auxResIglesia);
+                    ViewData["MetodoPagos"] = JsonConvert.DeserializeObject<List<MetodoPago>>(auxResMetodoPagos);
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
+
                 }
+
 
             }
             return View(aux);
@@ -191,7 +236,7 @@ namespace CxC_Seminario.Controllers
         }
         #endregion
         #region Delete
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(string id)
         {
             Usuario aux = new Usuario();
             using (var client = new HttpClient())
@@ -199,7 +244,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -212,7 +257,7 @@ namespace CxC_Seminario.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Usuario aux = new Usuario();
             using (var client = new HttpClient())
@@ -221,7 +266,7 @@ namespace CxC_Seminario.Controllers
 
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -269,6 +314,7 @@ namespace CxC_Seminario.Controllers
                     aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
                     if (aux != null)
                     {
+                        
                         if (Cryptography.Decrypt(aux.Contrasena) != entidad.Contrasena)
                         {
                             if (aux.LoginCount > 3)
@@ -398,7 +444,7 @@ namespace CxC_Seminario.Controllers
                             if (entidad.IdTipoUsuario == 4)
                             {
                                 return RedirectToAction("Index", "Usuario");
-                                
+
                             }
                             if (result.IsSuccessStatusCode)
                             {

@@ -10,16 +10,10 @@
 namespace Seminario.DAL.EF
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class LineaFactura
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int idLinea { get; set; }
-        public int idProducto { get; set; }
-        public string descripcion { get; set; }
-        public string idEncabezado { get; set; }
-    
-        public virtual EncabezadoFactura EncabezadoFactura { get; set; }
-        public virtual Producto Producto { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

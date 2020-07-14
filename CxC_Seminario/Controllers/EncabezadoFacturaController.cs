@@ -31,6 +31,7 @@ namespace CxC_Seminario.Controllers
                     var auxRes = res.Content.ReadAsStringAsync().Result;
 
                     aux = JsonConvert.DeserializeObject<List<EncabezadoFactura>>(auxRes);
+                   aux= aux.OrderByDescending(e => e.FechaPago).ToList();
                 }
             }
             return View(aux);
@@ -62,7 +63,7 @@ namespace CxC_Seminario.Controllers
             {
                 List<Producto> productos = new List<Producto>();
                 List<LineaFactura> lineas = new List<LineaFactura>();
-
+                aux.Encabezado = new EncabezadoFactura();
 
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
@@ -76,22 +77,22 @@ namespace CxC_Seminario.Controllers
                     List<Usuario> estudiantes = new List<Usuario>();
                     List<Usuario> usuarios = new List<Usuario>();
                     usuarios = JsonConvert.DeserializeObject<List<Usuario>>(auxresUsuario);
-
                     foreach (var item in usuarios)
                     {
                         if (item.IdTipoUsuario == 3)
                         {
                             estudiantes.Add(item);
                         }
-
                     }
                     ViewData["Usuarios"] = estudiantes;
                     productos = JsonConvert.DeserializeObject<List<Producto>>(auxresProducto);
                     aux.Productos = productos;
                     foreach (Producto item in productos)
                     {
-                        LineaFactura l = new LineaFactura();
-                        l.IdProducto = item.IdProducto;
+                        LineaFactura l = new LineaFactura
+                        {
+                            IdProducto = item.IdProducto
+                        };
                         lineas.Add(l);
                     }
                     aux.Lineas = lineas;
@@ -103,7 +104,7 @@ namespace CxC_Seminario.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Factura entidad)
         {
-         
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseurl);
@@ -112,41 +113,46 @@ namespace CxC_Seminario.Controllers
                 HttpResponseMessage res = await client.GetAsync("api/Usuario/GetOneByString/5?id=" + entidad.Encabezado.IdEstudiante);
                 var auxRes = res.Content.ReadAsStringAsync().Result;
                 Usuario aux = JsonConvert.DeserializeObject<Usuario>(auxRes);
-
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage res2 = await client.GetAsync("api/Iglesia/GetOneById/5?id= " + aux.IdIglesia);
                 var auxRes2 = res2.Content.ReadAsStringAsync().Result;
                 Iglesia aux2 = JsonConvert.DeserializeObject<Iglesia>(auxRes);
-
-                entidad.Encabezado.IdEncabezado = Cryptography.RandomID();
+                entidad.Encabezado.IdEncabezado = Cryptography.RandomID().ToUpper();
                 entidad.Encabezado.FechaPago = System.DateTime.Now;
-                entidad.Encabezado.Descuento = aux2.Descuento;
                 List<LineaFactura> lineas = new List<LineaFactura>();
-                double cobrar = 0;
-                double pagar = 0;
+                entidad.Lineas = lineas;
                 for (int i = 0; i < entidad.Productos.Count(); i++)
                 {
                     if (entidad.Productos[i].isChecked)
                     {
-                        entidad.Lineas[i].IdProducto = entidad.Productos[i].IdProducto;
-                        entidad.Lineas[i].IdEncabezado = entidad.Encabezado.IdEncabezado;
-                        pagar += entidad.Lineas[i].Pago;
-                        cobrar += entidad.Productos[i].Precio;
-                        entidad.Lineas[i].Descripcion = "test";
-                        lineas.Add(entidad.Lineas[i]);
+                        entidad.Lineas.Add(new LineaFactura()
+                        {
+                            IdProducto = entidad.Productos[i].IdProducto,
+                            IdEncabezado = entidad.Encabezado.IdEncabezado,
+                            Descripcion = entidad.Encabezado.Direccion
+                        });
+
                     }
-
                 }
-                entidad.Encabezado.TotalCobrar = cobrar - ((cobrar * entidad.Encabezado.Descuento) / 100);
-                entidad.Encabezado.TotalPagar = pagar;
-
-
+                if (entidad.Encabezado.TotalCobrar - entidad.Encabezado.TotalPagar > 0)
+                {
+                    aux.MontoAdeudado = (float)entidad.Encabezado.TotalCobrar - (float)entidad.Encabezado.TotalPagar;
+                }
+                if (entidad.Encabezado.TotalCobrar == 0 && entidad.Encabezado.TotalPagar > 0)
+                {
+                    aux.MontoAdeudado -= (float)entidad.Encabezado.TotalPagar;
+                }
                 var myContent = JsonConvert.SerializeObject(entidad.Encabezado);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var postTask = client.PostAsync("api/EncabezadoFactura/Insert", byteContent).Result;
+                myContent = JsonConvert.SerializeObject(aux);
+                buffer = Encoding.UTF8.GetBytes(myContent);
+                byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
                 System.Threading.Thread.Sleep(1000);
                 foreach (LineaFactura item in lineas)
                 {

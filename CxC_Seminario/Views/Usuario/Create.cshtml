@@ -4,113 +4,140 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-    @Scripts.Render("~/bundles/jquery")
+@{
+
+    IEnumerable<TipoUsuario> tipoUsuarios = ViewData["TipoUsuarios"] as IEnumerable<TipoUsuario>;
+    IEnumerable<Iglesia> iglesias = ViewData["Iglesias"] as IEnumerable<Iglesia>;
+    IEnumerable<MetodoPago> metodoPagos = ViewData["MetodoPagos"] as IEnumerable<MetodoPago>;
+    IEnumerable<Persona> personas = ViewData["Personas"] as IEnumerable<Persona>;
+
+}
+
+<div class="container-fluid" style="padding-top:5%">
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="sparkline12-list">
+                        <div class="sparkline12-hd">
+                            <div class="main-sparkline12-hd">
+                                <h1>Crear Usuario</h1>
+                            </div>
+                        </div>
+                        <div class="sparkline12-graph">
+                            <div class="basic-login-form-ad">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="all-form-element-inner">
+
+                                            @using (Html.BeginForm())
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.DropDownList("cedula", new SelectList(personas, "cedula", "Nombre"), "Seleciona a quien desea crear usuario", htmlAttributes: new { @class = "form-control" })
+
+                                                            @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.Usuario1, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.EditorFor(model => model.Usuario1, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Usuario1, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                               
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.IdTipoUsuario, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.DropDownList("idTipoUsuario", new SelectList(tipoUsuarios, "idTipoUsuario", "Nombre"), "Seleciona un Tipo de Usuario", htmlAttributes: new { @class = "form-control" })
+
+                                                            @Html.ValidationMessageFor(model => model.IdTipoUsuario, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.IdIglesia, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.DropDownList("idIglesia", new SelectList(iglesias, "idIglesia", "Nombre"), "Seleciona una Iglesia", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.IdIglesia, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            @Html.LabelFor(model => model.IdMetodoPago, htmlAttributes: new { @class = "login2 pull-right pull-right-pro" })
+                                                        </div>
+                                                        <div class="ol-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            @Html.DropDownList("idMetodoPago", new SelectList(metodoPagos, "idMetodoPago", "Nombre"), "Seleciona un Metodo de Pago", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner">
+                                                    <div class="login-btn-inner">
+                                                        <div class="row">
+                                                            <div class="col-lg-3"></div>
+                                                            <div class="col-lg-9">
+                                                                <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-custon-rounded-three btn-danger" })
+                                                                    <input type="submit" value="Crear" class="btn btn-sm btn-primary login-submit-cs" />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
-    @{
-        IEnumerable<TipoUsuario> tipoUsuarios = ViewData["TipoUsuarios"] as IEnumerable<TipoUsuario>;
-        IEnumerable<Iglesia> iglesias = ViewData["Iglesias"] as IEnumerable<Iglesia>;
-        IEnumerable<MetodoPago> metodoPagos = ViewData["MetodoPagos"] as IEnumerable<MetodoPago>;
-        IEnumerable<Carrera> carreras = ViewData["Carreras"] as IEnumerable<Carrera>;
-        IEnumerable<Persona> personas = ViewData["Personas"] as IEnumerable<Persona>;
-    }
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cedula, "cedula", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cedula", new SelectList(personas, "cedula", "Nombre"), "Seleciona a quien desea crear usuario", htmlAttributes: new { @class = "form-control" })
-
-                @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Usuario1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoUsuario, "idTipoUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                @Html.DropDownList("idTipoUsuario", new SelectList(tipoUsuarios, "idTipoUsuario", "Nombre"), "Seleciona un Tipo de Usuario", htmlAttributes: new { @class = "form-control" })
-
-                @Html.ValidationMessageFor(model => model.IdTipoUsuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdIglesia, "idIglesia", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idIglesia", new SelectList(iglesias, "idIglesia", "Nombre"), "Seleciona una Iglesia", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdIglesia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdMetodoPago, "idMetodoPago", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idMetodoPago", new SelectList(metodoPagos, "idMetodoPago", "Nombre"), "Seleciona un Metodo de Pago", htmlAttributes: new { @class = "form-control" })
-
-                @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdCarrera, "idCarrera", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idCarrera", new SelectList(carreras, "idCarrera", "Nombre"), "Seleciona una Carrera", htmlAttributes: new { @class = "form-control" })
-
-                @Html.ValidationMessageFor(model => model.IdCarrera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
-</html>
+}

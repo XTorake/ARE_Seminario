@@ -34,15 +34,11 @@
                                 <th>
                                     Total Pagado
                                 </th>
-                                <th>
-                                    Descuento Aplicado
-                                </th>
+                                
                                 <th>
                                     Fecha de Pago
                                 </th>
-                                <th>
-                                    Detalles
-                                </th>
+                                
                             </tr>
                             @foreach (var item in Model)
                             {
@@ -64,14 +60,9 @@
                                         @Html.DisplayFor(modelItem => item.TotalPagar)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Descuento)%
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.FechaPago)
                                     </td>
-                                    <td>
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.IdEncabezado }, new { @class = "btn btn-warning btn-sm" }) 
-                                    </td>
+                                    
                                 </tr>
                             }
                         </table>

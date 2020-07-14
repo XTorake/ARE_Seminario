@@ -24,7 +24,6 @@ namespace Seminario.DAL.EF
         public string idEstudiante { get; set; }
         public System.DateTime fechaPago { get; set; }
         public string direccion { get; set; }
-        public double descuento { get; set; }
         public double totalPagar { get; set; }
         public double totalCobrar { get; set; }
     

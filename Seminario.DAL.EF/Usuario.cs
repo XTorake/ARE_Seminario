@@ -26,12 +26,12 @@ namespace Seminario.DAL.EF
         public int idTipoUsuario { get; set; }
         public Nullable<int> idIglesia { get; set; }
         public Nullable<int> idMetodoPago { get; set; }
-        public Nullable<int> idCarrera { get; set; }
         public Nullable<bool> isTemp { get; set; }
         public int loginCount { get; set; }
         public string correo { get; set; }
+        public Nullable<double> montoAdeudado { get; set; }
+        public Nullable<int> Descuento { get; set; }
     
-        public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EncabezadoFactura> EncabezadoFacturas { get; set; }
         public virtual Iglesia Iglesia { get; set; }

@@ -12,6 +12,8 @@ namespace Seminario.DAL.EF
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ARE_SeminarioEntities : DbContext
     {
@@ -26,10 +28,7 @@ namespace Seminario.DAL.EF
         }
     
         public virtual DbSet<Auditoria> Auditorias { get; set; }
-        public virtual DbSet<Carrera> Carreras { get; set; }
-        public virtual DbSet<CarreraxCurso> CarreraxCursoes { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProductoes { get; set; }
-        public virtual DbSet<Curso> Cursoes { get; set; }
         public virtual DbSet<DistritoEclesiastico> DistritoEclesiasticoes { get; set; }
         public virtual DbSet<EncabezadoFactura> EncabezadoFacturas { get; set; }
         public virtual DbSet<Iglesia> Iglesias { get; set; }
@@ -39,8 +38,253 @@ namespace Seminario.DAL.EF
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<Producto> Productoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Telefono> Telefonoes { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Factura_Usuario> Factura_Usuario { get; set; }
+    
+        public virtual int DetallesCarrera(Nullable<int> idCarrera)
+        {
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("idCarrera", idCarrera) :
+                new ObjectParameter("idCarrera", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DetallesCarrera", idCarreraParameter);
+        }
+    
+        public virtual ObjectResult<DetallesPersona_Result> DetallesPersona(string cedula)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DetallesPersona_Result>("DetallesPersona", cedulaParameter);
+        }
+    
+        public virtual int EditarCarrera(Nullable<int> idCarrera, string nombre)
+        {
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("idCarrera", idCarrera) :
+                new ObjectParameter("idCarrera", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditarCarrera", idCarreraParameter, nombreParameter);
+        }
+    
+        public virtual int EditarPersona(string cedula, string nombre, string apellido1, string apellido2, Nullable<int> idPais)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellido1Parameter = apellido1 != null ?
+                new ObjectParameter("apellido1", apellido1) :
+                new ObjectParameter("apellido1", typeof(string));
+    
+            var apellido2Parameter = apellido2 != null ?
+                new ObjectParameter("apellido2", apellido2) :
+                new ObjectParameter("apellido2", typeof(string));
+    
+            var idPaisParameter = idPais.HasValue ?
+                new ObjectParameter("idPais", idPais) :
+                new ObjectParameter("idPais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditarPersona", cedulaParameter, nombreParameter, apellido1Parameter, apellido2Parameter, idPaisParameter);
+        }
+    
+        public virtual int EliminarCarrera(Nullable<int> idCarrera)
+        {
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("idCarrera", idCarrera) :
+                new ObjectParameter("idCarrera", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarCarrera", idCarreraParameter);
+        }
+    
+        public virtual int EliminarPersona(string cedula)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarPersona", cedulaParameter);
+        }
+    
+        [DbFunction("ARE_SeminarioEntities", "FacturaPorMes")]
+        public virtual IQueryable<FacturaPorMes_Result> FacturaPorMes(string mes)
+        {
+            var mesParameter = mes != null ?
+                new ObjectParameter("Mes", mes) :
+                new ObjectParameter("Mes", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FacturaPorMes_Result>("[ARE_SeminarioEntities].[FacturaPorMes](@Mes)", mesParameter);
+        }
+    
+        [DbFunction("ARE_SeminarioEntities", "FacturaPorUsuario")]
+        public virtual IQueryable<FacturaPorUsuario_Result> FacturaPorUsuario(string usuario)
+        {
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FacturaPorUsuario_Result>("[ARE_SeminarioEntities].[FacturaPorUsuario](@Usuario)", usuarioParameter);
+        }
+    
+        public virtual int InsertarCarrrera(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarCarrrera", nombreParameter);
+        }
+    
+        public virtual int InsertarPersona(string cedula, string nombre, string apellido1, string apellido2, Nullable<int> idPais)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellido1Parameter = apellido1 != null ?
+                new ObjectParameter("apellido1", apellido1) :
+                new ObjectParameter("apellido1", typeof(string));
+    
+            var apellido2Parameter = apellido2 != null ?
+                new ObjectParameter("apellido2", apellido2) :
+                new ObjectParameter("apellido2", typeof(string));
+    
+            var idPaisParameter = idPais.HasValue ?
+                new ObjectParameter("idPais", idPais) :
+                new ObjectParameter("idPais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarPersona", cedulaParameter, nombreParameter, apellido1Parameter, apellido2Parameter, idPaisParameter);
+        }
+    
+        public virtual int ListarCarrera()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListarCarrera");
+        }
+    
+        public virtual ObjectResult<ListarPersona_Result> ListarPersona(string cedula)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarPersona_Result>("ListarPersona", cedulaParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
     }
 }

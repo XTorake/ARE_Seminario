@@ -18,7 +18,6 @@ namespace Seminario.DAL.EF
         public Pai()
         {
             this.Personas = new HashSet<Persona>();
-            this.Telefonoes = new HashSet<Telefono>();
         }
     
         public int idPais { get; set; }
@@ -28,7 +27,5 @@ namespace Seminario.DAL.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Personas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Telefono> Telefonoes { get; set; }
     }
 }

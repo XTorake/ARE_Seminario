@@ -56,16 +56,10 @@
     <Compile Include="Auditoria.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Carrera.cs">
-      <DependentUpon>SeminarioModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarreraxCurso.cs">
-      <DependentUpon>SeminarioModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CategoriaProducto.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Curso.cs">
+    <Compile Include="DetallesPersona_Result.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DistritoEclesiastico.cs">
@@ -74,10 +68,22 @@
     <Compile Include="EncabezadoFactura.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FacturaPorMes_Result.cs">
+      <DependentUpon>SeminarioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaPorUsuario_Result.cs">
+      <DependentUpon>SeminarioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Factura_Usuario.cs">
+      <DependentUpon>SeminarioModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Iglesia.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LineaFactura.cs">
+      <DependentUpon>SeminarioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarPersona_Result.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MetodoPago.cs">
@@ -108,10 +114,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SeminarioModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Telefono.cs">
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SeminarioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>SeminarioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoUsuario.cs">

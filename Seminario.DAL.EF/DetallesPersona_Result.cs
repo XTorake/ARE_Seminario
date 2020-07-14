@@ -10,15 +10,13 @@
 namespace Seminario.DAL.EF
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CarreraxCurso
+    public partial class DetallesPersona_Result
     {
-        public int idRelacion { get; set; }
-        public int idCarrera { get; set; }
-        public int idCurso { get; set; }
-    
-        public virtual Carrera Carrera { get; set; }
-        public virtual Curso Curso { get; set; }
+        public string cedula { get; set; }
+        public string nombre { get; set; }
+        public string apellido1 { get; set; }
+        public string apellido2 { get; set; }
+        public int idPais { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace CxC_Seminario.Controllers
 {
     public class PersonaController : Controller
     {
-        readonly string _baseurl = "https://localhost:44313/";
+          readonly string _baseurl = "https://localhost:44313/";
         // GET: Persona
         public async Task<ActionResult> Index()
         {
@@ -150,7 +150,7 @@ namespace CxC_Seminario.Controllers
         }
         #endregion
         #region Delete
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(string id)
         {
             Persona aux = new Persona();
             using (var client = new HttpClient())
@@ -158,7 +158,7 @@ namespace CxC_Seminario.Controllers
                 client.BaseAddress = new Uri(_baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -171,7 +171,7 @@ namespace CxC_Seminario.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Persona aux = new Persona();
             using (var client = new HttpClient())
@@ -180,7 +180,7 @@ namespace CxC_Seminario.Controllers
 
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneById/5?id=" + id);
+                HttpResponseMessage res = await client.GetAsync("api/Persona/GetOneByString/5?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {

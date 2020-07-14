@@ -13,10 +13,12 @@ namespace Seminario.DO.Objects
         public int IdTipoUsuario { get; set; }
         public int? IdIglesia { get; set; }
         public int? IdMetodoPago { get; set; }
-        public int? IdCarrera { get; set; }
+
         public bool? IsTemp { get; set; }
         public int? loginCount { get; set; }
         public string correo { get; set; }
+        public int Descuento { get; set; }
+        public float MontoAdeudado { get; set; }
 
     }
 }

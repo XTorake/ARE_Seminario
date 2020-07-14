@@ -18,37 +18,12 @@
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="accion" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="Carrera">
-          <Key>
-            <PropertyRef Name="idCarrera" />
-          </Key>
-          <Property Name="idCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CarreraxCurso">
-          <Key>
-            <PropertyRef Name="idRelacion" />
-          </Key>
-          <Property Name="idRelacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idCarrera" Type="int" Nullable="false" />
-          <Property Name="idCurso" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="CategoriaProducto">
           <Key>
             <PropertyRef Name="idCategoriaProducto" />
           </Key>
           <Property Name="idCategoriaProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Curso">
-          <Key>
-            <PropertyRef Name="idCurso" />
-          </Key>
-          <Property Name="idCurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="idProfesor" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="precio" Type="float" Nullable="false" />
-          <Property Name="creditos" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DistritoEclesiastico">
           <Key>
@@ -65,7 +40,6 @@
           <Property Name="idEstudiante" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="fechaPago" Type="datetime" Nullable="false" />
           <Property Name="direccion" Type="varchar" MaxLength="100" />
-          <Property Name="descuento" Type="float" Nullable="false" />
           <Property Name="totalPagar" Type="float" Nullable="false" />
           <Property Name="totalCobrar" Type="float" Nullable="false" />
         </EntityType>
@@ -84,7 +58,6 @@
           </Key>
           <Property Name="idLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idProducto" Type="int" Nullable="false" />
-          <Property Name="pago" Type="float" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="idEncabezado" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
@@ -133,15 +106,6 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Telefono">
-          <Key>
-            <PropertyRef Name="idTelefono" />
-          </Key>
-          <Property Name="idTelefono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cedula" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="telefono" Type="int" Nullable="false" />
-          <Property Name="idCodigoPais" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="idTipoUsuario" />
@@ -159,35 +123,41 @@
           <Property Name="idTipoUsuario" Type="int" Nullable="false" />
           <Property Name="idIglesia" Type="int" />
           <Property Name="idMetodoPago" Type="int" />
-          <Property Name="idCarrera" Type="int" />
           <Property Name="isTemp" Type="bit" />
           <Property Name="loginCount" Type="int" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="montoAdeudado" Type="float" />
+          <Property Name="Descuento" Type="int" />
         </EntityType>
-        <Association Name="FK_CarreraxCurso_Carrera">
-          <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
-          <End Role="CarreraxCurso" Type="Self.CarreraxCurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="idCarrera" />
-            </Principal>
-            <Dependent Role="CarreraxCurso">
-              <PropertyRef Name="idCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarreraxCurso_Curso">
-          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
-          <End Role="CarreraxCurso" Type="Self.CarreraxCurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Curso">
-              <PropertyRef Name="idCurso" />
-            </Principal>
-            <Dependent Role="CarreraxCurso">
-              <PropertyRef Name="idCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ARE_Seminario.dbo.Factura_Usuario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Factura_Usuario">
+          <Key>
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Fecha de Pago" />
+            <PropertyRef Name="Total a Cobrar" />
+            <PropertyRef Name="Descuento" />
+            <PropertyRef Name="Total a Pagar" />
+            <PropertyRef Name="ID de Producto" />
+            <PropertyRef Name="Pago Realizado" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="Cedula" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="62" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="N° de Factura" Type="varchar" MaxLength="5" />
+          <Property Name="Fecha de Pago" Type="datetime" Nullable="false" />
+          <Property Name="Total a Cobrar" Type="float" Nullable="false" />
+          <Property Name="Descuento" Type="float" Nullable="false" />
+          <Property Name="Total a Pagar" Type="float" Nullable="false" />
+          <Property Name="ID de Producto" Type="int" Nullable="false" />
+          <Property Name="Pago Realizado" Type="float" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+        </EntityType>
         <Association Name="FK_EncabezadoFactura_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="EncabezadoFactura" Type="Self.EncabezadoFactura" Multiplicity="*" />
@@ -260,36 +230,167 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefono_Pais">
-          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
-          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+        <Association Name="FK_Usuario_Iglesia">
+          <End Role="Iglesia" Type="Self.Iglesia" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="idPais" />
+            <Principal Role="Iglesia">
+              <PropertyRef Name="idIglesia" />
             </Principal>
-            <Dependent Role="Telefono">
-              <PropertyRef Name="idCodigoPais" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idIglesia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefono_Persona">
+        <Association Name="FK_Usuario_MetodoPago">
+          <End Role="MetodoPago" Type="Self.MetodoPago" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodoPago">
+              <PropertyRef Name="idMetodoPago" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idMetodoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="cedula" />
             </Principal>
-            <Dependent Role="Telefono">
+            <Dependent Role="Usuario">
               <PropertyRef Name="cedula" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DetallesCarrera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarrera" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DetallesPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditarCarrera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarrera" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido1" Type="varchar" Mode="In" />
+          <Parameter Name="apellido2" Type="varchar" Mode="In" />
+          <Parameter Name="idPais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarCarrera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarrera" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="FacturaPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Mes" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Cedula" Type="varchar" MaxLength="12" Nullable="false" />
+                <Property Name="Nombre" Type="varchar" MaxLength="62" Nullable="false" />
+                <Property Name="Usuario" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="N° de Factura" Type="varchar" MaxLength="5" />
+                <Property Name="Fecha de Pago" Type="datetime" Nullable="false" />
+                <Property Name="Total a Cobrar" Type="float" Nullable="false" />
+                <Property Name="Descuento" Type="float" Nullable="false" />
+                <Property Name="Total a Pagar" Type="float" Nullable="false" />
+                <Property Name="ID de Producto" Type="int" Nullable="false" />
+                <Property Name="Pago Realizado" Type="float" Nullable="false" />
+                <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="Precio" Type="float" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FacturaPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Cedula" Type="varchar" MaxLength="12" Nullable="false" />
+                <Property Name="Nombre" Type="varchar" MaxLength="62" Nullable="false" />
+                <Property Name="Usuario" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="N° de Factura" Type="varchar" MaxLength="5" />
+                <Property Name="Fecha de Pago" Type="datetime" Nullable="false" />
+                <Property Name="Total a Cobrar" Type="float" Nullable="false" />
+                <Property Name="Descuento" Type="float" Nullable="false" />
+                <Property Name="Total a Pagar" Type="float" Nullable="false" />
+                <Property Name="ID de Producto" Type="int" Nullable="false" />
+                <Property Name="Pago Realizado" Type="float" Nullable="false" />
+                <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="Precio" Type="float" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="InsertarCarrrera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido1" Type="varchar" Mode="In" />
+          <Parameter Name="apellido2" Type="varchar" Mode="In" />
+          <Parameter Name="idPais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarCarrera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ARE_SeminarioModelStoreContainer">
           <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarreraxCurso" EntityType="Self.CarreraxCurso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoriaProducto" EntityType="Self.CategoriaProducto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DistritoEclesiastico" EntityType="Self.DistritoEclesiastico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EncabezadoFactura" EntityType="Self.EncabezadoFactura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Iglesia" EntityType="Self.Iglesia" Schema="dbo" store:Type="Tables" />
@@ -299,17 +400,24 @@
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CarreraxCurso_Carrera" Association="Self.FK_CarreraxCurso_Carrera">
-            <End Role="Carrera" EntitySet="Carrera" />
-            <End Role="CarreraxCurso" EntitySet="CarreraxCurso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarreraxCurso_Curso" Association="Self.FK_CarreraxCurso_Curso">
-            <End Role="Curso" EntitySet="Curso" />
-            <End Role="CarreraxCurso" EntitySet="CarreraxCurso" />
-          </AssociationSet>
+          <EntitySet Name="Factura_Usuario" EntityType="Self.Factura_Usuario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Factura_Usuario].[Cedula] AS [Cedula], 
+    [Factura_Usuario].[Nombre] AS [Nombre], 
+    [Factura_Usuario].[Usuario] AS [Usuario], 
+    [Factura_Usuario].[N° de Factura] AS [N° de Factura], 
+    [Factura_Usuario].[Fecha de Pago] AS [Fecha de Pago], 
+    [Factura_Usuario].[Total a Cobrar] AS [Total a Cobrar], 
+    [Factura_Usuario].[Descuento] AS [Descuento], 
+    [Factura_Usuario].[Total a Pagar] AS [Total a Pagar], 
+    [Factura_Usuario].[ID de Producto] AS [ID de Producto], 
+    [Factura_Usuario].[Pago Realizado] AS [Pago Realizado], 
+    [Factura_Usuario].[Descripcion] AS [Descripcion], 
+    [Factura_Usuario].[Precio] AS [Precio]
+    FROM [dbo].[Factura_Usuario] AS [Factura_Usuario]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_EncabezadoFactura_Usuario" Association="Self.FK_EncabezadoFactura_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="EncabezadoFactura" EntitySet="EncabezadoFactura" />
@@ -334,13 +442,21 @@
             <End Role="CategoriaProducto" EntitySet="CategoriaProducto" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefono_Pais" Association="Self.FK_Telefono_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Telefono" EntitySet="Telefono" />
+          <AssociationSet Name="FK_Usuario_Iglesia" Association="Self.FK_Usuario_Iglesia">
+            <End Role="Iglesia" EntitySet="Iglesia" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefono_Persona" Association="Self.FK_Telefono_Persona">
+          <AssociationSet Name="FK_Usuario_MetodoPago" Association="Self.FK_Usuario_MetodoPago">
+            <End Role="MetodoPago" EntitySet="MetodoPago" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="Telefono" EntitySet="Telefono" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -360,25 +476,6 @@
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="accion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Carrera">
-          <Key>
-            <PropertyRef Name="idCarrera" />
-          </Key>
-          <Property Name="idCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CarreraxCursoes" Relationship="Self.FK_CarreraxCurso_Carrera" FromRole="Carrera" ToRole="CarreraxCurso" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Carrera" FromRole="Carrera" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="CarreraxCurso">
-          <Key>
-            <PropertyRef Name="idRelacion" />
-          </Key>
-          <Property Name="idRelacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idCarrera" Type="Int32" Nullable="false" />
-          <Property Name="idCurso" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carrera" Relationship="Self.FK_CarreraxCurso_Carrera" FromRole="CarreraxCurso" ToRole="Carrera" />
-          <NavigationProperty Name="Curso" Relationship="Self.FK_CarreraxCurso_Curso" FromRole="CarreraxCurso" ToRole="Curso" />
-        </EntityType>
         <EntityType Name="CategoriaProducto">
           <Key>
             <PropertyRef Name="idCategoriaProducto" />
@@ -386,17 +483,6 @@
           <Property Name="idCategoriaProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Productoes" Relationship="Self.FK_Producto_CategoriaProducto" FromRole="CategoriaProducto" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="Curso">
-          <Key>
-            <PropertyRef Name="idCurso" />
-          </Key>
-          <Property Name="idCurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idProfesor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="precio" Type="Double" Nullable="false" />
-          <Property Name="creditos" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CarreraxCursoes" Relationship="Self.FK_CarreraxCurso_Curso" FromRole="Curso" ToRole="CarreraxCurso" />
         </EntityType>
         <EntityType Name="DistritoEclesiastico">
           <Key>
@@ -414,7 +500,6 @@
           <Property Name="idEstudiante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaPago" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="descuento" Type="Double" Nullable="false" />
           <Property Name="totalPagar" Type="Double" Nullable="false" />
           <Property Name="totalCobrar" Type="Double" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_EncabezadoFactura_Usuario" FromRole="EncabezadoFactura" ToRole="Usuario" />
@@ -437,7 +522,6 @@
           </Key>
           <Property Name="idLinea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
-          <Property Name="pago" Type="Double" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idEncabezado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EncabezadoFactura" Relationship="Self.FK_LineaFactura_EncabezadoFactura" FromRole="LineaFactura" ToRole="EncabezadoFactura" />
@@ -460,7 +544,6 @@
           <Property Name="codigoPais" Type="Int32" />
           <Property Name="descuento" Type="Double" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Pais" FromRole="Pais" ToRole="Persona" />
-          <NavigationProperty Name="Telefonoes" Relationship="Self.FK_Telefono_Pais" FromRole="Pais" ToRole="Telefono" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -472,7 +555,6 @@
           <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idPais" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pai" Relationship="Self.FK_Persona_Pais" FromRole="Persona" ToRole="Pais" />
-          <NavigationProperty Name="Telefonoes" Relationship="Self.FK_Telefono_Persona" FromRole="Persona" ToRole="Telefono" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Producto">
@@ -496,17 +578,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Telefono">
-          <Key>
-            <PropertyRef Name="idTelefono" />
-          </Key>
-          <Property Name="idTelefono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cedula" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="telefono1" Type="Int32" Nullable="false" />
-          <Property Name="idCodigoPais" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Pai" Relationship="Self.FK_Telefono_Pais" FromRole="Telefono" ToRole="Pais" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Telefono_Persona" FromRole="Telefono" ToRole="Persona" />
-        </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="idTipoUsuario" />
@@ -525,8 +596,6 @@
           <Property Name="idTipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="idIglesia" Type="Int32" />
           <Property Name="idMetodoPago" Type="Int32" />
-          <Property Name="idCarrera" Type="Int32" />
-          <NavigationProperty Name="Carrera" Relationship="Self.FK_Usuario_Carrera" FromRole="Usuario" ToRole="Carrera" />
           <NavigationProperty Name="EncabezadoFacturas" Relationship="Self.FK_EncabezadoFactura_Usuario" FromRole="Usuario" ToRole="EncabezadoFactura" />
           <NavigationProperty Name="Iglesia" Relationship="Self.FK_Usuario_Iglesia" FromRole="Usuario" ToRole="Iglesia" />
           <NavigationProperty Name="MetodoPago" Relationship="Self.FK_Usuario_MetodoPago" FromRole="Usuario" ToRole="MetodoPago" />
@@ -535,43 +604,9 @@
           <Property Name="isTemp" Type="Boolean" />
           <Property Name="loginCount" Type="Int32" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="montoAdeudado" Type="Double" />
+          <Property Name="Descuento" Type="Int32" />
         </EntityType>
-        <Association Name="FK_CarreraxCurso_Carrera">
-          <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
-          <End Role="CarreraxCurso" Type="Self.CarreraxCurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="idCarrera" />
-            </Principal>
-            <Dependent Role="CarreraxCurso">
-              <PropertyRef Name="idCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Carrera">
-          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="idCarrera" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarreraxCurso_Curso">
-          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
-          <End Role="CarreraxCurso" Type="Self.CarreraxCurso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Curso">
-              <PropertyRef Name="idCurso" />
-            </Principal>
-            <Dependent Role="CarreraxCurso">
-              <PropertyRef Name="idCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Producto_CategoriaProducto">
           <End Role="CategoriaProducto" Type="Self.CategoriaProducto" Multiplicity="1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
@@ -668,30 +703,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefono_Pais">
-          <End Role="Pais" Type="Self.Pai" Multiplicity="1" />
-          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="idPais" />
-            </Principal>
-            <Dependent Role="Telefono">
-              <PropertyRef Name="idCodigoPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Telefono_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="cedula" />
-            </Principal>
-            <Dependent Role="Telefono">
-              <PropertyRef Name="cedula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -718,10 +729,7 @@
         </Association>
         <EntityContainer Name="ARE_SeminarioEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Auditorias" EntityType="Self.Auditoria" />
-          <EntitySet Name="Carreras" EntityType="Self.Carrera" />
-          <EntitySet Name="CarreraxCursoes" EntityType="Self.CarreraxCurso" />
           <EntitySet Name="CategoriaProductoes" EntityType="Self.CategoriaProducto" />
-          <EntitySet Name="Cursoes" EntityType="Self.Curso" />
           <EntitySet Name="DistritoEclesiasticoes" EntityType="Self.DistritoEclesiastico" />
           <EntitySet Name="EncabezadoFacturas" EntityType="Self.EncabezadoFactura" />
           <EntitySet Name="Iglesias" EntityType="Self.Iglesia" />
@@ -731,21 +739,8 @@
           <EntitySet Name="Personas" EntityType="Self.Persona" />
           <EntitySet Name="Productoes" EntityType="Self.Producto" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Telefonoes" EntityType="Self.Telefono" />
           <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_CarreraxCurso_Carrera" Association="Self.FK_CarreraxCurso_Carrera">
-            <End Role="Carrera" EntitySet="Carreras" />
-            <End Role="CarreraxCurso" EntitySet="CarreraxCursoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Carrera" Association="Self.FK_Usuario_Carrera">
-            <End Role="Carrera" EntitySet="Carreras" />
-            <End Role="Usuario" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarreraxCurso_Curso" Association="Self.FK_CarreraxCurso_Curso">
-            <End Role="Curso" EntitySet="Cursoes" />
-            <End Role="CarreraxCurso" EntitySet="CarreraxCursoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Producto_CategoriaProducto" Association="Self.FK_Producto_CategoriaProducto">
             <End Role="CategoriaProducto" EntitySet="CategoriaProductoes" />
             <End Role="Producto" EntitySet="Productoes" />
@@ -778,14 +773,6 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Persona" EntitySet="Personas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefono_Pais" Association="Self.FK_Telefono_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Telefono" EntitySet="Telefonoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Telefono_Persona" Association="Self.FK_Telefono_Persona">
-            <End Role="Persona" EntitySet="Personas" />
-            <End Role="Telefono" EntitySet="Telefonoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
             <End Role="Persona" EntitySet="Personas" />
             <End Role="Usuario" EntitySet="Usuarios" />
@@ -794,7 +781,161 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Factura_Usuario" EntityType="ARE_SeminarioModel.Factura_Usuario" />
+          <FunctionImport Name="DetallesCarrera">
+          <Parameter Name="idCarrera" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DetallesPersona" ReturnType="Collection(ARE_SeminarioModel.DetallesPersona_Result)">
+          <Parameter Name="cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditarCarrera">
+            <Parameter Name="idCarrera" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditarPersona">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido1" Mode="In" Type="String" />
+            <Parameter Name="apellido2" Mode="In" Type="String" />
+            <Parameter Name="idPais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCarrera">
+          <Parameter Name="idCarrera" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarPersona">
+          <Parameter Name="cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FacturaPorMes" IsComposable="true" ReturnType="Collection(ARE_SeminarioModel.FacturaPorMes_Result)">
+          <Parameter Name="Mes" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FacturaPorUsuario" IsComposable="true" ReturnType="Collection(ARE_SeminarioModel.FacturaPorUsuario_Result)">
+          <Parameter Name="Usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertarCarrrera">
+          <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertarPersona">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido1" Mode="In" Type="String" />
+            <Parameter Name="apellido2" Mode="In" Type="String" />
+            <Parameter Name="idPais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCarrera" />
+          <FunctionImport Name="ListarPersona" ReturnType="Collection(ARE_SeminarioModel.ListarPersona_Result)">
+          <Parameter Name="cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ARE_SeminarioModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ARE_SeminarioModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <EntityType Name="Factura_Usuario">
+          <Key>
+            <PropertyRef Name="Cedula" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Fecha_de_Pago" />
+            <PropertyRef Name="Total_a_Cobrar" />
+            <PropertyRef Name="Descuento" />
+            <PropertyRef Name="Total_a_Pagar" />
+            <PropertyRef Name="ID_de_Producto" />
+            <PropertyRef Name="Pago_Realizado" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="62" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="N__de_Factura" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_de_Pago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total_a_Cobrar" Type="Double" Nullable="false" />
+          <Property Name="Descuento" Type="Double" Nullable="false" />
+          <Property Name="Total_a_Pagar" Type="Double" Nullable="false" />
+          <Property Name="ID_de_Producto" Type="Int32" Nullable="false" />
+          <Property Name="Pago_Realizado" Type="Double" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="DetallesPersona_Result">
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="apellido1" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="apellido2" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="idPais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FacturaPorMes_Result">
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="62" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="N__de_Factura" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="Fecha_de_Pago" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="Total_a_Cobrar" Nullable="false" />
+          <Property Type="Double" Name="Descuento" Nullable="false" />
+          <Property Type="Double" Name="Total_a_Pagar" Nullable="false" />
+          <Property Type="Int32" Name="ID_de_Producto" Nullable="false" />
+          <Property Type="Double" Name="Pago_Realizado" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Precio" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FacturaPorUsuario_Result">
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="62" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="N__de_Factura" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="Fecha_de_Pago" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="Total_a_Cobrar" Nullable="false" />
+          <Property Type="Double" Name="Descuento" Nullable="false" />
+          <Property Type="Double" Name="Total_a_Pagar" Nullable="false" />
+          <Property Type="Int32" Name="ID_de_Producto" Nullable="false" />
+          <Property Type="Double" Name="Pago_Realizado" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Precio" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ListarPersona_Result">
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="apellido1" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="apellido2" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="idPais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -815,39 +956,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Carreras">
-            <EntityTypeMapping TypeName="ARE_SeminarioModel.Carrera">
-              <MappingFragment StoreEntitySet="Carrera">
-                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarreraxCursoes">
-            <EntityTypeMapping TypeName="ARE_SeminarioModel.CarreraxCurso">
-              <MappingFragment StoreEntitySet="CarreraxCurso">
-                <ScalarProperty Name="idRelacion" ColumnName="idRelacion" />
-                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
-                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CategoriaProductoes">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.CategoriaProducto">
               <MappingFragment StoreEntitySet="CategoriaProducto">
                 <ScalarProperty Name="idCategoriaProducto" ColumnName="idCategoriaProducto" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cursoes">
-            <EntityTypeMapping TypeName="ARE_SeminarioModel.Curso">
-              <MappingFragment StoreEntitySet="Curso">
-                <ScalarProperty Name="idCurso" ColumnName="idCurso" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="creditos" ColumnName="creditos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -866,7 +979,6 @@
                 <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
                 <ScalarProperty Name="fechaPago" ColumnName="fechaPago" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="descuento" ColumnName="descuento" />
                 <ScalarProperty Name="totalPagar" ColumnName="totalPagar" />
                 <ScalarProperty Name="totalCobrar" ColumnName="totalCobrar" />
               </MappingFragment>
@@ -887,7 +999,6 @@
               <MappingFragment StoreEntitySet="LineaFactura">
                 <ScalarProperty Name="idLinea" ColumnName="idLinea" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="pago" ColumnName="pago" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idEncabezado" ColumnName="idEncabezado" />
               </MappingFragment>
@@ -943,16 +1054,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Telefonoes">
-            <EntityTypeMapping TypeName="ARE_SeminarioModel.Telefono">
-              <MappingFragment StoreEntitySet="Telefono">
-                <ScalarProperty Name="idTelefono" ColumnName="idTelefono" />
-                <ScalarProperty Name="cedula" ColumnName="cedula" />
-                <ScalarProperty Name="telefono1" ColumnName="telefono" />
-                <ScalarProperty Name="idCodigoPais" ColumnName="idCodigoPais" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoUsuarios">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.TipoUsuario">
               <MappingFragment StoreEntitySet="TipoUsuario">
@@ -964,6 +1065,8 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ARE_SeminarioModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="montoAdeudado" ColumnName="montoAdeudado" />
                 <ScalarProperty Name="loginCount" ColumnName="loginCount" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="isTemp" ColumnName="isTemp" />
@@ -973,10 +1076,117 @@
                 <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
                 <ScalarProperty Name="idIglesia" ColumnName="idIglesia" />
                 <ScalarProperty Name="idMetodoPago" ColumnName="idMetodoPago" />
-                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Factura_Usuario">
+            <EntityTypeMapping TypeName="ARE_SeminarioModel.Factura_Usuario">
+              <MappingFragment StoreEntitySet="Factura_Usuario">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Pago_Realizado" ColumnName="Pago Realizado" />
+                <ScalarProperty Name="ID_de_Producto" ColumnName="ID de Producto" />
+                <ScalarProperty Name="Total_a_Pagar" ColumnName="Total a Pagar" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Total_a_Cobrar" ColumnName="Total a Cobrar" />
+                <ScalarProperty Name="Fecha_de_Pago" ColumnName="Fecha de Pago" />
+                <ScalarProperty Name="N__de_Factura" ColumnName="N° de Factura" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DetallesCarrera" FunctionName="ARE_SeminarioModel.Store.DetallesCarrera" />
+          <FunctionImportMapping FunctionImportName="DetallesPersona" FunctionName="ARE_SeminarioModel.Store.DetallesPersona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.DetallesPersona_Result">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EditarCarrera" FunctionName="ARE_SeminarioModel.Store.EditarCarrera" />
+          <FunctionImportMapping FunctionImportName="EditarPersona" FunctionName="ARE_SeminarioModel.Store.EditarPersona" />
+          <FunctionImportMapping FunctionImportName="EliminarCarrera" FunctionName="ARE_SeminarioModel.Store.EliminarCarrera" />
+          <FunctionImportMapping FunctionImportName="EliminarPersona" FunctionName="ARE_SeminarioModel.Store.EliminarPersona" />
+          <FunctionImportMapping FunctionImportName="FacturaPorMes" FunctionName="ARE_SeminarioModel.Store.FacturaPorMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.FacturaPorMes_Result">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="N__de_Factura" ColumnName="N° de Factura" />
+                <ScalarProperty Name="Fecha_de_Pago" ColumnName="Fecha de Pago" />
+                <ScalarProperty Name="Total_a_Cobrar" ColumnName="Total a Cobrar" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Total_a_Pagar" ColumnName="Total a Pagar" />
+                <ScalarProperty Name="ID_de_Producto" ColumnName="ID de Producto" />
+                <ScalarProperty Name="Pago_Realizado" ColumnName="Pago Realizado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FacturaPorUsuario" FunctionName="ARE_SeminarioModel.Store.FacturaPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.FacturaPorUsuario_Result">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="N__de_Factura" ColumnName="N° de Factura" />
+                <ScalarProperty Name="Fecha_de_Pago" ColumnName="Fecha de Pago" />
+                <ScalarProperty Name="Total_a_Cobrar" ColumnName="Total a Cobrar" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Total_a_Pagar" ColumnName="Total a Pagar" />
+                <ScalarProperty Name="ID_de_Producto" ColumnName="ID de Producto" />
+                <ScalarProperty Name="Pago_Realizado" ColumnName="Pago Realizado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertarCarrrera" FunctionName="ARE_SeminarioModel.Store.InsertarCarrrera" />
+          <FunctionImportMapping FunctionImportName="InsertarPersona" FunctionName="ARE_SeminarioModel.Store.InsertarPersona" />
+          <FunctionImportMapping FunctionImportName="ListarCarrera" FunctionName="ARE_SeminarioModel.Store.ListarCarrera" />
+          <FunctionImportMapping FunctionImportName="ListarPersona" FunctionName="ARE_SeminarioModel.Store.ListarPersona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.ListarPersona_Result">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ARE_SeminarioModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ARE_SeminarioModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ARE_SeminarioModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ARE_SeminarioModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ARE_SeminarioModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ARE_SeminarioModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ARE_SeminarioModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ARE_SeminarioModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

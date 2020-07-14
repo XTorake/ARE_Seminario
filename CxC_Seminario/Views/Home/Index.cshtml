@@ -1,90 +1,37 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-     Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (Session["Tipo"].ToString() == "1")
-{<div class="panel-body" style="background: #f6f8fa">
-     <div class="jumbotron" style="background-color: #ffffff;padding-bottom: 5px">
-         <h1>Bienvenido al apartado de administradores</h1>
-         <p class="lead">Abajo podras encontrar algunas de las opciones que podras utilizar</p>
-     </div>
-    </div>
-    
-}
-
-<div class="widget-program-box mg-tb-30">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                    <div class="panel-body">
-                        <div class="text-center content-box">
-                            <h2 class="m-b-xs">Manejo de Personas</h2>
-                            <p class="font-bold text-danger">Lorem ipsum</p>
-                            <div class="m icon-box">
-                                <i class="educate-icon educate-charts"></i>
-                            </div>
-                            <p class="small mg-t-box">
-                                Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                            </p>
-                            <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                    <div class="panel-body">
-                        <div class="text-center content-box">
-                            <h2 class="m-b-xs">Manejo de Usuarios</h2>
-                            <p class="font-bold text-danger">Lorem ipsum</p>
-                            <div class="m icon-box">
-                                <i class="educate-icon educate-charts"></i>
-                            </div>
-                            <p class="small mg-t-box">
-                                Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                            </p>
-                            <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                    <div class="panel-body">
-                        <div class="text-center content-box">
-                            <h2 class="m-b-xs">Manejo de Facturas</h2>
-                            <p class="font-bold text-danger">Lorem ipsum</p>
-                            <div class="m icon-box">
-                                <i class="educate-icon educate-charts"></i>
-                            </div>
-                            <p class="small mg-t-box">
-                                Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                            </p>
-                            <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                    <div class="panel-body">
-                        <div class="text-center content-box">
-                            <h2 class="m-b-xs">Manejo de Productos</h2>
-                            <p class="font-bold text-danger">Lorem ipsum</p>
-                            <div class="m icon-box">
-                                <i class="educate-icon educate-charts"></i>
-                            </div>
-                            <p class="small mg-t-box">
-                                Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                            </p>
-                            <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                        </div>
-                    </div>
-                </div>
+@if (Session["Usuario"] != null)
+{
+    if (Session["Tipo"].ToString() == "1")
+    {<div class="panel-body" style="background: #f6f8fa">
+            <div class="jumbotron" style="background-color: #ffffff;padding-bottom: 5px">
+                <h1>Bienvenido al apartado de administradores</h1>
+                <p class="lead">Abajo podras encontrar algunas de las opciones que podras utilizar</p>
             </div>
         </div>
-    </div>
+
+    }
+    else if (Session["Tipo"].ToString() == "2")
+    {
+        <div class="panel-body" style="background: #f6f8fa">
+            <div class="jumbotron" style="background-color: #ffffff;padding-bottom: 5px">
+                <h1>Bienvenido al apartado de Profesores</h1>
+                <p class="lead">Abajo podras encontrar algunas de las opciones que podras utilizar</p>
+            </div>
+        </div>
+    }
+    else if (Session["Tipo"].ToString() == "3")
+    {
+        <div class="panel-body" style="background: #f6f8fa">
+            <div class="jumbotron" style="background-color: #ffffff;padding-bottom: 5px">
+                <h1>Bienvenido al apartado de Alumnos</h1>
+                <p class="lead">Abajo podras encontrar algunas de las opciones que podras utilizar</p>
+            </div>
+        </div>
+    }
+
     <div class="widget-program-box mg-tb-30">
         <div class="container-fluid">
             <div class="row">
@@ -92,67 +39,70 @@
                     <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
                         <div class="panel-body">
                             <div class="text-center content-box">
-                                <h2 class="m-b-xs">Manejo de Cursos</h2>
-                                <p class="font-bold text-danger">Lorem ipsum</p>
+                                <h2 class="m-b-xs">Manejo de Personas</h2>
+                                <p class="font-bold text-danger">Control de personas</p>
                                 <div class="m icon-box">
                                     <i class="educate-icon educate-charts"></i>
                                 </div>
                                 <p class="small mg-t-box">
-                                    Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
+                                    En este apartado podra manipular la informacion relacionada a las personas incluidas en el sistema
                                 </p>
-                                <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                        <div class="panel-body">
-                            <div class="text-center content-box">
-                                <h2 class="m-b-xs">Manejo de Carreras</h2>
-                                <p class="font-bold text-danger">Lorem ipsum</p>
-                                <div class="m icon-box">
-                                    <i class="educate-icon educate-charts"></i>
-                                </div>
-                                <p class="small mg-t-box">
-                                    Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                </p>
-                                <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                        <div class="panel-body">
-                            <div class="text-center content-box">
-                                <h2 class="m-b-xs">Box title</h2>
-                                <p class="font-bold text-danger">Lorem ipsum</p>
-                                <div class="m icon-box">
-                                    <i class="educate-icon educate-charts"></i>
-                                </div>
-                                <p class="small mg-t-box">
-                                    Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                </p>
-                                <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                        <div class="panel-body">
-                            <div class="text-center content-box">
-                                <h2 class="m-b-xs">Box title</h2>
-                                <p class="font-bold text-danger">Lorem ipsum</p>
-                                <div class="m icon-box">
-                                    <i class="educate-icon educate-charts"></i>
-                                </div>
-                                <p class="small mg-t-box">
-                                    Lorem Ipsum passages and more recently with the desktop published software like Aldus PageMaker.
-                                </p>
+                                @Html.ActionLink("Personas", "index", "Persona", null, new { @class = "btn btn-danger widget-btn-4 btn-sm" })
 
-                                <button class="btn btn-danger widget-btn-4 btn-sm">Action button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
+                        <div class="panel-body">
+                            <div class="text-center content-box">
+                                <h2 class="m-b-xs">Manejo de Usuarios</h2>
+                                <p class="font-bold text-danger">Control de Usuarios</p>
+                                <div class="m icon-box">
+                                    <i class="educate-icon educate-charts"></i>
+                                </div>
+                                <p class="small mg-t-box">
+                                    En este apartado podra manipular la informacion relacionada a los usuarios incluidos en el sistema
+                                </p>
+                                @Html.ActionLink("Usuarios", "index", "Usuario", null, new { @class = "btn btn-danger widget-btn-4 btn-sm" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
+                        <div class="panel-body">
+                            <div class="text-center content-box">
+                                <h2 class="m-b-xs">Manejo de Facturas</h2>
+                                <p class="font-bold text-danger">Control de Facturas</p>
+                                <div class="m icon-box">
+                                    <i class="educate-icon educate-charts"></i>
+                                </div>
+                                <p class="small mg-t-box">
+                                    En este apartado podra manipular la informacion relacionada a las facturas incluidas en el sistema
+                                </p>
+                                @Html.ActionLink("Facturas", "index", "EncabezadoFactura", null, new { @class = "btn btn-danger widget-btn-4 btn-sm" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
+                        <div class="panel-body">
+                            <div class="text-center content-box">
+                                <h2 class="m-b-xs">Manejo de Productos</h2>
+                                <p class="font-bold text-danger">Control de Productos</p>
+                                <div class="m icon-box">
+                                    <i class="educate-icon educate-charts"></i>
+                                </div>
+                                <p class="small mg-t-box">
+                                    En este apartado podra manipular la informacion relacionada a los productos incluidos en el sistema
+                                </p>
+                                @Html.ActionLink("Productos", "index", "Producto", null, new { @class = "btn btn-danger widget-btn-4 btn-sm" })
+
                             </div>
                         </div>
                     </div>
@@ -160,4 +110,8 @@
             </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    Response.Redirect("~/Usuario/Login");
+}

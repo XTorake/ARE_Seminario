@@ -10,16 +10,13 @@
 namespace Seminario.DAL.EF
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Telefono
+    public partial class sp_helpdiagrams_Result
     {
-        public int idTelefono { get; set; }
-        public string cedula { get; set; }
-        public int telefono1 { get; set; }
-        public int idCodigoPais { get; set; }
-    
-        public virtual Pai Pai { get; set; }
-        public virtual Persona Persona { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
