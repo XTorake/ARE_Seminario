@@ -179,7 +179,7 @@ namespace CxC_Seminario.Controllers
         }
         #endregion
         #region Edit
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(string id)
         {
             Usuario aux = new Usuario();
 

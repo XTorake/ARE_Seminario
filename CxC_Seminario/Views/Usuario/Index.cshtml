@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<CxC_Seminario.DO.Usuario>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
 
@@ -13,7 +12,6 @@
                     <h4>Lista de Usuarios</h4>
                     <div class="add-product">
                         <a href="@Url.Action("Create", "Usuario")" class="btn btn-primary btn-lg"> Agregar Nuevo</a>
-
                     </div>
                     <div class="asset-inner">
                         <table>
@@ -30,7 +28,7 @@
                                 <th>
                                     Correo
                                 </th>
-                               
+
                                 <th>
                                     Opciones
                                 </th>
@@ -47,7 +45,7 @@
                                     </td>
                                     <td>
                                         @using (Html.BeginForm("ForgotPassword", "Usuario",
-                            FormMethod.Post, new { @class = "login100-form validate-form" }))
+                                        FormMethod.Post, new { @class = "login100-form validate-form" }))
                                         {
                                             @Html.Hidden("Usuario1", item.Usuario1)
                                             @Html.Hidden("Cedula", item.Cedula)
@@ -60,7 +58,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Correo)
                                     </td>
-                                   
+
                                     <td>
                                         @Html.ActionLink("Editar", "Edit", new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" })  |
                                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Usuario1 }, new { @class = "btn btn-danger btn-sm" })

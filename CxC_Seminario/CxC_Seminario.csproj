@@ -671,6 +671,10 @@
     <Content Include="Views\Usuario\PasswordReset.cshtml" />
     <Content Include="Views\Usuario\ForgotPassword.cshtml" />
     <Content Include="Views\Reporte\Factura_Usuario.cshtml" />
+    <Content Include="Views\Reporte\Ultima_Factura_Usuario.cshtml" />
+    <Content Include="Views\Reporte\Lista_Usuarios.cshtml" />
+    <Content Include="Views\Reporte\Reporte_Mensual.cshtml" />
+    <Content Include="Views\Reporte\Ganancia_Categoria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

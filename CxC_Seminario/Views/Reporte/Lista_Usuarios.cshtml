@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CxC_Seminario.DO.Usuario>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<div class="product-status mg-b-15" style="padding-top:4%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap drp-lst">
+                    <h4>Lista de Usuarios</h4>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>
+                                    Cedula
+                                </th>
+                                <th>
+                                    Nombre de Usuario
+                                </th>
+                                <th>
+                                    Reportes
+                                </th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cedula)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario1)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Ultima Factura", "Edit","Reporte",new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" })  |
+                                        @Html.ActionLink("Saldos Pendientes", "Delete","Reporte", new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" }) |
+                                        @Html.ActionLink("Todas las Facturas", "Factura_Usuario","Reporte" ,new { id = item.Usuario1 }, new { @class = "btn btn-warning btn-sm" })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
