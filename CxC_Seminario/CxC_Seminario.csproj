@@ -449,6 +449,7 @@
     <Content Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\SeminarioNazareno.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\c3-charts\c3-active.js" />
     <Content Include="Scripts\c3-charts\c3.min.js" />

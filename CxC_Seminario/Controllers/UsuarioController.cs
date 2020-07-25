@@ -371,7 +371,7 @@ namespace CxC_Seminario.Controllers
                                 var byteContent = new ByteArrayContent(buffer);
                                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                                 var postTask = client.PostAsync("api/Usuario/Update", byteContent).Result;
-                                return RedirectToAction("", "");
+                                return RedirectToAction("Index", "Home");
                             }
                             else
                             {

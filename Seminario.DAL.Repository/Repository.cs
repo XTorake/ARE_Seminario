@@ -12,6 +12,7 @@ namespace Seminario.DAL.Repository
         public Repository(DbContext context)
         {
             _dbContext = context;
+            _dbContext.Database.Connection.Open();
         }
         public IQueryable<T> AsQueryble()
         {
